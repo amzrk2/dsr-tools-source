@@ -1,25 +1,22 @@
-const path = require('path');
+/**
+ * @param {string} path
+ * @param {string} repo
+ * @param {string} version
+ */
+function CDN(path, repo = 'dsr-api', version = '1') {
+  const base = `https://cdn.jsdelivr.net/gh/amzrk2/${repo}@${version}`;
 
-function CDN(sourcePath, repo = 'api', version = '1') {
-  const baseURL = `https://cdn.jsdelivr.net/gh/amzrk2/dsr-${repo}@${version}`;
+  let exp = /^\.?\/?(.*)/.exec(path);
+  let cleanPath;
+  if (exp && exp[1]) {
+    cleanPath = exp[1];
+  }
 
   if (process.env.NODE_ENV === 'production') {
-    if (sourcePath.startsWith('.')) {
-      return `${baseURL}${sourcePath.substring(1)}`;
-    } else if (sourcePath.startsWith('/')) {
-      return `${baseURL}${sourcePath}`;
-    } else {
-      return `${baseURL}/${sourcePath}`;
-    }
+    return cleanPath ? `${base}/${cleanPath}` : path;
   } else {
-    if (sourcePath.startsWith('.')) {
-      console.log(`[DEBUG] Fetching ${baseURL}${sourcePath.substring(1)}`);
-    } else if (sourcePath.startsWith('/')) {
-      console.log(`[DEBUG] Fetching ${baseURL}${sourcePath}`);
-    } else {
-      console.log(`[DEBUG] Fetching ${baseURL}/${sourcePath}`);
-    }
-    return path.resolve('/mock', sourcePath);
+    console.info(`try fetching '${cleanPath}' from ${repo}@${version}`);
+    return `/mock/${path}`;
   }
 }
 
