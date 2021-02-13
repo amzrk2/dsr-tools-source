@@ -11,8 +11,7 @@
     "axios": "~0.21.1",
     "vue": "~2.6.12",
     "vue-router": "~3.5.1",
-    "vuetify": "~2.4.3",
-    "vuex": "~3.6.2"
+    "vuetify": "~2.4.3"
   },
   "devDependencies": {
     "@mdi/js": "^5.9.55",
