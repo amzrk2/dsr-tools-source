@@ -8,6 +8,14 @@ import {
   mdiInformation,
   mdiTimeline,
   mdiLicense,
+  mdiOpenInNew,
+  mdiPackageVariantClosed,
+  mdiCertificateOutline,
+  mdiLinkVariant,
+  mdiCheck,
+  mdiHistory,
+  mdiCopyright,
+  mdiAlert,
 } from '@mdi/js';
 
 export {
@@ -20,4 +28,12 @@ export {
   mdiInformation,
   mdiTimeline,
   mdiLicense,
+  mdiOpenInNew,
+  mdiPackageVariantClosed,
+  mdiCertificateOutline,
+  mdiLinkVariant,
+  mdiCheck,
+  mdiHistory,
+  mdiCopyright,
+  mdiAlert,
 };

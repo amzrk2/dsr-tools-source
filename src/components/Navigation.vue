@@ -1,7 +1,7 @@
 <template>
   <v-list dense>
     <template v-for="route of routes">
-      <!-- 若无子路由 -->
+      <!-- 若无子路由或且设置显示 -->
       <v-list-item
         v-if="!route.children && !route.meta.hide"
         :key="route.name"
@@ -16,11 +16,11 @@
           <v-list-item-title>
             <template v-if="route.meta.short">{{ route.meta.short }}</template>
             <template v-else>{{ route.meta.name }}</template>
-            <v-icon small v-if="route.meta.ext">mdi-open-in-new</v-icon>
+            <v-icon small v-if="route.meta.ext">{{ mdiOpenInNew }}</v-icon>
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <!-- 若有子路由 -->
+      <!-- 若有子路由且设置显示 -->
       <v-list-group
         v-else-if="route.children && !route.meta.hide"
         :key="route.name"
@@ -47,7 +47,7 @@
             <v-list-item-title>
               <template v-if="child.meta.short">{{ child.meta.short }}</template>
               <template v-else>{{ child.meta.name }}</template>
-              <v-icon small v-if="child.meta.ext">mdi-open-in-new</v-icon>
+              <v-icon small v-if="child.meta.ext">{{ mdiOpenInNew }}</v-icon>
             </v-list-item-title>
           </v-list-item-content>
           <v-list-item-icon>
@@ -60,9 +60,16 @@
 </template>
 
 <script>
+import { mdiOpenInNew } from '@/utils/mdi';
+
 export default {
   name: 'Navigation',
   props: ['routes', 'drawer'],
+  data() {
+    return {
+      mdiOpenInNew,
+    };
+  },
   methods: {
     navigateTo(route) {
       if (route.meta.ext) {

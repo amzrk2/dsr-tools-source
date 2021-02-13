@@ -3,11 +3,7 @@
     <v-timeline v-for="(item, index) of changelog" :key="item.version" dense align-top>
       <v-timeline-item fill-dot :small="index !== 0" color="info">
         <template v-slot:icon>
-          <v-icon
-            dark
-            :small="index !== 0"
-            v-text="index === 0 ? 'mdi-check' : 'mdi-history'"
-          ></v-icon>
+          <v-icon dark :small="index !== 0">{{ index === 0 ? mdiCheck : mdiHistory }}</v-icon>
         </template>
         <v-card class="elevation-2">
           <v-card-title class="py-2 px-4">
@@ -37,6 +33,7 @@
 </template>
 
 <script>
+import { mdiCheck, mdiHistory } from '@/utils/mdi';
 import { changelog } from '@/assets/changelog';
 
 export default {
@@ -44,13 +41,11 @@ export default {
   data() {
     return {
       changelog,
+      mdiCheck,
+      mdiHistory,
     };
   },
   methods: {
-    /**
-     * handle switch detail panel
-     * @param {number} index
-     */
     handleItemClick(index) {
       this.$set(this.changelog[index], 'active', !this.changelog[index].active);
     },

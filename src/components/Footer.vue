@@ -1,7 +1,7 @@
 <template>
   <v-footer class="footer" absolute color="primary" dark>
     <v-container class="author text-center ma-0 pa-0" fluid>
-      <v-icon small>mdi-copyright</v-icon>
+      <v-icon small>{{ mdiCopyright }}</v-icon>
       <span>2019-{{ new Date().getFullYear() }}</span>
       <a href="https://dsrkafuu.co/" target="_blank">DSRKafuU</a>
     </v-container>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mdiCopyright } from '@/utils/mdi';
 import { version } from '@/assets/changelog';
 
 export default {
@@ -19,6 +20,7 @@ export default {
   data() {
     return {
       version,
+      mdiCopyright,
     };
   },
 };

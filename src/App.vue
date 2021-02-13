@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <v-navigation-drawer app v-model="drawer">
-      <nav-logo></nav-logo>
-      <navigation :routes="routes" :drawer="drawer"></navigation>
+      <Logo />
+      <Navigation :routes="routes" :drawer="drawer" />
     </v-navigation-drawer>
 
     <v-app-bar app dense dark color="primary">
@@ -17,23 +17,23 @@
         <router-view></router-view>
       </div>
 
-      <global-footer></global-footer>
+      <Footer />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import routes from '@/router/routes';
-import NavLogo from '@/components/NavLogo';
+import Logo from '@/components/Logo';
 import Navigation from '@/components/Navigation';
-import GlobalFooter from '@/components/Footer';
+import Footer from '@/components/Footer';
 
 export default {
   name: 'App',
   components: {
-    NavLogo,
+    Logo,
     Navigation,
-    GlobalFooter,
+    Footer,
   },
   data() {
     return {

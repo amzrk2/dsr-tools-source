@@ -6,7 +6,7 @@
         <v-card class="mx-4">
           <v-list-item>
             <v-list-item-avatar>
-              <img :src="CDN('images/avatars/dsrkafuu_256p.jpg', 'cdn', '1.1')" />
+              <img :src="CDN('/images/avatars/dsrkafuu_256p.jpg', 'dsr-cdn', '1.1')" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="headline">{{ name }}</v-list-item-title>
@@ -14,7 +14,7 @@
             </v-list-item-content>
           </v-list-item>
           <div class="sub-image">
-            <v-img :src="CDN('images/banners/mozilla_960p.jpg', 'cdn', '1.1')"></v-img>
+            <v-img :src="CDN('/images/banners/mozilla_960p.jpg', 'dsr-cdn', '1.1')"></v-img>
           </div>
           <v-card-text class="text-center pb-0">{{ imageCopy }}</v-card-text>
           <v-card-actions>
@@ -38,7 +38,11 @@
           <v-expansion-panel v-for="item of statements" :key="item.title">
             <v-expansion-panel-header>{{ item.title }}</v-expansion-panel-header>
             <v-expansion-panel-content>
-              <div class="mt-2" v-html="item.html"></div>
+              <div class="mt-2">
+                <p v-for="text of item.content" :key="`${text.slice(0, 6)}`">
+                  {{ text }}
+                </p>
+              </div>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -49,20 +53,20 @@
         <v-expansion-panels accordion class="mx-4" hover>
           <v-expansion-panel v-for="(item, index) of openSourceProjects" :key="item.title">
             <v-expansion-panel-header class="headers">
-              <v-icon>mdi-package-variant-closed</v-icon>
+              <v-icon>{{ mdiPackageVariantClosed }}</v-icon>
               <span>{{ index }}</span>
               <span>{{ item.title }}</span>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-list-item class="mt-2" two-line>
-                <v-icon class="mr-5">mdi-certificate-outline</v-icon>
+                <v-icon class="mr-5">{{ mdiCertificateOutline }}</v-icon>
                 <v-list-item-content>
                   <v-list-item-title>{{ item.license }}</v-list-item-title>
                   <v-list-item-subtitle>LICENSE</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item two-line>
-                <v-icon class="mr-5">mdi-link-variant</v-icon>
+                <v-icon class="mr-5">{{ mdiLinkVariant }}</v-icon>
                 <v-list-item-content>
                   <v-list-item-title>{{ item.link }}</v-list-item-title>
                   <v-list-item-subtitle>项目链接</v-list-item-subtitle>
@@ -77,7 +81,8 @@
 </template>
 
 <script>
-import CDN from '@/plugins/cdn';
+import CDN from '@/utils/cdn';
+import { mdiPackageVariantClosed, mdiCertificateOutline, mdiLinkVariant } from '@/utils/mdi';
 import statements from '@/assets/statements';
 import openSourceProjects from '@/assets/opensource';
 
@@ -92,12 +97,15 @@ export default {
       sub: 'dsrkafuu',
       imageCopy: 'Internet for people, not profit',
       personalLinks: [
-        { title: '个人页面', link: 'https://dsrkafuu.co/' },
+        { title: '个人页面', link: 'https://dsrkafuu.co' },
         { title: '推特', link: 'https://twitter.com/dsrkafuu' },
         { title: 'GitHub', link: 'https://github.com/dsrkafuu' },
       ],
       statements,
       openSourceProjects,
+      mdiPackageVariantClosed,
+      mdiCertificateOutline,
+      mdiLinkVariant,
     };
   },
 };

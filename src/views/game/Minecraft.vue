@@ -6,13 +6,13 @@
     <v-carousel cycle show-arrows-on-hover height="auto">
       <v-carousel-item v-for="(item, index) in slides" :key="index">
         <div class="image-wrapper">
-          <v-img :src="CDN(`dsr-tools/minecraft/${item}`)" />
+          <v-img :src="CDN(`/dsr-tools/minecraft/${item}`)" />
         </div>
       </v-carousel-item>
     </v-carousel>
     <v-container class="px-5 py-5">
       <v-row>
-        <v-alert class="alert mt-3" type="info" icon="mdi-alert" dense>{{ alert }}</v-alert>
+        <v-alert class="alert mt-3" type="info" :icon="mdiAlert" dense>{{ alert }}</v-alert>
       </v-row>
       <v-row>
         <v-col cols="12" sm="7">
@@ -72,8 +72,9 @@
 </template>
 
 <script>
-import CDN from '../../plugins/cdn';
+import CDN from '@/utils/cdn';
 import axios from 'axios';
+import { mdiAlert } from '@/utils/mdi';
 
 export default {
   name: 'Minecraft',
@@ -81,11 +82,19 @@ export default {
     CDN,
   },
   data() {
-    return { loading: true, slides: [], versions: [], modList: [], downloads: [], alert: '' };
+    return {
+      loading: true,
+      slides: [],
+      versions: [],
+      modList: [],
+      downloads: [],
+      alert: '',
+      mdiAlert,
+    };
   },
   async mounted() {
     try {
-      const response = await axios.get(CDN('dsr-tools/minecraft/index.json'));
+      const response = await axios.get(CDN('/dsr-tools/minecraft/index.json'));
       const res = response.data;
       res.slides.length && (this.slides = res.slides);
       res.versions.length && (this.versions = res.versions);
@@ -94,7 +103,7 @@ export default {
       res.alert.length && (this.alert = res.alert);
       this.loading = false;
     } catch (e) {
-      console.error('[DSRToolS]', e);
+      console.error('[dsr-tools]', e);
     }
   },
 };

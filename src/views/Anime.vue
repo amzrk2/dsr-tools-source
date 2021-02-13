@@ -27,8 +27,8 @@
 
 <script>
 import axios from 'axios';
-import CDN_OSS_SUBJECT from '../plugins/bangumi/imageCDN';
-import storage from '../plugins/storage';
+import CDN_OSS_SUBJECT from '@/utils/bangumi/imageCDN';
+import storage from '@/utils/storage';
 
 const HASH_CDN = 'https://cdn.jsdelivr.net/gh/czy0729/Bangumi-OSS@master/hash/subject.json';
 const BGM_CDN = 'https://dsr-tools-bgm.dsrkafuu.workers.dev/calendar';

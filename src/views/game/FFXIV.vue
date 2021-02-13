@@ -11,8 +11,6 @@
         <v-progress-circular indeterminate color="primary"></v-progress-circular>
       </v-overlay>
 
-      <!-- <temp-alert info="提供七个 FF14 国服魔矿车活动互换上车位"></temp-alert> -->
-
       <v-tab-item key="tab-0" value="tab-0">
         <v-container class="pa-10">
           <v-alert type="success">{{ formatedDate }}</v-alert>
@@ -69,15 +67,11 @@
 
 <script>
 import axios from 'axios';
-import CDN from '@/plugins/cdn';
-import storage from '@/plugins/storage';
-// import TempAlert from '../../components/TempAlert.vue';
+import CDN from '@/utils/cdn';
+import storage from '@/utils/storage';
 
 export default {
   name: 'FFXIV',
-  // components: {
-  //   TempAlert,
-  // },
   data() {
     return {
       loading: true,
@@ -128,23 +122,23 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const response = await axios.get(CDN('dsr-tools/ffxiv/index.json'));
+        const response = await axios.get(CDN('/dsr-tools/ffxiv/index.json'));
         const res = response.data;
-        // Update time
+        // update time
         this.lastUpdate = new Date(res.lastUpdate);
         storage.setSS('dsr-tools_ffxiv-last-update', this.lastUpdate.getTime());
-        // Data
+        // data
         for (let area in res.huntingData) {
           let areaData = res.huntingData[area];
           this.data.push(areaData);
         }
         storage.setSS('dsr-tools_ffxiv-cache', JSON.stringify(this.data));
-        console.log('[DSRToolS] Latest data loaded');
+        console.log('[dsr-tools] latest data loaded');
         setTimeout(() => {
           this.loading = false;
         }, 500);
       } catch (e) {
-        console.error('[DSRToolS]', e);
+        console.error('[dsr-tools]', e);
       }
     },
     handleTabChange(val) {
@@ -152,7 +146,7 @@ export default {
     },
   },
   /**
-   * Fetch data cache in same session
+   * fetch data cache in same session
    */
   async mounted() {
     const cacheDate = storage.getSS('dsr-tools_ffxiv-last-update');
@@ -161,7 +155,7 @@ export default {
       // If data cache founded
       this.lastUpdate = new Date(Number.parseInt(cacheDate));
       this.data = JSON.parse(cacheData);
-      console.log('[DSRToolS] Data cache loaded');
+      console.log('[dsr-tools] data cache loaded');
       setTimeout(() => {
         this.loading = false;
       }, 500);
@@ -173,9 +167,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/scss/color';
-
-// Hide empty header in mobile
+// hide empty header in mobile
 ::v-deep .v-data-table-header-mobile {
   display: none;
 }

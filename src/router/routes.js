@@ -22,14 +22,6 @@ const routes = [
   },
   game,
   about,
-  {
-    path: '/temp',
-    component: () => import(/* webpackChunkName: "temp" */ '@/views/Temp.vue'),
-    meta: {
-      name: '临时信息发布',
-      icon: mdiClipboardPulse,
-    },
-  },
   // old route scheme/domain redirect
   {
     path: '/ffxiv*',
