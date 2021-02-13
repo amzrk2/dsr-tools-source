@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import changelog from '@/assets/changelog';
+import { changelog } from '@/assets/changelog';
 
 export default {
   name: 'Changelog',
@@ -47,6 +47,10 @@ export default {
     };
   },
   methods: {
+    /**
+     * handle switch detail panel
+     * @param {number} index
+     */
     handleItemClick(index) {
       this.$set(this.changelog[index], 'active', !this.changelog[index].active);
     },

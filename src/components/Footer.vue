@@ -1,35 +1,39 @@
 <template>
-  <v-footer absolute color="primary" dark style="height: 50px">
+  <v-footer class="footer" absolute color="primary" dark>
     <v-container class="author text-center ma-0 pa-0" fluid>
       <v-icon small>mdi-copyright</v-icon>
       <span>2019-{{ new Date().getFullYear() }}</span>
-      <a href="https://amzrk2.cc/" target="_blank">DSRKafuU</a>
+      <a href="https://dsrkafuu.co/" target="_blank">DSRKafuU</a>
     </v-container>
     <v-container class="version text-center ma-0 pa-0" fluid>
-      <span>DSRToolS {{ changelog[0].version }}</span>
+      <span>DSRToolS {{ version }}</span>
     </v-container>
   </v-footer>
 </template>
 
 <script>
-import changelog from '@/assets/changelog';
+import { version } from '@/assets/changelog';
 
 export default {
   name: 'Footer',
   data() {
     return {
-      changelog,
+      version,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.footer {
+  height: 3.125rem;
+}
+
 .author {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 0.875rem;
 
   a {
     color: #ffffff;
@@ -42,6 +46,6 @@ export default {
 }
 
 .version {
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 </style>
