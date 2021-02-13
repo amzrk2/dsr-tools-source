@@ -2,28 +2,25 @@
 <html lang="zh-Hans">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
     <link rel="apple-touch-icon" sizes="180x180" href="<%= BASE_URL %>apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="<%= BASE_URL %>favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="<%= BASE_URL %>favicon-16x16.png" />
     <link rel="shortcut icon" href="<%= BASE_URL %>favicon.ico" />
     <title>DSRToolS</title>
-    <meta name="description" content="DSR 小工具资源站。" />
+    <meta name="description" content="DSR 工具资源站。" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="<%= BASE_URL %>" />
     <meta property="og:title" content="DSRToolS" />
-    <meta property="og:description" content="DSR 小工具资源站。" />
+    <meta property="og:description" content="DSR 工具资源站。" />
     <meta property="og:image" content="<%= BASE_URL %>og.png" />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="<%= BASE_URL %>" />
     <meta property="twitter:title" content="DSRToolS" />
-    <meta property="twitter:description" content="DSR 小工具资源站。" />
+    <meta property="twitter:description" content="DSR 工具资源站。" />
     <meta property="twitter:image" content="<%= BASE_URL %>og.png" />
-    <meta name="baidu-site-verification" content="HrfWai4YTd" />
     <!-- ga -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1279PMB9E"></script>
     <script>
@@ -43,16 +40,18 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
-    <script type="text/javascript">
-      window.$crisp = [];
-      window.CRISP_WEBSITE_ID = 'd3750a6b-c763-4252-8ec7-bce6050774f6';
-      (function () {
-        d = document;
-        s = d.createElement('script');
-        s.src = 'https://client.crisp.chat/l.js';
-        s.async = 1;
-        d.getElementsByTagName('head')[0].appendChild(s);
-      })();
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        window.$crisp = [];
+        window.CRISP_WEBSITE_ID = 'd3750a6b-c763-4252-8ec7-bce6050774f6';
+        (function () {
+          d = document;
+          s = d.createElement('script');
+          s.src = 'https://client.crisp.chat/l.js';
+          s.async = 1;
+          d.getElementsByTagName('head')[0].appendChild(s);
+        })();
+      });
     </script>
   </body>
 </html>
