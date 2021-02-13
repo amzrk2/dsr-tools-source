@@ -4,14 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build --report",
+    "build": "vue-cli-service build && node ./cleanup.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "~0.21.1",
     "vue": "~2.6.12",
     "vue-router": "~3.5.1",
-    "vuetify": "~2.4.3"
+    "vuetify": "~2.4.4"
   },
   "devDependencies": {
     "@mdi/js": "^5.9.55",
@@ -20,7 +20,7 @@
     "@vue/cli-plugin-vuex": "~4.5.11",
     "@vue/cli-service": "~4.5.11",
     "prettier": "^2.2.1",
-    "sass": "^1.32.6",
+    "sass": "^1.32.7",
     "sass-loader": "^10.1.1",
     "vue-cli-plugin-vuetify": "^2.1.0",
     "vue-template-compiler": "~2.6.12",
