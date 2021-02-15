@@ -97,7 +97,7 @@ export default {
       sub: 'dsrkafuu',
       imageCopy: 'Internet for people, not profit',
       personalLinks: [
-        { title: '个人页面', link: 'https://dsrkafuu.co' },
+        { title: '个人页面', link: 'https://dsrkafuu.su' },
         { title: '推特', link: 'https://twitter.com/dsrkafuu' },
         { title: 'GitHub', link: 'https://github.com/dsrkafuu' },
       ],
