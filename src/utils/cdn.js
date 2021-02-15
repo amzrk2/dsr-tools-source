@@ -3,7 +3,7 @@
  * @param {string} repo
  * @param {string} version
  */
-function CDN(path, repo = 'dsr-api', version = '1') {
+function CDN(path, repo = 'dsr-api', version = '1.1') {
   const base = `https://cdn.jsdelivr.net/gh/amzrk2/${repo}@${version}`;
 
   let exp = /^\.?\/?(.*)/.exec(path);
