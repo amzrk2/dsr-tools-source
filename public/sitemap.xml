@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- www.xml-sitemaps.com -->
+  <url>
+    <loc>https://tools.dsrkafuu.su/</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://tools.dsrkafuu.su/anime</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://tools.dsrkafuu.su/game/minecraft</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://tools.dsrkafuu.su/game/sdv</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://tools.dsrkafuu.su/game/ffxiv</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://tools.dsrkafuu.su/about/changelog</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://tools.dsrkafuu.su/about/site</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+</urlset>
