@@ -14,7 +14,7 @@ const routes = [
   },
   {
     path: '/anime',
-    component: () => import(/* webpackChunkName: "temp" */ '@/views/Anime.vue'),
+    component: () => import(/* webpackChunkName: "anime" */ '@/views/Anime.vue'),
     meta: {
       name: '本季番组',
       icon: mdiTelevisionBox,

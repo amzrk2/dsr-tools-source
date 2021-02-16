@@ -1,5 +1,5 @@
 import ChildRouter from '@/views/ChildRouter.vue';
-import { mdiGamepad, mdiMinecraft, mdiAccountSupervisorCircle } from '@/utils/mdi';
+import { mdiGamepad, mdiMinecraft, mdiStarFace, mdiAccountSupervisorCircle } from '@/utils/mdi';
 
 export default {
   path: '/game',
@@ -17,6 +17,16 @@ export default {
         name: 'Minecraft DSRCA 整合包',
         short: 'MC 整合包',
         icon: mdiMinecraft,
+      },
+    },
+    {
+      path: '/game/sdv',
+      component: () => import(/* webpackChunkName: "sdv" */ '@/views/game/SDV.vue'),
+      meta: {
+        name: '星露谷物语 DSR 非侵入式整合包',
+        short: '星露谷整合包',
+        icon: mdiStarFace,
+        hide: true,
       },
     },
     {

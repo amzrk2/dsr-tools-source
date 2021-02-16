@@ -5,6 +5,11 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
 
+import axios from './plugins/axios';
+Vue.use(axios);
+import message from './plugins/message';
+Vue.use(message);
+
 new Vue({
   router,
   vuetify,

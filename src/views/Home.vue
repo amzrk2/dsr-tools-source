@@ -2,7 +2,7 @@
   <div class="home">
     <v-container class="home-bg fill-height" fluid>
       <v-row align="center" justify="center">
-        <v-col offset="1" offset-md="2">
+        <v-col offset="2">
           <h1 class="text-title text-h3 text-md-h2 text-no-wrap mb-4 ml-1">{{ title }}</h1>
           <template v-for="link of titleLinks">
             <v-btn class="text-btn ma-2" large :href="link.src" target="_blank" :key="link.src">
@@ -17,9 +17,6 @@
 </template>
 
 <script>
-import CDN from '@/utils/cdn';
-import axios from 'axios';
-
 export default {
   name: 'Home',
   data() {
@@ -29,20 +26,13 @@ export default {
       license: '',
     };
   },
-  methods: {
-    CDN,
-  },
   async mounted() {
-    try {
-      const response = await axios.get(CDN('/dsr-tools/home/index.json'));
-      const res = response.data;
-      if (res.title) {
-        this.title = res.title;
-        this.titleLinks = res.links;
-        this.license = res.license;
-      }
-    } catch (e) {
-      console.error('[dsr-tools]', e);
+    const response = await this.$api.get('/dsr-tools/home/index.json');
+    const res = response.data;
+    if (res.title) {
+      this.title = res.title;
+      this.titleLinks = res.links;
+      this.license = res.license;
     }
   },
 };
@@ -64,6 +54,13 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .col {
+    text-align: center;
+    margin-left: 0 !important;
   }
 }
 

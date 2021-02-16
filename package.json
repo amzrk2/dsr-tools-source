@@ -1,6 +1,6 @@
 {
   "name": "dsr-tools",
-  "version": "3.3.2",
+  "version": "3.4.0",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",

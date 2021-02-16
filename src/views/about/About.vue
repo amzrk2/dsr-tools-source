@@ -6,7 +6,7 @@
         <v-card class="mx-4">
           <v-list-item>
             <v-list-item-avatar>
-              <img :src="CDN('/images/avatars/dsrkafuu_256p.jpg', 'dsr-cdn', '1.1')" />
+              <v-img :src="$cdn.resolve('/images/avatars/dsrkafuu_256p.jpg')" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title class="headline">{{ name }}</v-list-item-title>
@@ -14,7 +14,7 @@
             </v-list-item-content>
           </v-list-item>
           <div class="sub-image">
-            <v-img :src="CDN('/images/banners/mozilla_960p.jpg', 'dsr-cdn', '1.1')"></v-img>
+            <v-img :src="$cdn.resolve('/images/banners/mozilla_960p.jpg')" />
           </div>
           <v-card-text class="text-center pb-0">{{ imageCopy }}</v-card-text>
           <v-card-actions>
@@ -81,16 +81,12 @@
 </template>
 
 <script>
-import CDN from '@/utils/cdn';
 import { mdiPackageVariantClosed, mdiCertificateOutline, mdiLinkVariant } from '@/utils/mdi';
 import statements from '@/assets/statements';
 import openSourceProjects from '@/assets/opensource';
 
 export default {
   name: 'About',
-  methods: {
-    CDN,
-  },
   data() {
     return {
       name: 'DSRKafuU',

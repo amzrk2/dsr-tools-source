@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import CDN_OSS_SUBJECT from '@/utils/bangumi/imageCDN';
 import storage from '@/utils/storage';
 
@@ -94,28 +93,20 @@ export default {
      * 获取 CDN hash
      */
     async fetchHash() {
-      try {
-        const hash = await axios.get(HASH_CDN);
-        this.cdnHash = hash.data;
-      } catch (e) {
-        console.error(e);
-      }
+      const hash = await this.$axios.get(HASH_CDN);
+      this.cdnHash = hash.data;
     },
     async fetchData() {
-      try {
-        const res = await axios.get(BGM_CDN);
-        // 补全 rating 数据
-        res.data.forEach((val) => {
-          val.items.forEach((val) => {
-            if (!val.rating) {
-              val.rating = { score: -1 };
-            }
-          });
+      const res = await this.$axios.get(BGM_CDN);
+      // 补全 rating 数据
+      res.data.forEach((val) => {
+        val.items.forEach((val) => {
+          if (!val.rating) {
+            val.rating = { score: -1 };
+          }
         });
-        this.animeData = res.data;
-      } catch (e) {
-        console.error(e);
-      }
+      });
+      this.animeData = res.data;
     },
     async applyCDN() {
       await Promise.all([this.fetchHash(), this.fetchData()]);
@@ -142,6 +133,7 @@ export default {
       const date = new Date();
       const time = date.getTime();
       storage.setLS('dsr-tools_anime-cache-date', JSON.stringify(time));
+      this.$message({ type: 'info', text: '数据已缓存' });
     },
   },
   async mounted() {
@@ -154,6 +146,7 @@ export default {
         if (cache.length > 1) {
           this.animeData = cache;
           this.status = true;
+          this.$message({ type: 'info', text: '已读取数据缓存' });
           return;
         }
       }
@@ -161,7 +154,7 @@ export default {
       this.status = true;
       this.storeCache();
     } catch (e) {
-      console.error(e);
+      this.$message({ type: 'error', text: '缓存操作失败' });
       await this.applyCDN();
       this.status = true;
       this.storeCache();

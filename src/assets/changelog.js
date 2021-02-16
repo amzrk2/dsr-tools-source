@@ -1,6 +1,9 @@
-export const version = 'v3.3.2';
-
 export const changelog = [
+  {
+    version: 'v3.4.0',
+    date: '2021-02-17',
+    logs: ['主页背景轮换', '主页设计调整', '错误提示优化'],
+  },
   {
     version: 'v3.3.2',
     date: '2021-02-08',
@@ -157,3 +160,5 @@ export const changelog = [
     logs: ['站点首页上线'],
   },
 ];
+
+export const version = changelog[0].version;

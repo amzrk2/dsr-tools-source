@@ -6,7 +6,7 @@
     <v-carousel cycle show-arrows-on-hover height="auto">
       <v-carousel-item v-for="(item, index) in slides" :key="index">
         <div class="image-wrapper">
-          <v-img :src="CDN(`/dsr-tools/minecraft/${item}`)" />
+          <v-img :src="$api.resolve(`/dsr-tools/minecraft/${item}`)" />
         </div>
       </v-carousel-item>
     </v-carousel>
@@ -72,15 +72,10 @@
 </template>
 
 <script>
-import CDN from '@/utils/cdn';
-import axios from 'axios';
 import { mdiAlert } from '@/utils/mdi';
 
 export default {
   name: 'Minecraft',
-  methods: {
-    CDN,
-  },
   data() {
     return {
       loading: true,
@@ -93,18 +88,14 @@ export default {
     };
   },
   async mounted() {
-    try {
-      const response = await axios.get(CDN('/dsr-tools/minecraft/index.json'));
-      const res = response.data;
-      res.slides.length && (this.slides = res.slides);
-      res.versions.length && (this.versions = res.versions);
-      res.modList.length && (this.modList = res.modList);
-      res.downloads.length && (this.downloads = res.downloads);
-      res.alert.length && (this.alert = res.alert);
-      this.loading = false;
-    } catch (e) {
-      console.error('[dsr-tools]', e);
-    }
+    const response = await this.$api.get('/dsr-tools/minecraft/index.json');
+    const res = response.data;
+    res.slides.length && (this.slides = res.slides);
+    res.versions.length && (this.versions = res.versions);
+    res.modList.length && (this.modList = res.modList);
+    res.downloads.length && (this.downloads = res.downloads);
+    res.alert.length && (this.alert = res.alert);
+    this.loading = false;
   },
 };
 </script>

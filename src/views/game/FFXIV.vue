@@ -66,8 +66,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-import CDN from '@/utils/cdn';
 import storage from '@/utils/storage';
 
 export default {
@@ -121,25 +119,21 @@ export default {
   },
   methods: {
     async fetchData() {
-      try {
-        const response = await axios.get(CDN('/dsr-tools/ffxiv/index.json'));
-        const res = response.data;
-        // update time
-        this.lastUpdate = new Date(res.lastUpdate);
-        storage.setSS('dsr-tools_ffxiv-last-update', this.lastUpdate.getTime());
-        // data
-        for (let area in res.huntingData) {
-          let areaData = res.huntingData[area];
-          this.data.push(areaData);
-        }
-        storage.setSS('dsr-tools_ffxiv-cache', JSON.stringify(this.data));
-        console.log('[dsr-tools] latest data loaded');
-        setTimeout(() => {
-          this.loading = false;
-        }, 500);
-      } catch (e) {
-        console.error('[dsr-tools]', e);
+      const response = await this.$api.get('/dsr-tools/ffxiv/index.json');
+      const res = response.data;
+      // update time
+      this.lastUpdate = new Date(res.lastUpdate);
+      storage.setSS('dsr-tools_ffxiv-last-update', this.lastUpdate.getTime());
+      // data
+      for (let area in res.huntingData) {
+        let areaData = res.huntingData[area];
+        this.data.push(areaData);
       }
+      storage.setSS('dsr-tools_ffxiv-cache', JSON.stringify(this.data));
+      this.$message({ type: 'info', text: '数据已缓存' });
+      setTimeout(() => {
+        this.loading = false;
+      }, 500);
     },
     handleTabChange(val) {
       storage.setLS('dsr-tools_ffxiv-tab', val);
@@ -154,8 +148,14 @@ export default {
     if (cacheDate && cacheData) {
       // If data cache founded
       this.lastUpdate = new Date(Number.parseInt(cacheDate));
-      this.data = JSON.parse(cacheData);
-      console.log('[dsr-tools] data cache loaded');
+      try {
+        this.data = JSON.parse(cacheData);
+      } catch {
+        this.$message({ type: 'error', text: '缓存操作失败' });
+        this.fetchData();
+        return;
+      }
+      this.$message({ type: 'info', text: '已读取数据缓存' });
       setTimeout(() => {
         this.loading = false;
       }, 500);

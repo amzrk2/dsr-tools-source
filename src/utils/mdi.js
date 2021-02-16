@@ -16,6 +16,7 @@ import {
   mdiHistory,
   mdiCopyright,
   mdiAlert,
+  mdiStarFace,
 } from '@mdi/js';
 
 export {
@@ -36,4 +37,5 @@ export {
   mdiHistory,
   mdiCopyright,
   mdiAlert,
+  mdiStarFace,
 };

@@ -36,24 +36,26 @@
             <v-list-item-title v-else>{{ route.meta.name }}</v-list-item-title>
           </v-list-item-content>
         </template>
-        <v-list-item
-          v-for="child of route.children"
-          :key="child.name"
-          :class="isRouteActive(child.path)"
-          @click="navigateTo(child)"
-          color="primary"
-        >
-          <v-list-item-content>
-            <v-list-item-title>
-              <template v-if="child.meta.short">{{ child.meta.short }}</template>
-              <template v-else>{{ child.meta.name }}</template>
-              <v-icon small v-if="child.meta.ext">{{ mdiOpenInNew }}</v-icon>
-            </v-list-item-title>
-          </v-list-item-content>
-          <v-list-item-icon>
-            <v-icon>{{ child.meta.icon }}</v-icon>
-          </v-list-item-icon>
-        </v-list-item>
+        <template v-for="child of route.children">
+          <v-list-item
+            v-if="!child.meta.hide"
+            :key="child.name"
+            :class="isRouteActive(child.path)"
+            @click="navigateTo(child)"
+            color="primary"
+          >
+            <v-list-item-content>
+              <v-list-item-title>
+                <template v-if="child.meta.short">{{ child.meta.short }}</template>
+                <template v-else>{{ child.meta.name }}</template>
+                <v-icon small v-if="child.meta.ext">{{ mdiOpenInNew }}</v-icon>
+              </v-list-item-title>
+            </v-list-item-content>
+            <v-list-item-icon>
+              <v-icon>{{ child.meta.icon }}</v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+        </template>
       </v-list-group>
     </template>
   </v-list>
