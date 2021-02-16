@@ -9,8 +9,8 @@
 <script>
 export default {
   name: 'SDV',
-  async mounted() {
-    const response = await this.$api.get('/dsr-tools/minecraft/a.json');
+  mounted() {
+    this.$message({ type: 'error', text: '模块尚未完工', duration: 10000 });
   },
 };
 </script>

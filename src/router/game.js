@@ -26,7 +26,6 @@ export default {
         name: '星露谷物语 DSR 非侵入式整合包',
         short: '星露谷整合包',
         icon: mdiStarFace,
-        hide: true,
       },
     },
     {
