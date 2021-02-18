@@ -12,7 +12,12 @@
         <div :class="['date', { today: today === date.weekday.cn }]">{{ date.weekday.cn }}</div>
         <a v-for="item of date.items" :key="item.id" :href="item.url | filtHttps" target="_blank">
           <div class="anime">
-            <img v-if="item.images" class="anime-img" :src="item.images" />
+            <img
+              v-if="item.images"
+              class="anime-img"
+              :src="item.images"
+              referrerpolicy="no-referrer"
+            />
             <div class="anime-name">
               <div class="name-zh">{{ item.name_cn }}</div>
               <div class="name-ja">{{ item.name }}</div>
@@ -89,9 +94,6 @@ export default {
     },
   },
   methods: {
-    /**
-     * 获取 CDN hash
-     */
     async fetchHash() {
       const hash = await this.$axios.get(HASH_CDN);
       this.cdnHash = hash.data;
@@ -130,35 +132,29 @@ export default {
     },
     storeCache() {
       storage.setLS('dsr-tools_anime-cache', JSON.stringify(this.animeData));
-      const date = new Date();
-      const time = date.getTime();
-      storage.setLS('dsr-tools_anime-cache-date', JSON.stringify(time));
+      storage.setLS('dsr-tools_anime-cache-date', JSON.stringify(Date.now()));
       this.$message({ type: 'info', text: '数据已缓存' });
     },
   },
   async mounted() {
-    const date = new Date();
-    const time = date.getTime();
     try {
       const cacheTime = JSON.parse(storage.getLS('dsr-tools_anime-cache-date'));
-      if (time - cacheTime < 86400000) {
+      if (Date.now() - cacheTime < 86400000) {
         const cache = JSON.parse(storage.getLS('dsr-tools_anime-cache'));
-        if (cache.length > 1) {
+        if (cache && cache.length > 1) {
           this.animeData = cache;
-          this.status = true;
           this.$message({ type: 'info', text: '已读取数据缓存' });
+          this.status = true;
           return;
         }
       }
-      await this.applyCDN();
-      this.status = true;
-      this.storeCache();
     } catch (e) {
+      console.error(e);
       this.$message({ type: 'error', text: '缓存操作失败' });
-      await this.applyCDN();
-      this.status = true;
-      this.storeCache();
     }
+    await this.applyCDN();
+    this.storeCache();
+    this.status = true;
   },
 };
 </script>

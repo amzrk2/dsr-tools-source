@@ -123,45 +123,19 @@ export default {
       const res = response.data;
       // update time
       this.lastUpdate = new Date(res.lastUpdate);
-      storage.setSS('dsr-tools_ffxiv-last-update', this.lastUpdate.getTime());
       // data
       for (let area in res.huntingData) {
         let areaData = res.huntingData[area];
         this.data.push(areaData);
       }
-      storage.setSS('dsr-tools_ffxiv-cache', JSON.stringify(this.data));
-      this.$message({ type: 'info', text: '数据已缓存' });
-      setTimeout(() => {
-        this.loading = false;
-      }, 500);
+      this.loading = false;
     },
     handleTabChange(val) {
       storage.setLS('dsr-tools_ffxiv-tab', val);
     },
   },
-  /**
-   * fetch data cache in same session
-   */
   async mounted() {
-    const cacheDate = storage.getSS('dsr-tools_ffxiv-last-update');
-    const cacheData = storage.getSS('dsr-tools_ffxiv-cache');
-    if (cacheDate && cacheData) {
-      // If data cache founded
-      this.lastUpdate = new Date(Number.parseInt(cacheDate));
-      try {
-        this.data = JSON.parse(cacheData);
-      } catch {
-        this.$message({ type: 'error', text: '缓存操作失败' });
-        this.fetchData();
-        return;
-      }
-      this.$message({ type: 'info', text: '已读取数据缓存' });
-      setTimeout(() => {
-        this.loading = false;
-      }, 500);
-    } else {
-      this.fetchData();
-    }
+    await this.fetchData();
   },
 };
 </script>

@@ -8,7 +8,6 @@ function showMessage({ type = 'success', text = '', duration = 5000 }) {
   if (window._message) {
     window._message._timers.forEach((timer) => clearTimeout(timer));
     window._message.$destroy();
-    document.body.removeChild(window._message.$el);
     window._message = null;
   }
 
@@ -25,9 +24,7 @@ function showMessage({ type = 'success', text = '', duration = 5000 }) {
   message.$mount();
   document.body.appendChild(message.$el);
   message.show = true;
-  window._message = message;
-
-  window._message._timers = [
+  message._timers = [
     setTimeout(() => {
       message.style.width = '0';
     }, 300),
@@ -39,6 +36,8 @@ function showMessage({ type = 'success', text = '', duration = 5000 }) {
       document.body.removeChild(message.$el);
     }, duration + 600),
   ];
+
+  window._message = message;
 }
 
 export const $message = showMessage;

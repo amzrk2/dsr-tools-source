@@ -9,15 +9,15 @@ Vue.config.productionTip = false;
 
 import * as Sentry from '@sentry/vue';
 import { Integrations } from '@sentry/tracing';
-Sentry.init({
-  environment: process.env.NODE_ENV || 'development',
-  Vue,
-  dsn: 'https://9c3ce0eb84764dbabc65508570b46ec4@o526740.ingest.sentry.io/5642179',
-  debug: process.env.NODE_ENV === 'development',
-  logErrors: process.env.NODE_ENV === 'development',
-  tracesSampleRate: 1.0,
-  integrations: [new Integrations.BrowserTracing()],
-});
+
+if (process.env.NODE_ENV === 'production') {
+  Sentry.init({
+    Vue,
+    dsn: 'https://9c3ce0eb84764dbabc65508570b46ec4@o526740.ingest.sentry.io/5642179',
+    tracesSampleRate: 1.0,
+    integrations: [new Integrations.BrowserTracing()],
+  });
+}
 
 import axios from './plugins/axios';
 Vue.use(axios);
