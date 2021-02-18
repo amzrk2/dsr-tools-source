@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import CDN_OSS_SUBJECT from '@/utils/bangumi/imageCDN';
+import BCDN from '@/utils/bangumi/cdn';
 import storage from '@/utils/storage';
 
 const HASH_CDN = 'https://cdn.jsdelivr.net/gh/czy0729/Bangumi-OSS@master/hash/subject.json';
@@ -116,10 +116,10 @@ export default {
           // api 返回图片类型判断
           if (val.images) {
             if (typeof val.images.common === 'string') {
-              const image = CDN_OSS_SUBJECT(val.images.common, this.cdnHash);
+              const image = BCDN(val.images.common, this.cdnHash);
               val.images = image;
             } else if (typeof val.images === 'string') {
-              const image = CDN_OSS_SUBJECT(val.images, this.cdnHash);
+              const image = BCDN(val.images, this.cdnHash);
               val.images = image;
             } else {
               delete val.images;

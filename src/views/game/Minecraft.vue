@@ -11,7 +11,7 @@
       </v-carousel-item>
     </v-carousel>
     <v-container class="px-5 py-5">
-      <v-row>
+      <v-row v-if="alert">
         <v-alert class="alert mt-3" type="info" :icon="mdiAlert" dense>{{ alert }}</v-alert>
       </v-row>
       <v-row>
@@ -48,11 +48,19 @@
           </v-card>
         </v-col>
         <v-col cols="12" sm="5">
+          <v-card class="mx-auto mb-5">
+            <v-card-title class="primary white--text">
+              <span class="title">游戏版本</span>
+            </v-card-title>
+            <v-card-text class="py-0 version-cur">
+              <span class="text-curversion">{{ curVersion }}</span>
+            </v-card-text>
+          </v-card>
           <v-card class="mx-auto">
             <v-card-title class="primary white--text">
-              <span class="title">当前版本</span>
+              <span class="title">版本历史</span>
             </v-card-title>
-            <v-card-text class="py-0 version-card">
+            <v-card-text class="py-0 version-list">
               <v-timeline dense>
                 <v-timeline-item
                   v-for="(item, index) of versions"
@@ -86,6 +94,16 @@ export default {
       alert: '',
       mdiAlert,
     };
+  },
+  computed: {
+    curVersion() {
+      if (this.versions.length > 0) {
+        const vArr = this.versions[0].split('.');
+        vArr.pop();
+        return vArr.join('.');
+      }
+      return '';
+    },
   },
   async mounted() {
     const response = await this.$api.get('/dsr-tools/minecraft/index.json');
@@ -162,5 +180,19 @@ export default {
       flex: 0 0 auto;
     }
   }
+}
+
+.version-cur span {
+  display: block;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 1.2rem;
+}
+
+.version-list {
+  max-height: 16.75rem;
+  overflow-y: auto;
 }
 </style>
