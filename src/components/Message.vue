@@ -18,6 +18,16 @@ export default {
       style: { transition: 'width 5000ms linear', width: '100%' },
     };
   },
+  mounted() {
+    if (!document.body.contains(this.$el)) {
+      document.body.appendChild(this.$el);
+    }
+  },
+  beforeDestroy() {
+    if (document.body.contains(this.$el)) {
+      document.body.removeChild(this.$el);
+    }
+  },
 };
 </script>
 

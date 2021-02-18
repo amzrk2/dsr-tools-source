@@ -22,7 +22,6 @@ function showMessage({ type = 'success', text = '', duration = 5000 }) {
   });
 
   message.$mount();
-  document.body.appendChild(message.$el);
   message.show = true;
   message._timers = [
     setTimeout(() => {
@@ -33,7 +32,6 @@ function showMessage({ type = 'success', text = '', duration = 5000 }) {
     }, duration),
     setTimeout(() => {
       message.$destroy();
-      document.body.removeChild(message.$el);
     }, duration + 600),
   ];
 
