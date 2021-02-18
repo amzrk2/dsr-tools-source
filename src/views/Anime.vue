@@ -30,7 +30,7 @@ import BCDN from '@/utils/bangumi/cdn';
 import storage from '@/utils/storage';
 
 const HASH_CDN = 'https://cdn.jsdelivr.net/gh/czy0729/Bangumi-OSS@master/hash/subject.json';
-const BGM_CDN = 'https://dsr-tools-bgm.dsrkafuu.workers.dev/calendar';
+const API_BASE = 'https://workers.dsrkafuu.su/bgm';
 
 export default {
   name: 'Anime',
@@ -97,7 +97,7 @@ export default {
       this.cdnHash = hash.data;
     },
     async fetchData() {
-      const res = await this.$axios.get(BGM_CDN);
+      const res = await this.$axios.get(`${API_BASE}/calendar`);
       // 补全 rating 数据
       res.data.forEach((val) => {
         val.items.forEach((val) => {

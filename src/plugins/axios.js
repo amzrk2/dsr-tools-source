@@ -24,6 +24,7 @@ const interceptors = (text) => [
   (e) => {
     const status = e.response.status;
     $message({ type: 'error', text: `${text} - ${status}` });
+    console.error(e);
   },
 ];
 

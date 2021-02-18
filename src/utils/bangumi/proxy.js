@@ -1,75 +1,102 @@
-const API_URL = 'https://api.bgm.tv/';
-const API_PATH = /^\/(.*)/;
+const API_BASE = 'https://api.bgm.tv';
+const PROXY_PATH = /^\/bgm(\/?.*)/;
 const ALLOWED_ORIGIN = [
   /^https?:\/\/tools\.dsrkafuu\.su/,
   /^https?:\/\/dsr-tools-bgm\.dsrkafuu\.workers\.dev/,
   /^https?:\/\/localhost/,
 ];
+const FAKE_ORIGIN = 'https://bgm.tv';
+const FAKE_REFERRER = 'https://bgm.tv/calendar';
+const CACHE_CONTROL = 'public, no-cache, must-revalidate';
 
 /**
- * 验证 Origin 头
- * @param {String} origin
+ * 验证 Origin
+ * @param {Request} request
+ * @return {boolean}
  */
-function validateOrigin(origin) {
+function validateOrigin(request) {
+  const origin = request.headers.get('Origin');
   if (origin) {
     for (let i = 0; i < ALLOWED_ORIGIN.length; i++) {
       if (ALLOWED_ORIGIN[i].exec(origin)) {
-        return true; // 通过
+        return true;
       }
     }
   }
-  return false; // 拒绝所有非 CORS 请求
+  // 拒绝所有无 Origin 请求
+  return false;
 }
 
 /**
- * 解析 pathname
- * @param {String} url
+ * 解析 API 请求路径
+ * @param {Request} request
+ * @return {string}
  */
-function validatePath(pathname) {
-  const parsedPath = API_PATH.exec(pathname);
-  if (parsedPath && parsedPath.length > 1) {
-    return `/${parsedPath[1]}`; // `api.bgm.tv/*` => `worker.example.org/*`
-  } else {
-    return false; // 若不是对 `/*` 的访问则拒绝
+function validatePath(request) {
+  const url = new URL(request.url);
+  const path = url.pathname;
+  const exp = PROXY_PATH.exec(path);
+  if (exp) {
+    // `api.live.bilibili.com/data` => `workers.dsrkafuu.su/bilive/data`
+    if (exp[1]) {
+      return exp[1];
+    }
+    // `api.live.bilibili.com/` => `workers.dsrkafuu.su/bilive`
+    else if (exp[1] === '') {
+      return '/';
+    }
   }
+  return '';
 }
 
 /**
- * 添加 CORS 头
- * @param {Request} request - 源请求
- * @param {String} origin - 源 origin
- * @param {String} pathname - 源请求解析出的正确 pathname
- * @param {URLSearchParams} searchParams - 源请求的 searchParams
+ * 添加 CORS 头 + Referer 伪装
+ * @param {Request} request 源请求
+ * @param {string} path 解析后的 API 请求路径
+ * @return {Response}
  */
-async function handleRequest(request, origin, pathname, searchParams) {
-  const apiUrl = new URL(API_URL); // 构建一个新的 URL 对象 `api.bgm.tv/`
-  apiUrl.pathname = pathname; // 设置正确的 pathname
-  for (const [key, value] of searchParams) {
-    apiUrl.searchParams.append(key, value);
-  } // 迁移正确的 searchParams
-  request = new Request(apiUrl, request); // 覆盖源 request
-  request.headers.set('Origin', apiUrl.origin); // 伪装 Origin
-  let response = await fetch(request); // 获取响应
-  response = new Response(response.body, response); // 覆盖响应 response
-  response.headers.set('Access-Control-Allow-Origin', origin); // 设置 CORS 头
-  response.headers.append('Vary', 'Origin'); // 设置 Vary 头使浏览器正确进行缓存
-  return response;
+async function handleRequest(request, path) {
+  const rawURL = new URL(request.url);
+  const rawOrigin = request.headers.get('Origin');
+  const rawParams = rawURL.searchParams;
+
+  const reqURL = new URL(API_BASE);
+  // 迁移属性
+  reqURL.pathname = path;
+  for (const [key, value] of rawParams) {
+    reqURL.searchParams.append(key, value);
+  }
+  // 发起代理请求
+  request = new Request(reqURL, request); // 覆盖源 request
+  request.headers.set('Origin', FAKE_ORIGIN); // 伪装 Origin
+  request.headers.set('Referer', FAKE_REFERRER); // 伪装 Referer
+  let res = await fetch(request); // 获取响应
+  res = new Response(res.body, res); // 覆盖响应 response 使其 muteable
+
+  res.headers.set('Access-Control-Allow-Origin', rawOrigin); // 设置 CORS 头
+  res.headers.append('Vary', 'Origin'); // 设置 Vary 头使浏览器正确进行缓存
+  res.headers.set('Cache-Control', CACHE_CONTROL); // 设置 Cache-Control
+  return res;
+}
+
+/**
+ * 拒绝请求
+ * @return {Response}
+ */
+async function handleReject() {
+  const res = new Response('[CloudFlare Workers] REQUEST NOT ALLOWED', { status: 403 });
+  return res;
 }
 
 addEventListener('fetch', (event) => {
   // 获取请求的信息
   const request = event.request;
-  const url = new URL(request.url);
-  const origin = request.headers.get('Origin');
-  const pathname = url.pathname;
-  const searchParams = url.searchParams;
   // 验证和解析
-  const validOrigin = validateOrigin(origin);
-  const validPath = validatePath(pathname);
+  const validOrigin = validateOrigin(request);
+  const validPath = validatePath(request);
   if (validOrigin && validPath) {
-    event.respondWith(handleRequest(request, origin, validPath, searchParams));
+    event.respondWith(handleRequest(request, validPath));
   } else {
-    const response = new Response('[BGM API Proxy] Request not allowed', { status: 403 });
-    event.respondWith(response);
+    event.respondWith(handleReject());
   }
 });

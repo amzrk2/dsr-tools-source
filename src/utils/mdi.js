@@ -1,7 +1,7 @@
 import {
   mdiHome,
   mdiTelevisionBox,
-  mdiClipboardPulse,
+  mdiTelevisionClassic,
   mdiGamepad,
   mdiMinecraft,
   mdiAccountSupervisorCircle,
@@ -22,7 +22,7 @@ import {
 export {
   mdiHome,
   mdiTelevisionBox,
-  mdiClipboardPulse,
+  mdiTelevisionClassic,
   mdiGamepad,
   mdiMinecraft,
   mdiAccountSupervisorCircle,

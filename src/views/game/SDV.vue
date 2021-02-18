@@ -1,5 +1,8 @@
 <template>
   <div class="fill-height">
+    <v-overlay absolute :opacity="1" color="white" :value="loading">
+      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+    </v-overlay>
     <div class="image-wrapper">
       <v-img :src="$api.resolve(`/dsr-tools/sdv/stardew.webp`)" />
     </div>

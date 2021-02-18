@@ -1,7 +1,7 @@
 import Home from '@/views/Home.vue';
 import game from './game';
 import about from './about';
-import { mdiHome, mdiTelevisionBox, mdiClipboardPulse } from '@/utils/mdi';
+import { mdiHome, mdiTelevisionBox, mdiTelevisionClassic } from '@/utils/mdi';
 
 const routes = [
   {
@@ -18,6 +18,15 @@ const routes = [
     meta: {
       name: '本季番组',
       icon: mdiTelevisionBox,
+    },
+  },
+  {
+    path: '/bilive',
+    component: () => import(/* webpackChunkName: "blive" */ '@/views/BiLive.vue'),
+    meta: {
+      name: '哔哩哔哩录播地址获取工具',
+      short: '哔哩哔哩录播',
+      icon: mdiTelevisionClassic,
     },
   },
   game,

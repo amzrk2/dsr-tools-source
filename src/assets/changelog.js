@@ -1,5 +1,10 @@
 export const changelog = [
   {
+    version: 'v3.5.0',
+    date: '2021-02-18',
+    logs: ['添加星露谷物语整合包模块', '添加哔哩哔哩录播地址获取工具', '整合 Sentry SDK'],
+  },
+  {
     version: 'v3.4.0',
     date: '2021-02-17',
     logs: [
