@@ -2,7 +2,7 @@ export const changelog = [
   {
     version: 'v3.5.1',
     date: '2021-02-24',
-    logs: ['迁移至 pnpm', '修复导航栏层级'],
+    logs: ['修复导航栏层级', '修复录播地址工具图片样式'],
   },
   {
     version: 'v3.5.0-hotfix',

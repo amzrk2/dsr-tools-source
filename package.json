@@ -3,7 +3,6 @@
   "version": "3.5.1",
   "private": true,
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build && node ./cleanup.js",
     "lint": "vue-cli-service lint"
