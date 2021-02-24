@@ -1,19 +1,25 @@
 name: build
-on: [push, pull_request]
+
+on:
+  - push
+  - pull_request
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v2
 
-      - name: setup node.js
-        uses: actions/setup-node@v2.1.3
+      - name: Setup Node.js 🔧
+        uses: actions/setup-node@v2
         with:
           node-version: "14"
+          check-latest: true
 
-      - name: build
+      - name: Build ✨
         run: |
-          npm ci
-          npm run build
+          npm install -g pnpm
+          pnpm install
+          pnpm run build
