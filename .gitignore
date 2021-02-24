@@ -1,6 +1,11 @@
 .DS_Store
-node_modules
-/dist
+package-lock.json
+.npm/
+.pnpm-store/
+node_modules/
+jspm_packages/
+web_modules/
+dist/
 
 # mock
 public/mock/

@@ -268,6 +268,9 @@ export default {
   &-image {
     overflow: hidden;
     position: relative;
+    height: 0;
+    padding-bottom: 56.25%;
+    background-color: #eeeeee;
 
     img {
       display: block;
@@ -283,7 +286,7 @@ export default {
     padding: 0 0.25rem;
     background-color: rgba(0, 0, 0, 0.3);
     color: rgb(220, 220, 220);
-    z-index: 99;
+    z-index: 2;
     font-size: 0.875rem;
     border-bottom-right-radius: 0.25rem;
   }

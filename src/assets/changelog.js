@@ -1,5 +1,10 @@
 export const changelog = [
   {
+    version: 'v3.5.1',
+    date: '2021-02-24',
+    logs: ['迁移至 pnpm', '修复导航栏层级'],
+  },
+  {
     version: 'v3.5.0-hotfix',
     date: '2021-02-18',
     logs: ['修复通知 DOM 错误挂载问题'],
