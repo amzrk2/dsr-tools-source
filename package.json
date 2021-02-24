@@ -1,6 +1,6 @@
 {
   "name": "dsr-tools",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -9,8 +9,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@sentry/tracing": "^6.2.0",
-    "@sentry/vue": "^6.2.0",
+    "@sentry/tracing": "~6.2.0",
+    "@sentry/vue": "~6.2.0",
     "axios": "~0.21.1",
     "core-js": "~3.9.0",
     "normalize.css": "~8.0.1",

@@ -8701,8 +8701,8 @@ packages:
       integrity: sha512-D1mvvtDG0L5ft/jGWkLpG1+m0eQxOfaBvTNELraWj22wSVUMWxZUvYgJYcKh6jGGIkJFhH4IZPQhR4TKpc8mBw==
 specifiers:
   '@mdi/js': ^5.9.55
-  '@sentry/tracing': ^6.2.0
-  '@sentry/vue': ^6.2.0
+  '@sentry/tracing': ~6.2.0
+  '@sentry/vue': ~6.2.0
   '@sentry/webpack-plugin': ^1.14.1
   '@vue/cli-plugin-babel': ~4.5.11
   '@vue/cli-plugin-router': ~4.5.11
