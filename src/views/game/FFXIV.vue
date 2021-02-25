@@ -11,6 +11,19 @@
         <v-progress-circular indeterminate color="primary"></v-progress-circular>
       </v-overlay>
 
+      <v-alert id="temp-alert" color="orange" dense type="info" v-model="showAlert" dismissible>
+        <span>全新伤害统计悬浮窗持续更新中</span>
+        <v-btn
+          class="ml-2 btn"
+          small
+          color="white"
+          href="https://github.com/dsrkafuu/skyline-overlay"
+          target="_blank"
+        >
+          欢迎试用
+        </v-btn>
+      </v-alert>
+
       <v-tab-item key="tab-0" value="tab-0">
         <v-container class="pa-10">
           <v-alert type="success">{{ formatedDate }}</v-alert>
@@ -75,6 +88,7 @@ export default {
       loading: true,
       data: [],
       lastUpdate: new Date(0),
+      showAlert: false,
       tab: storage.getLS('dsr-tools_ffxiv-tab') || 'tab-0',
       headers: [
         { text: '服务器', value: 'server', align: 'center' },
@@ -117,6 +131,13 @@ export default {
       return `最后更新于 ${year}-${month}-${day} ${h}:${m}:${s}`;
     },
   },
+  watch: {
+    showAlert(val) {
+      if (!val) {
+        storage.setLS('dsr-tools_ffxiv-alert', Date.now());
+      }
+    },
+  },
   methods: {
     async fetchData() {
       const response = await this.$api.get('/dsr-tools/ffxiv/index.json');
@@ -133,8 +154,20 @@ export default {
     handleTabChange(val) {
       storage.setLS('dsr-tools_ffxiv-tab', val);
     },
+    checkAlertStatus() {
+      const date = storage.getLS('dsr-tools_ffxiv-alert');
+      if (!date) {
+        this.showAlert = true;
+        return;
+      }
+      const timePassed = Date.now() - Number(date);
+      if (Number.isNaN(timePassed) || timePassed > 7 * 24 * 60 * 60 * 1000) {
+        this.showAlert = true;
+      }
+    },
   },
   async mounted() {
+    this.checkAlertStatus();
     await this.fetchData();
   },
 };
@@ -161,5 +194,16 @@ a {
 
 .text-trans {
   color: rgba(0, 0, 0, 0.5) !important;
+}
+
+#temp-alert {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 50;
+
+  .btn {
+    color: rgb(255, 152, 0);
+  }
 }
 </style>
