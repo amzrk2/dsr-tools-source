@@ -2,6 +2,13 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
 
+import useVector from 'vector-tracker';
+
+const { vecView, vecLeave } = useVector(
+  '603b6904be1b2b0008e5bb6b',
+  'https://analytics.appvector.icu/api'
+);
+
 // Same route error
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
@@ -40,6 +47,23 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     next();
+  }
+});
+
+router.afterEach((to, from) => {
+  if (process.env.NODE_ENV === 'production') {
+    if (!window._vector) {
+      // if first view
+      window._vector = true;
+      vecView(to.path, document.referrer);
+    } else {
+      // report view
+      vecView(to.path);
+    }
+    // report leave
+    if (window._vector && from.name !== null) {
+      vecLeave(from.path);
+    }
   }
 });
 
