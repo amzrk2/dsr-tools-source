@@ -4,11 +4,6 @@ import routes from './routes';
 
 import useVector from 'vector-tracker';
 
-const { vecView, vecLeave } = useVector(
-  '603b6904be1b2b0008e5bb6b',
-  'https://analytics.appvector.icu/api'
-);
-
 // Same route error
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
@@ -50,6 +45,11 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+const { vecView, vecLeave } = useVector(
+  '603b6904be1b2b0008e5bb6b',
+  'https://analytics.appvector.icu/api'
+);
+
 router.afterEach((to, from) => {
   if (process.env.NODE_ENV === 'production') {
     if (!window._vector) {
@@ -65,6 +65,13 @@ router.afterEach((to, from) => {
       vecLeave(from.path);
     }
   }
+});
+// leave when page unload
+// [safari fix]
+// safari doesn't fire the `visibilitychange` and `beforeunload`
+// when navigating away from a document
+window.addEventListener('pagehide', () => {
+  vecLeave(window.location.pathname);
 });
 
 export default router;
