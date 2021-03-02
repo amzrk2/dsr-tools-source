@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routes from './routes';
 
-import useVector from 'vector-tracker';
+import useAofuji from 'aofuji-tracker';
 
 // Same route error
 const originalPush = VueRouter.prototype.push;
@@ -45,33 +45,35 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-const { vecView, vecLeave } = useVector(
-  '603e00eb53cb27529085714f',
-  'https://analytics.appvector.icu/api'
-);
+if (process.env.NODE_ENV === 'production') {
+  const aoid = process.env.VUE_APP_AOID;
+  const { aoView, aoLeave } = useAofuji(aoid, 'https://demo.aofuji.ink/api');
 
-router.afterEach((to, from) => {
-  if (process.env.NODE_ENV === 'production') {
-    if (!window._vector) {
-      // if first view
-      window._vector = true;
-      vecView(to.path, document.referrer);
-    } else {
-      // report view
-      vecView(to.path);
+  // route view and leave
+  router.afterEach((to, from) => {
+    if (process.env.NODE_ENV === 'production') {
+      if (!window._vector) {
+        // if first view
+        window._vector = true;
+        aoView(to.path, document.referrer);
+      } else {
+        // report view
+        aoView(to.path);
+      }
+      // report leave
+      if (window._vector && from.name !== null) {
+        aoLeave(from.path);
+      }
     }
-    // report leave
-    if (window._vector && from.name !== null) {
-      vecLeave(from.path);
-    }
-  }
-});
-// leave when page unload
-// [safari fix]
-// safari doesn't fire the `visibilitychange` and `beforeunload`
-// when navigating away from a document
-window.addEventListener('pagehide', () => {
-  vecLeave(window.location.pathname);
-});
+  });
+
+  // leave when page unload
+  // [safari fix]
+  // safari doesn't fire the `visibilitychange` and `beforeunload`
+  // when navigating away from a document
+  window.addEventListener('pagehide', () => {
+    aoLeave(window.location.pathname);
+  });
+}
 
 export default router;
