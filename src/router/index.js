@@ -46,7 +46,7 @@ router.beforeEach((to, from, next) => {
 });
 
 const { vecView, vecLeave } = useVector(
-  '603b6904be1b2b0008e5bb6b',
+  '603e00eb53cb27529085714f',
   'https://analytics.appvector.icu/api'
 );
 
