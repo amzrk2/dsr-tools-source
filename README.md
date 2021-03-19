@@ -1,17 +1,17 @@
 # DSRToolS
 
-![BADGE](https://img.shields.io/github/workflow/status/dsrkafuu/dsr-tools/build?style=flat-square)
+![BADGE](https://img.shields.io/github/workflow/status/dsrkafuu/dsr-tools/test?style=flat-square)
 ![BADGE](https://img.shields.io/github/languages/top/dsrkafuu/dsr-tools?style=flat-square)
 ![BADGE](https://img.shields.io/github/license/dsrkafuu/dsr-tools?style=flat-square)
 
-DSRToolS 站点项目，基于 Vue.js 和 Vuetify。
+新版 DSRToolS 站点项目，基于 [React](https://github.com/facebook/react) 和 [Ant Design](https://github.com/ant-design/ant-design/)。
 
 ## 开发
 
 ```bash
 npm install
-npm run dev # Compiles and hot-reloads for development
-npm run build # Compiles and minifies for production
+npm run dev
+npm run build
 ```
 
 ## License

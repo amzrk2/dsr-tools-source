@@ -1,4 +1,4 @@
-name: build
+name: test
 
 on:
   - push
@@ -20,6 +20,5 @@ jobs:
 
       - name: Build ✨
         run: |
-          npm install -g pnpm
-          pnpm install
-          pnpm run build
+          npm ci
+          npm run build
