@@ -6,6 +6,9 @@ jspm_packages/
 web_modules/
 dist/
 
+# workflow fix
+package-lock.json
+
 # mock
 public/mock/
 
