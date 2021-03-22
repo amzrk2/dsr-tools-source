@@ -1,0 +1,12 @@
+.qrcode {
+  width: 128px !important;
+  height: 128px !important;
+  display: block;
+
+  &--loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(190, 190, 190, 0.2);
+  }
+}

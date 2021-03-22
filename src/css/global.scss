@@ -1,3 +1,13 @@
+html,
+body {
+  font-family: $font-family-base;
+}
+
+pre,
+code {
+  font-family: $font-family-mono;
+}
+
 #root {
   min-height: 100vh;
 }

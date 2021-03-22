@@ -8,10 +8,10 @@ import './css/global.scss';
 import App from './App';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ConfigProvider autoInsertSpaceInButton={false}>
-      <App />
-    </ConfigProvider>
-  </React.StrictMode>,
+  /* <React.StrictMode> */
+  <ConfigProvider autoInsertSpaceInButton={false}>
+    <App />
+  </ConfigProvider>,
+  /* </React.StrictMode> */
   document.getElementById('root')
 );

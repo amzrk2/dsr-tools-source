@@ -1,15 +1,3 @@
 .app {
   min-height: 100vh;
 }
-
-.header {
-  padding: 0 0;
-  height: unset;
-  line-height: unset;
-  box-shadow: $shadow-box;
-
-  &__content {
-    padding-top: $space-xs;
-    padding-bottom: $space-xs;
-  }
-}
