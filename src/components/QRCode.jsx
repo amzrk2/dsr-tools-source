@@ -6,9 +6,8 @@ import 'antd/lib/skeleton/style/index.less';
 import 'antd/lib/spin/style/index.less';
 
 import './QRCode.scss';
+import { SCRIPT_AWESOME_QR } from '@/utils/constants';
 
-const aQRSrc =
-  'https://cdn.jsdelivr.net/gh/SumiMakito/Awesome-qr.js@2.0.1-rc.0/dist/awesome-qr.min.js';
 const size = 128;
 const errorComponent = <Skeleton.Image className='qrcode qrcode--error' />;
 const loadingComponent = (
@@ -25,7 +24,7 @@ function QRCode({ content }) {
   useEffect(() => {
     const script = document.createElement('script');
     script.setAttribute('async', '');
-    script.setAttribute('src', aQRSrc);
+    script.setAttribute('src', SCRIPT_AWESOME_QR);
     script.addEventListener('load', () => setStatus('fulfilled'));
     script.addEventListener('error', () => setStatus('rejected'));
     document.body.appendChild(script);
