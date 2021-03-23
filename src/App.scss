@@ -1,3 +1,11 @@
 .app {
   min-height: 100vh;
 }
+
+.header__layout,
+.footer__layout {
+  padding: 0 0;
+  height: unset;
+  line-height: unset;
+  overflow-x: hidden;
+}

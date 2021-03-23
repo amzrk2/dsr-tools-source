@@ -6,6 +6,8 @@ import 'antd/lib/layout/style/index.less';
 
 import './App.scss';
 import Header from './components/Header';
+import Router from './Router';
+import Footer from './components/Footer';
 import responsive from './utils/responsive';
 import { throttle } from './utils/performance';
 
@@ -31,62 +33,16 @@ function App() {
       </Layout.Sider>
       <Layout>
         <Affix>
-          <Header collapsed={collapsed} onCollapsedChange={() => setCollapsed((val) => !val)} />
+          <Layout.Header className='header__layout'>
+            <Header collapsed={collapsed} onCollapsedChange={() => setCollapsed((val) => !val)} />
+          </Layout.Header>
         </Affix>
-
-        <Layout.Content>
-          Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br /> Content
-          <br />
+        <Layout.Content className='content__layout'>
+          <Router />
         </Layout.Content>
-        <Layout.Footer>Footer</Layout.Footer>
+        <Layout.Footer className='footer__layout'>
+          <Footer />
+        </Layout.Footer>
       </Layout>
     </Layout>
   );

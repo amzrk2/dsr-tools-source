@@ -2,9 +2,8 @@ import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 
-import { Button, Layout, message, PageHeader, Popover } from 'antd';
+import { Button, message, PageHeader, Popover } from 'antd';
 import 'antd/lib/button/style/index.less';
-import 'antd/lib/layout/style/index.less';
 import 'antd/lib/message/style/index.less';
 import 'antd/lib/page-header/style/index.less';
 import 'antd/lib/popover/style/index.less';
@@ -35,48 +34,41 @@ function Header({ collapsed, onCollapsedChange }) {
   };
 
   return (
-    <Layout.Header className='header'>
-      <PageHeader
-        className='header__content'
-        ghost={false}
-        backIcon={
-          <Button type='primary' icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />} />
-        }
-        onBack={onCollapsedChange}
-        title='首页'
-        subTitle='DSRToolS'
-        extra={[
-          <Button className='header__clock' type='text' key='time'>
-            {clock.format('HH:mm:ss')}
-          </Button>,
-          <Button
-            type='primary'
-            key='refresh'
-            icon={<SyncOutlined />}
-            onClick={() => window.location.reload()}
-          />,
-          <Popover
-            key='share'
-            trigger='click'
-            content={
-              <Fragment>
-                <QRCode content={window.location.href} />
-                <Button
-                  className='header__copy'
-                  type='primary'
-                  block={true}
-                  onClick={copyShareLink}
-                >
-                  复制链接
-                </Button>
-              </Fragment>
-            }
-          >
-            <Button type='primary' icon={<ShareAltOutlined />} />
-          </Popover>,
-        ]}
-      />
-    </Layout.Header>
+    <PageHeader
+      className='header'
+      ghost={false}
+      backIcon={
+        <Button type='primary' icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />} />
+      }
+      onBack={onCollapsedChange}
+      title='首页'
+      subTitle='DSRToolS'
+      extra={[
+        <Button className='header__clock' type='text' key='time'>
+          {clock.format('HH:mm:ss')}
+        </Button>,
+        <Button
+          type='primary'
+          key='refresh'
+          icon={<SyncOutlined />}
+          onClick={() => window.location.reload()}
+        />,
+        <Popover
+          key='share'
+          trigger='click'
+          content={
+            <Fragment>
+              <QRCode content={window.location.href} />
+              <Button className='header__copy' type='primary' block={true} onClick={copyShareLink}>
+                复制链接
+              </Button>
+            </Fragment>
+          }
+        >
+          <Button type='primary' icon={<ShareAltOutlined />} />
+        </Popover>,
+      ]}
+    />
   );
 }
 

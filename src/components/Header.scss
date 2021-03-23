@@ -1,16 +1,10 @@
 .header {
-  padding: 0 0;
-  height: unset;
-  line-height: unset;
+  padding-top: $space-xs;
+  padding-bottom: $space-xs;
   box-shadow: $shadow-box;
 
   &__clock {
     width: 7rem;
-  }
-
-  &__content {
-    padding-top: $space-xs;
-    padding-bottom: $space-xs;
   }
 
   &__copy {
