@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Skeleton, Spin } from 'antd';
+import { Image, Skeleton, Spin } from 'antd';
+import 'antd/lib/image/style/index.less';
 import 'antd/lib/skeleton/style/index.less';
 import 'antd/lib/spin/style/index.less';
 
@@ -51,7 +52,9 @@ function QRCode({ content }) {
   if (status === 'rejected' || !content) {
     return errorComponent;
   }
-  return <img className='qrcode' src={qrCode} alt='Share Link QRCode' />;
+  return (
+    <Image className='qrcode' width={size} height={size} src={qrCode} alt='Share Link QRCode' />
+  );
 }
 
 QRCode.propTypes = {

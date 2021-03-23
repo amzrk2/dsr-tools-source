@@ -58,8 +58,8 @@ function Header({ collapsed, onCollapsedChange }) {
           trigger='click'
           content={
             <Fragment>
-              <QRCode content={window.location.href} />
-              <Button className='header__copy' type='primary' block={true} onClick={copyShareLink}>
+              <QRCode className='header__qrcode' content={window.location.href} />
+              <Button className='header__copy' block={true} type='primary' onClick={copyShareLink}>
                 复制链接
               </Button>
             </Fragment>
