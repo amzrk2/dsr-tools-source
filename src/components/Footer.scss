@@ -1,3 +1,10 @@
 .footer {
   background-color: #ffffff !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: $font-size-sm;
+  line-height: 1.5;
+  padding: $space-xs 0;
 }
