@@ -14,7 +14,7 @@ import routes from '@/router/index';
  * @return {import('react').ReactElement}
  */
 function mapRoute(route) {
-  if (route.icon) {
+  if (!route.hide) {
     // with sub route
     if (route.routes && route.routes.length > 0) {
       return (

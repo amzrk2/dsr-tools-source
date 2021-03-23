@@ -1,7 +1,12 @@
 import React from 'react';
 import { lazy } from '@loadable/component';
 
-import { HomeOutlined, InfoCircleOutlined } from '@ant-design/icons';
+import {
+  HomeOutlined,
+  InfoCircleOutlined,
+  CloudSyncOutlined,
+  FileTextOutlined,
+} from '@ant-design/icons';
 
 export default [
   {
@@ -22,20 +27,21 @@ export default [
         path: '/about/changelog',
         exact: true,
         component: lazy(() => import('@/views/About/Changelog')),
-        icon: <HomeOutlined />,
+        icon: <CloudSyncOutlined />,
       },
       {
         name: '站点信息',
         path: '/about/info',
         exact: true,
         component: lazy(() => import('@/views/About/Info')),
-        icon: <HomeOutlined />,
+        icon: <FileTextOutlined />,
       },
     ],
   },
   {
-    name: '404',
+    name: '404 NOT FOUND',
     path: '*',
     component: lazy(() => import('@/views/NotFound')),
+    hide: true,
   },
 ];

@@ -1,5 +1,6 @@
-import React, { Suspense } from 'react';
+import React, { Fragment, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import { Spin } from 'antd';
 import 'antd/lib/spin/style/index.less';
@@ -50,9 +51,14 @@ function Router() {
           exact={route.exact || false}
           path={route.path}
           render={(props) => (
-            <Suspense fallback={<RouteLoading />}>
-              <route.component {...props} />
-            </Suspense>
+            <Fragment>
+              <Helmet>
+                <title>{route.name} | DSRToolS</title>
+              </Helmet>
+              <Suspense fallback={<RouteLoading />}>
+                <route.component {...props} />
+              </Suspense>
+            </Fragment>
           )}
         />
       ))}
