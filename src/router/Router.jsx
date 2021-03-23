@@ -1,13 +1,15 @@
 import React, { Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import { Spin } from 'antd';
 import 'antd/lib/spin/style/index.less';
 
 import routes from './index';
 
-// route loading indicator
+/**
+ * route loading indicator
+ * @return {import('react').ReactElement}
+ */
 function RouteLoading() {
   return (
     <div
@@ -23,32 +25,36 @@ function RouteLoading() {
   );
 }
 
-// wrapper for handling sub-routes
-function RouteWithSubRoutes(route) {
-  return (
-    <Route
-      path={route.path}
-      exact={route.exact || false}
-      render={(props) => (
-        <Suspense fallback={<RouteLoading />}>
-          <route.component {...props} routes={route.routes} />
-        </Suspense>
-      )}
-    />
-  );
+/**
+ * flatten routes
+ * @param {Array<Object>} routes
+ * @return {Array<Object>}
+ */
+function flattenRoutes(routes) {
+  return routes.reduce((preItem, item) => {
+    return preItem.concat(Array.isArray(item.routes) ? flattenRoutes(item.routes) : item);
+  }, []);
 }
+const flatRoutes = flattenRoutes(routes);
 
-RouteWithSubRoutes.propTypes = {
-  path: PropTypes.string.isRequired,
-  exact: PropTypes.bool,
-  component: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
-};
-
+/**
+ * app router
+ * @return {import('react').ReactElement}
+ */
 function Router() {
   return (
     <Switch>
-      {routes.map((route, idx) => (
-        <RouteWithSubRoutes key={idx} {...route} />
+      {flatRoutes.map((route) => (
+        <Route
+          key={route.path}
+          exact={route.exact || false}
+          path={route.path}
+          render={(props) => (
+            <Suspense fallback={<RouteLoading />}>
+              <route.component {...props} />
+            </Suspense>
+          )}
+        />
       ))}
     </Switch>
   );

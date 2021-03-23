@@ -6,6 +6,7 @@ import 'antd/lib/layout/style/index.less';
 
 import './App.scss';
 import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 import Router from './router/Router';
 import Footer from './components/Footer';
 import responsive from './utils/responsive';
@@ -28,8 +29,12 @@ function App() {
 
   return (
     <Layout className='app'>
-      <Layout.Sider collapsed={collapsed} collapsedWidth={minimal ? 0 : 60}>
-        Sider
+      <Layout.Sider
+        className='sidebar__layout'
+        collapsed={collapsed}
+        collapsedWidth={minimal ? 0 : 80}
+      >
+        <Sidebar />
       </Layout.Sider>
       <Layout>
         <Affix className='header__affix'>

@@ -17,6 +17,11 @@ import {
 import './Header.scss';
 import QRCode from './QRCode';
 
+/**
+ * custom header
+ * @param {Objecr} props
+ * @return {import('react').ReactElement}
+ */
 function Header({ collapsed, onCollapsedChange }) {
   // time updater
   const [clock, setClock] = useState(dayjs());
