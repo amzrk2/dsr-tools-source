@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import { Spin } from 'antd';
+import 'antd/lib/spin/style/index.less';
+
 import routes from './index';
+
+// route loading indicator
+function RouteLoading() {
+  return (
+    <div
+      style={{
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Spin delay={1000} size='large' />
+    </div>
+  );
+}
 
 // wrapper for handling sub-routes
 function RouteWithSubRoutes(route) {
@@ -10,7 +29,11 @@ function RouteWithSubRoutes(route) {
     <Route
       path={route.path}
       exact={route.exact || false}
-      render={(props) => <route.component {...props} routes={route.routes} />}
+      render={(props) => (
+        <Suspense fallback={<RouteLoading />}>
+          <route.component {...props} routes={route.routes} />
+        </Suspense>
+      )}
     />
   );
 }
@@ -18,7 +41,7 @@ function RouteWithSubRoutes(route) {
 RouteWithSubRoutes.propTypes = {
   path: PropTypes.string.isRequired,
   exact: PropTypes.bool,
-  component: PropTypes.func.isRequired,
+  component: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
 };
 
 function Router() {

@@ -1,20 +1,18 @@
-import Home from '@/views/Home';
-import About from '@/views/About';
-import NotFound from '@/views/NotFound';
+import { lazy } from '@loadable/component';
 
 export default [
   {
     path: '/',
-    component: Home,
+    component: lazy(() => import('@/views/Home')),
     exact: true,
   },
   {
     path: '/about',
-    component: About,
+    component: lazy(() => import('@/views/About')),
     exact: true,
   },
   {
     path: '*',
-    component: NotFound,
+    component: lazy(() => import('@/views/NotFound')),
   },
 ];
