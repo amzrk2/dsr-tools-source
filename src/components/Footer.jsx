@@ -5,6 +5,7 @@ import { CopyrightOutlined } from '@ant-design/icons';
 
 import './Footer.scss';
 import { version } from '@/assets/changelog';
+import reactIcon from '@/assets/svg/react.svg';
 
 function Footer() {
   return (
@@ -13,6 +14,7 @@ function Footer() {
       <span>
         Copyright <CopyrightOutlined /> {dayjs().year()} DSRKafuU
       </span>
+      <img className='footer__icon' src={reactIcon} alt='React Icon' />
     </div>
   );
 }
