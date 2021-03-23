@@ -7,5 +7,19 @@
   padding: 0 0;
   height: unset;
   line-height: unset;
-  overflow-x: hidden;
+}
+
+.header__affix {
+  border-bottom: $border-box;
+  z-index: 20;
+}
+
+.footer__layout {
+  border-top: $border-box;
+  z-index: 20;
+}
+
+.content__layout {
+  background-color: #ffffff;
+  z-index: 10;
 }

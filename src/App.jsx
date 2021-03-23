@@ -6,7 +6,7 @@ import 'antd/lib/layout/style/index.less';
 
 import './App.scss';
 import Header from './components/Header';
-import Router from './Router';
+import Router from './router/Router';
 import Footer from './components/Footer';
 import responsive from './utils/responsive';
 import { throttle } from './utils/performance';
@@ -32,7 +32,7 @@ function App() {
         Sider
       </Layout.Sider>
       <Layout>
-        <Affix>
+        <Affix className='header__affix'>
           <Layout.Header className='header__layout'>
             <Header collapsed={collapsed} onCollapsedChange={() => setCollapsed((val) => !val)} />
           </Layout.Header>
