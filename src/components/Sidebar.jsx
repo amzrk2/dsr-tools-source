@@ -43,10 +43,18 @@ function mapRoute(route) {
  * @return {import('react').ReactElement}
  */
 function Sidebar() {
+  // current location
   const loc = useLocation();
+  // current opened group
+  const openKey = `/${loc.pathname.split('/')[1] || ''}`;
 
   return (
-    <Menu className='sidebar' mode='inline' selectedKeys={[loc.pathname]}>
+    <Menu
+      className='sidebar'
+      mode='inline'
+      selectedKeys={[loc.pathname]}
+      defaultOpenKeys={[openKey]}
+    >
       {routes.map((route) => mapRoute(route))}
     </Menu>
   );
