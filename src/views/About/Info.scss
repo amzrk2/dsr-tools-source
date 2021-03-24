@@ -1,0 +1,21 @@
+.info {
+  padding: 32px;
+
+  .personal {
+    display: flex;
+    align-items: center;
+
+    &__avatar {
+      width: 48px;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 12px;
+      margin-left: 32px;
+    }
+
+    &__id {
+      display: inline-block;
+      font-size: $font-size-xl * 1.25;
+    }
+  }
+}
