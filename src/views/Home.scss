@@ -1,0 +1,42 @@
+.home {
+  position: relative;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    color: hsla(0, 0%, 100%, 0.55);
+    font-size: $font-size-xl * 3;
+
+    @include responsive(md) {
+    }
+  }
+
+  &__links {
+    display: flex;
+    gap: 1.5rem;
+
+    .ant-btn {
+      color: hsla(0, 0%, 100%, 0.55);
+      border-color: hsla(0, 0%, 100%, 0.55);
+
+      &:hover {
+        color: $color-primary;
+        border-color: $color-primary;
+      }
+    }
+  }
+
+  &__license {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 0.25rem;
+    color: hsla(0, 0%, 100%, 0.55);
+  }
+}
