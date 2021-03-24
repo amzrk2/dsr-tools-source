@@ -1,0 +1,14 @@
+.logo {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-primary;
+
+  &__image {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    margin: 3rem 0;
+  }
+}
