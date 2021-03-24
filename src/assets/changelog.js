@@ -1,8 +1,8 @@
 export const changelog = [
   {
     version: 'v4.0.0',
-    date: '',
-    logs: [],
+    date: '2021-03-24',
+    logs: ['React 全站重构', '全站样式更新'],
   },
   {
     version: 'v3.5.1',
