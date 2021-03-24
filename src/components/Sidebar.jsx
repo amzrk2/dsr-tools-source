@@ -7,6 +7,7 @@ import 'antd/lib/tooltip/style/index.less';
 
 import './Sidebar.scss';
 import routes from '@/router/index';
+import Logo from './Logo';
 
 /**
  * map route to component
@@ -55,6 +56,9 @@ function Sidebar() {
       selectedKeys={[loc.pathname]}
       defaultOpenKeys={[openKey]}
     >
+      <Menu.Item className='menu__icon' key='icon'>
+        <Logo />
+      </Menu.Item>
       {routes.map((route) => mapRoute(route))}
     </Menu>
   );

@@ -6,7 +6,6 @@ import 'antd/lib/layout/style/index.less';
 
 import './App.scss';
 import Header from './components/Header';
-import Logo from './components/Logo';
 import Sidebar from './components/Sidebar';
 import Router from './router/Router';
 import Footer from './components/Footer';
@@ -35,7 +34,6 @@ function App() {
         collapsed={collapsed}
         collapsedWidth={minimal ? 0 : 80}
       >
-        <Logo />
         <Sidebar />
       </Layout.Sider>
       <Layout>
