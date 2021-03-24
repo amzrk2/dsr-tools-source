@@ -12,9 +12,8 @@ package-lock.json
 # mock
 public/mock/
 
-# local env files
-.env.local
-.env.*.local
+# env files
+.env*
 
 # Log files
 npm-debug.log*
