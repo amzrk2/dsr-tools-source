@@ -20,6 +20,12 @@
 }
 
 .content__layout {
-  background-color: #ffffff;
   z-index: 10;
+}
+
+.header__layout,
+.footer__layout,
+.content__layout,
+.sidebar__layout {
+  background-color: #ffffff;
 }

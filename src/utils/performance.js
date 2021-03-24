@@ -4,10 +4,10 @@
  */
 export const throttle = (func, delay = 300) => {
   let timer = null;
-  return () => {
+  return function (...args) {
     if (!timer) {
       timer = setTimeout(() => {
-        func();
+        func(...args);
         timer = null;
       }, delay);
     }
@@ -20,14 +20,8 @@ export const throttle = (func, delay = 300) => {
  */
 export const debounce = (func, delay = 300) => {
   let timer = null;
-  return () => {
-    if (timer) {
-      clearTimeout(timer);
-      timer = null;
-    }
-    timer = setTimeout(() => {
-      func();
-      timer = null;
-    }, delay);
+  return function (...args) {
+    timer && clearTimeout(timer);
+    timer = setTimeout(() => func(...args), delay);
   };
 };
