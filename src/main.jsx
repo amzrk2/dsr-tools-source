@@ -5,6 +5,11 @@ import 'normalize.css';
 import { ConfigProvider } from 'antd';
 import 'antd/lib/style/index.less';
 
+// google analytics
+import ga from './utils/ga';
+ga(import.meta.env.VITE_GA);
+
+// app
 import './css/global.scss';
 import './css/utils.scss';
 import App from './App';
