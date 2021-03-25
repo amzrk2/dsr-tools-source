@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { Row, Col, Card, Image } from 'antd';
+import { Row, Col, Card, Image, Collapse, List } from 'antd';
 import 'antd/lib/grid/style/index.less';
 import 'antd/lib/card/style/index.less';
 import 'antd/lib/image/style/index.less';
+import 'antd/lib/collapse/style/index.less';
+import 'antd/lib/list/style/index.less';
 import {
   PaperClipOutlined,
   FileTextOutlined,
@@ -13,6 +15,8 @@ import {
 
 import './Info.scss';
 import jsdelivr from '@/utils/jsdelivr';
+import statements from '@/assets/statements';
+import { dependencies, devDependencies } from '@/../package.json';
 
 function Personal() {
   return (
@@ -28,24 +32,60 @@ function Personal() {
 }
 
 function Info() {
+  const deps = { ...dependencies, ...devDependencies };
+
   return (
     <div className='info'>
       <Row gutter={[64, 64]}>
-        <Col xs={24} md={12}>
+        <Col className='info__card' xs={24} md={12}>
           <Card
             cover={<Personal />}
             actions={[
-              <PaperClipOutlined key='homepage' />,
-              <FileTextOutlined key='blog' />,
-              <TwitterOutlined key='twitter' />,
-              <GithubOutlined key='github' />,
+              <a href='https://dsrkafuu.su' key='homepage' target='_blank'>
+                <PaperClipOutlined />
+              </a>,
+              <a href='https://blog.dsrkafuu.su' key='blog' target='_blank'>
+                <FileTextOutlined />
+              </a>,
+              <a href='https://twitter.com/dsrkafuu' key='twitter' target='_blank'>
+                <TwitterOutlined />
+              </a>,
+              <a href='https://githuib.com/dsrkafuu' key='github' target='_blank'>
+                <GithubOutlined />
+              </a>,
             ]}
           >
-            <Image alt='Personal Image' />
+            <Image
+              className='personal__image'
+              alt='Personal Image'
+              src={jsdelivr('/images/banners/mozilla_960p.jpg', 'cdn')}
+            />
+          </Card>
+          <Card title='版权信息'>
+            <Collapse ghost={true}>
+              {statements.map((item, idx) => (
+                <Collapse.Panel header={item.title} key={idx}>
+                  {item.contents.map((val, idx) => (
+                    <p key={idx}>{val}</p>
+                  ))}
+                </Collapse.Panel>
+              ))}
+            </Collapse>
           </Card>
         </Col>
-        <Col xs={24} md={12}>
-          col-12
+        <Col className='info__card' xs={24} md={12}>
+          <Card title='开源许可'>
+            <List
+              size='small'
+              dataSource={Object.keys(deps)}
+              renderItem={(key) => (
+                <List.Item className='opensource__item'>
+                  <span>{key}</span>
+                  <span>{deps[key]}</span>
+                </List.Item>
+              )}
+            />
+          </Card>
         </Col>
       </Row>
     </div>

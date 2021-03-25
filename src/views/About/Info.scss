@@ -17,5 +17,24 @@
       display: inline-block;
       font-size: $font-size-xl * 1.25;
     }
+
+    &__image {
+      display: block;
+    }
+  }
+
+  &__card {
+    .ant-card-body {
+      padding: 0;
+    }
+
+    .ant-card:not(:first-child) {
+      margin-top: 32px;
+    }
+
+    .opensource__item {
+      padding-left: 24px !important;
+      padding-right: 24px !important;
+    }
   }
 }

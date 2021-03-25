@@ -13,6 +13,7 @@
   },
   "plugins": ["react", "react-hooks"],
   "rules": {
+    "react/jsx-no-target-blank": "off",
     "react-hooks/exhaustive-deps": "warn"
   }
 }

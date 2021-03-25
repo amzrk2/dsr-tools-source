@@ -21,7 +21,7 @@ function RouteLoading() {
         alignItems: 'center',
       }}
     >
-      <Spin delay={1000} size='large' />
+      <Spin delay={500} size='large' />
     </div>
   );
 }
