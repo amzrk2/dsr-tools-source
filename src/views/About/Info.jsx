@@ -18,6 +18,10 @@ import jsdelivr from '@/utils/jsdelivr';
 import statements from '@/assets/statements';
 import { dependencies, devDependencies } from '@/../package.json';
 
+/**
+ * personal card title
+ * @return {import('react').ReactElement}
+ */
 function Personal() {
   return (
     <div className='personal'>
@@ -31,6 +35,10 @@ function Personal() {
   );
 }
 
+/**
+ * info page
+ * @return {import('react').ReactElement}
+ */
 function Info() {
   const deps = { ...dependencies, ...devDependencies };
 

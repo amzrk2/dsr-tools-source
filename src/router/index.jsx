@@ -6,6 +6,8 @@ import {
   InfoCircleOutlined,
   CloudSyncOutlined,
   FileTextOutlined,
+  PlayCircleOutlined,
+  FieldTimeOutlined,
 } from '@ant-design/icons';
 
 export default [
@@ -15,6 +17,22 @@ export default [
     exact: true,
     component: lazy(() => import('@/views/Home')),
     icon: <HomeOutlined />,
+  },
+  {
+    name: '游戏工具',
+    path: '/game',
+    exact: true,
+    icon: <PlayCircleOutlined />,
+    routes: [
+      {
+        name: 'FF14 国服狩猎车时间表',
+        short: 'FF14 狩猎时间表',
+        path: '/game/ffxiv',
+        exact: true,
+        component: lazy(() => import('@/views/Game/FFXIV')),
+        icon: <FieldTimeOutlined />,
+      },
+    ],
   },
   {
     name: '关于',

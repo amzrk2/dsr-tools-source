@@ -6,6 +6,10 @@ import 'antd/lib/timeline/style/index.less';
 import './Changelog.scss';
 import { changelog } from '@/assets/changelog';
 
+/**
+ * changelog page
+ * @return {import('react').ReactElement}
+ */
 function Changelog() {
   return (
     <div className='changelog'>

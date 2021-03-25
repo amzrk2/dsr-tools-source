@@ -29,7 +29,7 @@ function mapRoute(route) {
     else {
       return (
         <Menu.Item key={route.path} icon={route.icon}>
-          <Link to={route.path}>{route.name}</Link>
+          <Link to={route.path}>{route.short || route.name}</Link>
         </Menu.Item>
       );
     }

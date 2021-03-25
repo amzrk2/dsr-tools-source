@@ -4,6 +4,10 @@ import { Button, Result } from 'antd';
 import 'antd/lib/button/style/index.less';
 import 'antd/lib/result/style/index.less';
 
+/**
+ * not found page
+ * @return {import('react').ReactElement}
+ */
 function NotFound() {
   return (
     <div className='not-found'>

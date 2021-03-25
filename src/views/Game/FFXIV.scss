@@ -1,0 +1,48 @@
+.ffxiv {
+  position: relative;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .ant-tabs {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+
+    &-tab {
+      border-radius: 0 !important;
+    }
+
+    &-content-holder {
+      flex: 1 1 auto;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .ant-tabs-card {
+    .ant-tabs-content {
+      flex: 1 1 auto;
+      margin-top: -16px;
+
+      & > .ant-tabs-tabpane {
+        background: #ffffff;
+      }
+    }
+
+    & > .ant-tabs-nav::before {
+      display: none;
+    }
+
+    .ant-tabs-tab {
+      background: transparent;
+      border-color: transparent;
+
+      &-active {
+        background: #ffffff;
+        border-color: #ffffff;
+      }
+    }
+  }
+}
