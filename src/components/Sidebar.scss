@@ -1,16 +1,16 @@
 .sidebar {
   min-height: 100%;
-
   font-size: $font-size-lg;
+
   a {
     font-size: $font-size-lg;
   }
-}
 
-.menu__icon {
-  padding: 0 !important;
-  margin: 0 !important;
-  height: unset !important;
-  max-height: unset !important;
-  cursor: auto;
+  &__icon {
+    padding: 0 !important;
+    margin: 0 !important;
+    height: unset !important;
+    max-height: unset !important;
+    cursor: auto;
+  }
 }

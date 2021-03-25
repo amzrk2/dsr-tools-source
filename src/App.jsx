@@ -12,6 +12,10 @@ import Footer from './components/Footer';
 import responsive from './utils/responsive';
 import { throttle } from './utils/performance';
 
+/**
+ * root app component
+ * @return {import('react').ReactElement}
+ */
 function App() {
   // sidebar collapsed (tablet) or minimal (mobile) mode
   const [collapsed, setCollapsed] = useState(() => responsive() !== 'lg');
@@ -34,7 +38,7 @@ function App() {
         collapsed={collapsed}
         collapsedWidth={minimal ? 0 : 80}
       >
-        <Sidebar />
+        <Sidebar collapsed={collapsed} />
       </Layout.Sider>
       <Layout>
         <Affix className='header__affix'>

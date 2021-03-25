@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { Menu } from 'antd';
 import 'antd/lib/menu/style/index.less';
@@ -43,7 +44,7 @@ function mapRoute(route) {
  * navidation sidebar
  * @return {import('react').ReactElement}
  */
-function Sidebar() {
+function Sidebar({ collapsed }) {
   // current location
   const loc = useLocation();
   // current opened group
@@ -56,12 +57,16 @@ function Sidebar() {
       selectedKeys={[loc.pathname]}
       defaultOpenKeys={[openKey]}
     >
-      <Menu.Item className='menu__icon' key='icon'>
-        <Logo />
+      <Menu.Item className='sidebar__icon' key='icon'>
+        <Logo collapsed={collapsed} />
       </Menu.Item>
       {routes.map((route) => mapRoute(route))}
     </Menu>
   );
 }
+
+Sidebar.propTypes = {
+  collapsed: PropTypes.bool.isRequired,
+};
 
 export default Sidebar;

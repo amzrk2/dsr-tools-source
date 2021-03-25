@@ -1,18 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import './Logo.scss';
 import jsdelivr from '@/utils/jsdelivr';
 
-function Logo() {
+/**
+ * sidebar logo
+ * @return {import('react').ReactElement}
+ */
+function Logo({ collapsed }) {
   return (
     <div className='logo'>
       <img
-        className='logo__image'
+        className={classNames('logo__image', { 'logo__image--collapsed': collapsed })}
         src={jsdelivr('/dsr-tools/home/dsrca_head.webp', 'api')}
         alt='Logo'
       />
     </div>
   );
 }
+
+Logo.propTypes = {
+  collapsed: PropTypes.bool.isRequired,
+};
 
 export default Logo;
