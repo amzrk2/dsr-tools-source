@@ -12,54 +12,67 @@ import {
 
 export default [
   {
-    name: '首页',
     path: '/',
     exact: true,
     component: lazy(() => import('@/views/Home')),
-    icon: <HomeOutlined />,
+    meta: {
+      name: '首页',
+      icon: <HomeOutlined />,
+    },
   },
   {
-    name: '游戏工具',
     path: '/game',
     exact: true,
-    icon: <PlayCircleOutlined />,
+    meta: {
+      name: '游戏工具',
+      icon: <PlayCircleOutlined />,
+    },
     routes: [
       {
-        name: 'FF14 国服狩猎车时间表',
-        short: 'FF14 狩猎时间表',
         path: '/game/ffxiv',
         exact: true,
         component: lazy(() => import('@/views/Game/FFXIV')),
-        icon: <FieldTimeOutlined />,
+        meta: {
+          name: 'FF14 国服狩猎车时间表',
+          short: 'FF14 狩猎时间表',
+          icon: <FieldTimeOutlined />,
+        },
       },
     ],
   },
   {
-    name: '关于',
     path: '/about',
     exact: true,
-    icon: <InfoCircleOutlined />,
+    meta: {
+      name: '关于',
+      icon: <InfoCircleOutlined />,
+    },
     routes: [
       {
-        name: '更新记录',
         path: '/about/changelog',
         exact: true,
         component: lazy(() => import('@/views/About/Changelog')),
-        icon: <CloudSyncOutlined />,
+        meta: {
+          name: '更新记录',
+          icon: <CloudSyncOutlined />,
+        },
       },
       {
-        name: '站点信息',
         path: '/about/info',
         exact: true,
         component: lazy(() => import('@/views/About/Info')),
-        icon: <FileTextOutlined />,
+        meta: {
+          name: '站点信息',
+          icon: <FileTextOutlined />,
+        },
       },
     ],
   },
   {
-    name: '404 NOT FOUND',
     path: '*',
     component: lazy(() => import('@/views/NotFound')),
-    hide: true,
+    meta: {
+      name: '404 NOT FOUND',
+    },
   },
 ];

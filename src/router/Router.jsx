@@ -1,5 +1,6 @@
 import React, { Fragment, Suspense } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+import { GuardedRoute } from 'react-router-guards';
 import { Helmet } from 'react-helmet';
 
 import { Spin } from 'antd';
@@ -46,17 +47,18 @@ function Router() {
   return (
     <Switch>
       {flatRoutes.map((route) => (
-        <Route
+        <GuardedRoute
           key={route.path}
           exact={route.exact || false}
           path={route.path}
+          meta={route.meta}
           render={(props) => (
             <Fragment>
               <Helmet>
-                <title>{route.name} | DSRToolS</title>
+                <title>{route.meta.name} | DSRToolS</title>
               </Helmet>
               <Suspense fallback={<RouteLoading />}>
-                <route.component {...props} />
+                <route.component {...props} route={route} />
               </Suspense>
             </Fragment>
           )}
