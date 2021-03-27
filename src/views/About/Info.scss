@@ -4,6 +4,28 @@
   .personal {
     display: flex;
     align-items: center;
+    min-height: 72px;
+
+    &__card {
+      .ant-card-body {
+        padding-top: 56.25%;
+        position: relative;
+
+        .ant-image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          overflow: hidden;
+        }
+      }
+    }
+
+    &__image {
+      position: absolute;
+      top: -48px;
+    }
 
     &__avatar {
       width: 48px;
@@ -16,10 +38,6 @@
     &__id {
       display: inline-block;
       font-size: $font-size-xl * 1.25;
-    }
-
-    &__image {
-      display: block;
     }
   }
 

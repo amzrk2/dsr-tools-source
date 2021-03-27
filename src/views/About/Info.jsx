@@ -47,6 +47,7 @@ function Info() {
       <Row gutter={[64, 64]}>
         <Col className='info__card' xs={24} md={12}>
           <Card
+            className='personal__card'
             cover={<Personal />}
             actions={[
               <a href='https://dsrkafuu.su' key='homepage' target='_blank'>
@@ -66,7 +67,7 @@ function Info() {
             <Image
               className='personal__image'
               alt='Personal Image'
-              src={jsdelivr('/images/banners/mozilla_960p.jpg', 'cdn')}
+              src={jsdelivr('/images/banners/84199396_CUnet.jpg', 'cdn')}
             />
           </Card>
           <Card title='版权信息'>
