@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { Menu } from 'antd';
@@ -7,6 +7,7 @@ import 'antd/lib/menu/style/index.less';
 import 'antd/lib/tooltip/style/index.less';
 
 import './Sidebar.scss';
+import useRoute from '@/hooks/useRoute';
 import routes from '@/router/index';
 import Logo from './Logo';
 
@@ -45,18 +46,14 @@ function mapRoute(route) {
  * @return {import('react').ReactElement}
  */
 function Sidebar({ collapsed }) {
-  // current location
-  const loc = useLocation();
+  // current route
+  const route = useRoute();
   // current opened group
-  const openKey = `/${loc.pathname.split('/')[1] || ''}`;
+  const active = route?.path;
+  const opened = '/' + active?.split('/')[1] || '';
 
   return (
-    <Menu
-      className='sidebar'
-      mode='inline'
-      selectedKeys={[loc.pathname]}
-      defaultOpenKeys={[openKey]}
-    >
+    <Menu className='sidebar' mode='inline' selectedKeys={[active]} defaultOpenKeys={[opened]}>
       <Menu.Item className='sidebar__icon' key='icon'>
         <Logo collapsed={collapsed} />
       </Menu.Item>

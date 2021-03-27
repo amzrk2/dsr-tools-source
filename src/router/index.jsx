@@ -69,7 +69,7 @@ export default [
     ],
   },
   {
-    path: '*',
+    path: '/**',
     component: lazy(() => import('@/views/NotFound')),
     meta: {
       name: '404 NOT FOUND',

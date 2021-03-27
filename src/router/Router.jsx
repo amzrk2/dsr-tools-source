@@ -55,10 +55,10 @@ function Router() {
           render={(props) => (
             <Fragment>
               <Helmet>
-                <title>{route.meta.name} | DSRToolS</title>
+                <title>{route.meta?.name || ''} | DSRToolS</title>
               </Helmet>
               <Suspense fallback={<RouteLoading />}>
-                <route.component {...props} route={route} />
+                <route.component {...props} />
               </Suspense>
             </Fragment>
           )}

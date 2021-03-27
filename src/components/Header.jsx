@@ -15,14 +15,19 @@ import {
 } from '@ant-design/icons';
 
 import './Header.scss';
+import useRoute from '@/hooks/useRoute';
 import QRCode from './QRCode';
 
 /**
  * custom header
- * @param {Objecr} props
+ * @param {Object} props
  * @return {import('react').ReactElement}
  */
 function Header({ collapsed, onCollapsedChange }) {
+  // title
+  const route = useRoute();
+  const title = route?.meta?.name || '';
+
   // time updater
   const [clock, setClock] = useState(dayjs());
   useEffect(() => {
@@ -46,7 +51,7 @@ function Header({ collapsed, onCollapsedChange }) {
         <Button type='primary' icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />} />
       }
       onBack={onCollapsedChange}
-      title='首页'
+      title={title}
       subTitle='DSRToolS'
       extra={[
         <Button className='header__clock' type='text' key='time'>
@@ -78,8 +83,8 @@ function Header({ collapsed, onCollapsedChange }) {
 }
 
 Header.propTypes = {
-  collapsed: PropTypes.bool,
-  onCollapsedChange: PropTypes.func,
+  collapsed: PropTypes.bool.isRequired,
+  onCollapsedChange: PropTypes.func.isRequired,
 };
 
 export default Header;
