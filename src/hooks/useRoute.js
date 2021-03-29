@@ -32,6 +32,10 @@ function matchRoute(routes, path) {
 // match cache
 const cache = Object.create(null);
 
+/**
+ * get current matched route
+ * @return {Object|null}
+ */
 export default function useRoute() {
   const location = useLocation();
   const path = location.pathname;

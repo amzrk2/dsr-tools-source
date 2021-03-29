@@ -11,6 +11,9 @@ export const api = axios.create({
 export const cdn = axios.create({
   baseURL: jsdelivr('', 'cdn'),
 });
+export const workers = axios.create({
+  baseURL: 'https://workers.dsrkafuu.su',
+});
 export const xhr = axios.create();
 
 const interceptors = (text) => [
@@ -23,4 +26,5 @@ const interceptors = (text) => [
 ];
 api.interceptors.response.use(...interceptors('API 请求失败'));
 cdn.interceptors.response.use(...interceptors('CDN 请求失败'));
+workers.interceptors.response.use(...interceptors('CloudFlare Workers 请求失败'));
 xhr.interceptors.response.use(...interceptors('数据请求失败'));

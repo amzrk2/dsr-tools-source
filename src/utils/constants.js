@@ -5,3 +5,7 @@ export const SCRIPT_AWESOME_QR =
 // responsive
 export const RESPONSIVE_LG = 992;
 export const RESPONSIVE_MD = 768;
+
+// bangumi
+export const BANGUMI_HASH =
+  'https://cdn.jsdelivr.net/gh/czy0729/Bangumi-OSS@master/hash/subject.json';

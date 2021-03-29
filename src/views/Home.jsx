@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { Button } from 'antd';
-import 'antd/lib/message/style/index.less';
+import 'antd/lib/button/style/index.less';
 
 import './Home.scss';
 import jsdelivr from '@/utils/jsdelivr';

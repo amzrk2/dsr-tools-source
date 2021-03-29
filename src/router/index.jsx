@@ -8,6 +8,7 @@ import {
   FileTextOutlined,
   PlayCircleOutlined,
   FieldTimeOutlined,
+  CalendarOutlined,
 } from '@ant-design/icons';
 
 export default [
@@ -18,6 +19,16 @@ export default [
     meta: {
       name: '首页',
       icon: <HomeOutlined />,
+    },
+  },
+  {
+    path: '/anime',
+    exact: true,
+    component: lazy(() => import('@/views/Anime')),
+    meta: {
+      name: '番组每日放送',
+      short: '每日番组',
+      icon: <CalendarOutlined />,
     },
   },
   {
