@@ -9,6 +9,7 @@ import 'antd/lib/tooltip/style/index.less';
 import './Sidebar.scss';
 import useRoute from '@/hooks/useRoute';
 import routes from '@/router/index';
+import responsive from '@/utils/responsive';
 import Logo from './Logo';
 
 /**
@@ -50,10 +51,13 @@ function Sidebar({ collapsed }) {
   const route = useRoute();
   // current opened group
   const active = route?.path;
-  const opened = '/' + active?.split('/')[1] || '';
+  let opened = ['/' + active?.split('/')[1] || ''];
+  if (responsive() === 'md') {
+    opened = [];
+  }
 
   return (
-    <Menu className='sidebar' mode='inline' selectedKeys={[active]} defaultOpenKeys={[opened]}>
+    <Menu className='sidebar' mode='inline' selectedKeys={[active]} defaultOpenKeys={opened}>
       <Menu.Item className='sidebar__icon' key='icon'>
         <Logo collapsed={collapsed} />
       </Menu.Item>
