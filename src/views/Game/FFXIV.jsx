@@ -4,12 +4,13 @@ import dayjs from 'dayjs';
 import { Tabs, Table, Card, Alert, List } from 'antd';
 import 'antd/lib/tabs/style/index.less';
 import 'antd/lib/table/style/index.less';
-import 'antd/lib/empty/style/index.less';
+import 'antd/lib/empty/style/index.less'; // table
 import 'antd/lib/card/style/index.less';
 import 'antd/lib/alert/style/index.less';
 import 'antd/lib/list/style/index.less';
 
 import './FFXIV.scss';
+import Loading from '@/components/Loading';
 import { api } from '@/utils/axios';
 
 const shadowbringers = () => '5.X SHADOWBRINGERS';
@@ -20,8 +21,9 @@ const stormblood = () => '4.X STORMBLOOD';
  * @return {import('react').ReactElement}
  */
 function FFXIV() {
-  const [meta, setMeta] = useState({ lastUpdate: '', license: '' });
+  const [loading, setLoading] = useState(true);
 
+  const [meta, setMeta] = useState({ lastUpdate: '', license: '' });
   const metaList = [
     {
       title: '数据更新',
@@ -48,7 +50,6 @@ function FFXIV() {
   const [chocobo, setChocobo] = useState({ shadowbringers: [], stormblood: [] });
   const [moogle, setMoogle] = useState({ shadowbringers: [], stormblood: [] });
   const [fatCat, setFatCat] = useState({ shadowbringers: [], stormblood: [] });
-
   useEffect(() => {
     (async () => {
       const res = await api.get('/dsr-tools/ffxiv/index.json');
@@ -57,70 +58,71 @@ function FFXIV() {
         setChocobo(res.data.huntingData.chocobo);
         setMoogle(res.data.huntingData.moogle);
         setFatCat(res.data.huntingData.fatCat);
+        setTimeout(() => setLoading(false), 500);
       }
     })();
   }, []);
 
   const columns = [
-    { title: '服务器', dataIndex: 'server', key: 'server', align: 'center' },
-    { title: '早车', dataIndex: ['timeTable', '0'], key: 'time-0', align: 'center' },
-    { title: '午车', dataIndex: ['timeTable', '1'], key: 'time-1', align: 'center' },
-    { title: '晚车', dataIndex: ['timeTable', '2'], key: 'time-2', align: 'center' },
-    { title: '灵车', dataIndex: ['timeTable', '3'], key: 'time-3', align: 'center' },
-    { title: '始发地', dataIndex: 'origin', key: 'origin', align: 'center' },
-    { title: '路线', dataIndex: 'route', key: 'route', align: 'center' },
+    { title: '服务器', dataIndex: 'server', key: '服务器', align: 'center' },
+    { title: '早车', dataIndex: ['timeTable', '0'], key: '早车', align: 'center' },
+    { title: '午车', dataIndex: ['timeTable', '1'], key: '午车', align: 'center' },
+    { title: '晚车', dataIndex: ['timeTable', '2'], key: '晚车', align: 'center' },
+    { title: '灵车', dataIndex: ['timeTable', '3'], key: '灵车', align: 'center' },
+    { title: '始发地', dataIndex: 'origin', key: '始发地', align: 'center' },
+    { title: '路线', dataIndex: 'route', key: '路线', align: 'center' },
   ];
-
   const tableProps = {
     size: 'small',
     columns,
     pagination: false,
     scroll: { x: 'max-content' },
+    rowKey: (record) => record.server,
   };
   const tabPanes = [
-    { name: '陆行鸟', key: 'chocobo', data: chocobo },
-    { name: '莫古力', key: 'moogle', data: moogle },
-    { name: '猫小胖', key: 'fatCat', data: fatCat },
+    { name: '陆行鸟', records: chocobo },
+    { name: '莫古力', records: moogle },
+    { name: '猫小胖', records: fatCat },
   ];
 
   return (
-    <div className='ffxiv'>
-      <Tabs type='card' size='large' centered={true}>
-        <Tabs.TabPane tab='关于' key='about' className='tabs-about'>
-          <Alert
-            message={`最后更新于 ${dayjs(meta.lastUpdate).format('YYYY-MM-DD HH:mm:ss')}`}
-            type='success'
-            showIcon={true}
-          />
-          <Card>
-            <List
-              dataSource={metaList}
-              renderItem={(item) => (
-                <List.Item>
-                  <List.Item.Meta title={item.title} description={item.desc} />
-                </List.Item>
-              )}
-            ></List>
-          </Card>
-        </Tabs.TabPane>
-        {tabPanes.map((server) => (
-          <Tabs.TabPane tab={server.name} key={server.key}>
-            <Table
-              {...tableProps}
-              dataSource={server.data.shadowbringers}
-              loading={server.data.shadowbringers.length <= 0}
-              title={shadowbringers}
+    <Loading loading={loading}>
+      <div className='ffxiv'>
+        <Tabs type='card' size='large' centered={true}>
+          <Tabs.TabPane tab='关于' key='about' className='tabs-about'>
+            <Alert
+              message={`最后更新于 ${dayjs(meta.lastUpdate).format('YYYY-MM-DD HH:mm:ss')}`}
+              type='success'
+              showIcon={true}
             />
-            <Table
-              {...tableProps}
-              dataSource={server.data.stormblood}
-              loading={server.data.stormblood.length <= 0}
-              title={stormblood}
-            />
+            <Card>
+              <List
+                dataSource={metaList}
+                renderItem={(item) => (
+                  <List.Item>
+                    <List.Item.Meta title={item.title} description={item.desc} />
+                  </List.Item>
+                )}
+              ></List>
+            </Card>
           </Tabs.TabPane>
-        ))}
-      </Tabs>
-    </div>
+          {tabPanes.map((dataCenter) => (
+            <Tabs.TabPane tab={dataCenter.name} key={dataCenter.name}>
+              <Table
+                {...tableProps}
+                dataSource={dataCenter.records.shadowbringers}
+                title={shadowbringers}
+              />
+              <Table
+                {...tableProps}
+                dataSource={dataCenter.records.stormblood}
+                title={stormblood}
+              />
+            </Tabs.TabPane>
+          ))}
+        </Tabs>
+      </div>
+    </Loading>
   );
 }
 

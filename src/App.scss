@@ -1,31 +1,30 @@
 .app {
   min-height: 100vh;
-}
 
-.header__layout,
-.footer__layout {
-  padding: 0 0;
-  height: unset;
-  line-height: unset;
-}
+  .header__layout,
+  .footer__layout {
+    padding: 0 0;
+    height: unset;
+    line-height: unset;
+  }
 
-.header__affix {
-  border-bottom: $border-box;
-  z-index: 20;
-}
+  .header__affix {
+    border-bottom: $border-box;
+    z-index: 99;
+  }
 
-.footer__layout {
-  border-top: $border-box;
-  z-index: 20;
-}
+  .footer__layout {
+    border-top: $border-box;
+  }
 
-.content__layout {
-  z-index: 10;
-  overflow-x: hidden;
-}
+  .content__layout {
+    z-index: 10;
+    overflow-x: hidden;
+  }
 
-.header__layout,
-.footer__layout,
-.sidebar__layout {
-  background-color: #ffffff;
+  .header__layout,
+  .footer__layout,
+  .sidebar__layout {
+    background-color: #ffffff;
+  }
 }
