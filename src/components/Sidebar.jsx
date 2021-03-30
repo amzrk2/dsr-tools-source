@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -57,10 +57,13 @@ function Sidebar({ collapsed, onRouteClick }) {
   const route = useRoute();
   // current opened group
   const active = route?.path;
-  let opened = ['/' + active?.split('/')[1] || ''];
-  if (responsive() === 'md') {
-    opened = [];
-  }
+  const [opened] = useState(() => {
+    let arr = ['/' + active?.split('/')[1] || ''];
+    if (responsive() !== 'lg') {
+      arr = [];
+    }
+    return arr;
+  });
 
   return (
     <Menu className='sidebar' mode='inline' selectedKeys={[active]} defaultOpenKeys={opened}>
