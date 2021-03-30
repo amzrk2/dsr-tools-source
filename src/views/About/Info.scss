@@ -1,10 +1,10 @@
 .info {
-  padding: 32px;
+  padding: 2.2857rem;
 
   .personal {
     display: flex;
     align-items: center;
-    min-height: 72px;
+    min-height: 5.1429rem;
 
     &__card {
       .ant-card-body {
@@ -24,15 +24,15 @@
 
     &__image {
       position: absolute;
-      top: -48px;
+      top: -3.4286rem;
     }
 
     &__avatar {
-      width: 48px;
+      width: 3.4286rem;
       border-radius: 50%;
       display: inline-block;
-      margin: 12px;
-      margin-left: 32px;
+      margin: 0.8571rem;
+      margin-left: 2.2857rem;
     }
 
     &__id {
@@ -47,12 +47,12 @@
     }
 
     .ant-card:not(:first-child) {
-      margin-top: 32px;
+      margin-top: 2.2857rem;
     }
 
     .opensource__item {
-      padding-left: 24px !important;
-      padding-right: 24px !important;
+      padding-left: 1.7143rem !important;
+      padding-right: 1.7143rem !important;
     }
   }
 }

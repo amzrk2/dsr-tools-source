@@ -22,10 +22,12 @@
     &-card {
       .ant-tabs-content {
         flex: 1 1 auto;
-        margin-top: -16px;
+        margin-top: -1.1429rem;
 
         & > .ant-tabs-tabpane {
           background: #ffffff;
+          padding-left: 1.1429rem;
+          padding-right: 1.1429rem;
         }
       }
 
@@ -41,12 +43,6 @@
           background: #ffffff;
           border-color: #ffffff;
         }
-      }
-
-      .ant-alert,
-      .ant-card {
-        margin-left: 1rem;
-        margin-right: 1rem;
       }
     }
   }
