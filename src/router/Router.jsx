@@ -60,7 +60,7 @@ function Router() {
               </Helmet>
               <Suspense fallback={<RouteLoading />}>
                 {/* show construction when in prod and not finished */}
-                {import.meta.env.DEV && route.meta.dev ? (
+                {!route.component || (import.meta.env.PROD && route.meta.dev) ? (
                   <Construction {...props} />
                 ) : (
                   <route.component {...props} />

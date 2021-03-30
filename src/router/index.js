@@ -8,6 +8,9 @@ import {
   PlayCircleOutlined,
   FieldTimeOutlined,
   CalendarOutlined,
+  CloudServerOutlined,
+  StarOutlined,
+  MacCommandOutlined,
 } from '@ant-design/icons';
 
 export default [
@@ -32,6 +35,16 @@ export default [
     },
   },
   {
+    path: '/bilive',
+    exact: true,
+    component: null,
+    meta: {
+      name: '哔哩哔哩录播地址获取工具',
+      short: '哔哩哔哩录播',
+      icon: CloudServerOutlined,
+    },
+  },
+  {
     path: '/game',
     exact: true,
     meta: {
@@ -47,6 +60,26 @@ export default [
           name: 'FF14 国服狩猎车时间表',
           short: 'FF14 狩猎时间表',
           icon: FieldTimeOutlined,
+        },
+      },
+      {
+        path: '/game/minecraft',
+        exact: true,
+        component: null,
+        meta: {
+          name: 'Minecraft DSRCA 整合包',
+          short: 'MC 整合包',
+          icon: MacCommandOutlined,
+        },
+      },
+      {
+        path: '/game/sdv',
+        exact: true,
+        component: null,
+        meta: {
+          name: '星露谷物语 DSR 非侵入式整合包',
+          short: '星露谷整合包',
+          icon: StarOutlined,
         },
       },
     ],
