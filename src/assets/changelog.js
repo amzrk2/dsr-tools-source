@@ -2,7 +2,12 @@ export const changelog = [
   {
     version: 'v4.0.1',
     date: '2021-03-30',
-    logs: ['修复 iOS Safari 高度塌陷的问题', '修复边栏菜单错误收起的问题'],
+    logs: [
+      '修复 iOS Safari 高度塌陷问题',
+      '修复边栏菜单错误收起的问题',
+      '优化 SVG 组件导入方式',
+      '修复 iOS Safari flex gap 相关问题',
+    ],
   },
   {
     version: 'v4.0.0',

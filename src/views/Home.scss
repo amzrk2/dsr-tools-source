@@ -24,11 +24,11 @@
 
   &__links {
     display: flex;
-    gap: 1.5rem;
 
     .ant-btn {
       color: hsla(0, 0%, 100%, 0.55);
       border-color: hsla(0, 0%, 100%, 0.55);
+      margin: 0 0.75rem;
 
       &:hover {
         color: $color-primary;

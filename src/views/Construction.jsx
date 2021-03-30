@@ -5,7 +5,7 @@ import { Button, Result } from 'antd';
 import 'antd/lib/button/style/index.less';
 import 'antd/lib/result/style/index.less';
 
-import constructionIcon from '@/assets/svg/construction.min.svg';
+import { ReactComponent as ConstructionIcon } from '@/assets/svg/construction.svg';
 
 /**
  * loading overlay
@@ -17,7 +17,7 @@ function Construction() {
   return (
     <div className='construction'>
       <Result
-        icon={<img style={{ width: '20%' }} src={constructionIcon} alt='Under COnstruction' />}
+        icon={<ConstructionIcon style={{ width: '12rem', height: '12rem' }} />}
         title='页面施工中'
         extra={
           <Button type='primary' onClick={() => history.goBack()}>

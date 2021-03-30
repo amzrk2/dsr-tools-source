@@ -5,7 +5,7 @@ import { CopyrightOutlined } from '@ant-design/icons';
 
 import './Footer.scss';
 import { version } from '@/assets/changelog';
-import reactIcon from '@/assets/svg/react.min.svg';
+import { ReactComponent as ReactIcon } from '@/assets/svg/react.svg';
 
 /**
  * custom footer
@@ -18,7 +18,7 @@ function Footer() {
       <span>
         Copyright <CopyrightOutlined /> {dayjs().year()} DSRKafuU
       </span>
-      <img className='footer__icon' src={reactIcon} alt='React Icon' />
+      <ReactIcon className='footer__icon' />
     </div>
   );
 }
