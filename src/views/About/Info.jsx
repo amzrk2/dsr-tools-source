@@ -44,7 +44,7 @@ function Info() {
 
   return (
     <div className='info'>
-      <Row gutter={[64, 64]}>
+      <Row gutter={[32, 32]}>
         <Col className='info__card' xs={24} md={12}>
           <Card
             className='personal__card'
