@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 
 import { Tabs, Table, Card, Alert, List } from 'antd';
@@ -12,6 +12,7 @@ import 'antd/lib/list/style/index.less';
 import './FFXIV.scss';
 import Loading from '@/components/Loading';
 import { api } from '@/utils/axios';
+import { setLS, getLS } from '@/utils/storage';
 
 const shadowbringers = () => '5.X SHADOWBRINGERS';
 const stormblood = () => '4.X STORMBLOOD';
@@ -100,11 +101,22 @@ function FFXIV() {
     [data.chocobo, data.fatCat, data.moogle]
   );
 
+  // selected tab saver
+  const savedTab = useMemo(() => getLS('ffxiv-tab') || '', []);
+  const saveTab = useCallback((key) => setLS('ffxiv-tab', key), []);
+
   return (
     <Loading loading={loading}>
       <div className='ffxiv'>
-        <Tabs type='card' size='large' centered={true}>
-          <Tabs.TabPane tab='关于' key='about' className='tabs-about'>
+        <Tabs
+          type='card'
+          size='large'
+          centered={true}
+          animated={true}
+          onChange={saveTab}
+          defaultActiveKey={savedTab}
+        >
+          <Tabs.TabPane tab='关于' key='关于' className='tabs-about'>
             {meta.message && <Alert message={meta.message} type='error' showIcon={true} />}
             <Alert
               message={`最后更新于 ${dayjs(meta.lastUpdate).format('YYYY-MM-DD HH:mm:ss')}`}

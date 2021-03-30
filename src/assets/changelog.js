@@ -8,6 +8,7 @@ export const changelog = [
       '优化 SVG 组件导入方式',
       '修复 iOS Safari flex gap 相关问题',
       '移除多余的 sidebar tooltip',
+      '持久化保存 FFXIV 模块选择 tab',
     ],
   },
   {
