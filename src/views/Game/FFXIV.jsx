@@ -24,7 +24,7 @@ function FFXIV() {
   const [loading, setLoading] = useState(true);
 
   // metadata
-  const [meta, setMeta] = useState({ lastUpdate: '', license: '' });
+  const [meta, setMeta] = useState({ message: '', lastUpdate: '', license: '' });
   const metaList = useMemo(
     () => [
       {
@@ -57,7 +57,11 @@ function FFXIV() {
     (async () => {
       const res = await api.get('/dsr-tools/ffxiv/index.json');
       if (res.data) {
-        setMeta({ lastUpdate: res.data.lastUpdate, license: res.data.license });
+        setMeta({
+          message: res.data.message || '',
+          lastUpdate: res.data.lastUpdate,
+          license: res.data.license,
+        });
         setData(res.data.huntingData);
         setLoading(false);
       }
@@ -101,6 +105,7 @@ function FFXIV() {
       <div className='ffxiv'>
         <Tabs type='card' size='large' centered={true}>
           <Tabs.TabPane tab='关于' key='about' className='tabs-about'>
+            {meta.message && <Alert message={meta.message} type='error' showIcon={true} />}
             <Alert
               message={`最后更新于 ${dayjs(meta.lastUpdate).format('YYYY-MM-DD HH:mm:ss')}`}
               type='success'
