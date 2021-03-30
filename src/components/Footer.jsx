@@ -5,7 +5,7 @@ import { CopyrightOutlined } from '@ant-design/icons';
 
 import './Footer.scss';
 import { version } from '@/assets/changelog';
-import reactIcon from '@/assets/svg/react.svg';
+import reactIcon from '@/assets/svg/react.min.svg';
 
 /**
  * custom footer

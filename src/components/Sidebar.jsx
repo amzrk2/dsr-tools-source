@@ -44,6 +44,7 @@ function mapRoute(route) {
 
 /**
  * navidation sidebar
+ * @param {Object} props
  * @return {import('react').ReactElement}
  */
 function Sidebar({ collapsed }) {

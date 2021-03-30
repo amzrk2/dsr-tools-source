@@ -7,6 +7,7 @@ import jsdelivr from '@/utils/jsdelivr';
 
 /**
  * sidebar logo
+ * @param {Object} props
  * @return {import('react').ReactElement}
  */
 function Logo({ collapsed }) {
