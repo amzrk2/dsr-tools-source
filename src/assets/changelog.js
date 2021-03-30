@@ -1,7 +1,12 @@
 export const changelog = [
   {
-    version: 'v4.0.0',
+    version: 'v4.0.1',
     date: '2021-03-30',
+    logs: ['修复 iOS Safari 高度塌陷的问题', '修复边栏菜单错误收起的问题'],
+  },
+  {
+    version: 'v4.0.0',
+    date: '2021-03-29',
     logs: ['React 全站重构', '全站样式更新'],
   },
   {

@@ -24,7 +24,6 @@ function App() {
   // react screen size change
   useEffect(() => {
     const resizeHandler = throttle(() => {
-      setCollapsed(responsive() !== 'lg');
       setMinimal(responsive() === 'sm');
     });
     window.addEventListener('resize', resizeHandler);
