@@ -26,8 +26,6 @@
 
         & > .ant-tabs-tabpane {
           background: #ffffff;
-          padding-left: 1.1429rem;
-          padding-right: 1.1429rem;
         }
       }
 
@@ -53,6 +51,9 @@
   }
 
   .tabs-about {
+    padding-left: 1.1429rem;
+    padding-right: 1.1429rem;
+
     & > div {
       max-width: 45.7143rem;
       margin: 1.4286rem auto;
