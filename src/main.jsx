@@ -4,13 +4,16 @@ import { BrowserRouter } from 'react-router-dom';
 import { GuardProvider } from 'react-router-guards';
 import guards from './router/guards';
 
+// sentry and ga
+import sentry from './plugins/sentry';
+import ga from './plugins/ga';
+sentry();
+ga();
+
+// antd
 import 'normalize.css';
 import { ConfigProvider } from 'antd';
 import 'antd/lib/style/index.less';
-
-// google analytics
-import ga from './utils/ga';
-ga();
 
 // app
 import './css/global.scss';

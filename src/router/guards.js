@@ -1,4 +1,4 @@
-import { aoView, aoLeave } from '@/utils/aofuji';
+import { aoView, aoLeave } from '@/plugins/aofuji';
 
 /**
  * @param {Object} to
