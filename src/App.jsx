@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { Affix, Layout } from 'antd';
 import 'antd/lib/affix/style/index.less';
@@ -31,6 +31,20 @@ function App() {
     return () => window.removeEventListener('resize', resizeHandler);
   }, []);
 
+  // collapse navbar when route change/click out on mobile
+  const doCollapse = useCallback((e) => {
+    if (responsive() === 'sm') {
+      e.stopPropagation();
+      setCollapsed(true);
+    }
+  }, []);
+  // switch collapse status when click button
+  const switchCollapse = useCallback((e) => {
+    // prevent immedate sidebar collapse when click show button
+    e.stopPropagation();
+    setCollapsed((val) => !val);
+  }, []);
+
   return (
     <Layout className='app'>
       <Layout.Sider
@@ -39,31 +53,12 @@ function App() {
         collapsedWidth={minimal ? 0 : 80}
         width={220}
       >
-        <Sidebar
-          collapsed={collapsed}
-          onRouteClick={(e) => {
-            // collapse navbar when route change on mobile
-            e.stopPropagation();
-            responsive() === 'sm' && setCollapsed(true);
-          }}
-        />
+        <Sidebar collapsed={collapsed} onRouteClick={doCollapse} />
       </Layout.Sider>
-      <Layout
-        onClick={(e) => {
-          e.stopPropagation();
-          setCollapsed(true);
-        }}
-      >
+      <Layout onClick={doCollapse}>
         <Affix className='header__affix'>
           <Layout.Header className='header__layout'>
-            <Header
-              collapsed={collapsed}
-              onCollapsedChange={(e) => {
-                // prevent immedate sidebar collapse when click show button
-                e.stopPropagation();
-                setCollapsed((val) => !val);
-              }}
-            />
+            <Header collapsed={collapsed} onCollapsedChange={switchCollapse} />
           </Layout.Header>
         </Affix>
         <Layout.Content className='content__layout'>
