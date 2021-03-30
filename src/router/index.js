@@ -1,4 +1,3 @@
-import React from 'react';
 import { lazy } from '@loadable/component';
 
 import {
@@ -18,7 +17,7 @@ export default [
     component: lazy(() => import('@/views/Home')),
     meta: {
       name: '首页',
-      icon: <HomeOutlined />,
+      icon: HomeOutlined,
     },
   },
   {
@@ -28,7 +27,8 @@ export default [
     meta: {
       name: '番组每日放送',
       short: '每日番组',
-      icon: <CalendarOutlined />,
+      icon: CalendarOutlined,
+      dev: true,
     },
   },
   {
@@ -36,7 +36,7 @@ export default [
     exact: true,
     meta: {
       name: '游戏工具',
-      icon: <PlayCircleOutlined />,
+      icon: PlayCircleOutlined,
     },
     routes: [
       {
@@ -46,7 +46,7 @@ export default [
         meta: {
           name: 'FF14 国服狩猎车时间表',
           short: 'FF14 狩猎时间表',
-          icon: <FieldTimeOutlined />,
+          icon: FieldTimeOutlined,
         },
       },
     ],
@@ -56,7 +56,7 @@ export default [
     exact: true,
     meta: {
       name: '关于',
-      icon: <InfoCircleOutlined />,
+      icon: InfoCircleOutlined,
     },
     routes: [
       {
@@ -65,7 +65,7 @@ export default [
         component: lazy(() => import('@/views/About/Changelog')),
         meta: {
           name: '更新记录',
-          icon: <CloudSyncOutlined />,
+          icon: CloudSyncOutlined,
         },
       },
       {
@@ -74,7 +74,7 @@ export default [
         component: lazy(() => import('@/views/About/Info')),
         meta: {
           name: '站点信息',
-          icon: <FileTextOutlined />,
+          icon: FileTextOutlined,
         },
       },
     ],

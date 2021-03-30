@@ -28,12 +28,16 @@ function QRCode({ content }) {
 
   // load dependency
   useEffect(() => {
-    const script = document.createElement('script');
-    script.setAttribute('async', '');
-    script.setAttribute('src', SCRIPT_AWESOME_QR);
-    script.addEventListener('load', () => setStatus('fulfilled'));
-    script.addEventListener('error', () => setStatus('rejected'));
-    document.body.appendChild(script);
+    let script = document.getElementById('awesome-qr');
+    if (!script) {
+      script = document.createElement('script');
+      script.setAttribute('async', '');
+      script.setAttribute('src', SCRIPT_AWESOME_QR);
+      script.setAttribute('id', 'awesome-qr');
+      script.addEventListener('load', () => setStatus('fulfilled'));
+      script.addEventListener('error', () => setStatus('rejected'));
+      document.body.appendChild(script);
+    }
   }, []);
 
   // init image

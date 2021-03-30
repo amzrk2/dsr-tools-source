@@ -7,6 +7,7 @@ import { Spin } from 'antd';
 import 'antd/lib/spin/style/index.less';
 
 import routes from './index';
+import Construction from '@/views/Construction';
 
 /**
  * route loading indicator
@@ -58,7 +59,12 @@ function Router() {
                 <title>{route.meta?.name || ''} | DSRToolS</title>
               </Helmet>
               <Suspense fallback={<RouteLoading />}>
-                <route.component {...props} />
+                {/* show construction when in prod and not finished */}
+                {import.meta.env.DEV && route.meta.dev ? (
+                  <Construction {...props} />
+                ) : (
+                  <route.component {...props} />
+                )}
               </Suspense>
             </Fragment>
           )}

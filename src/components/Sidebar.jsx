@@ -22,7 +22,7 @@ function mapRoute(route) {
     // with sub route
     if (route.routes && route.routes.length > 0) {
       return (
-        <Menu.SubMenu key={route.path} icon={route.meta.icon} title={route.meta.name}>
+        <Menu.SubMenu key={route.path} icon={<route.meta.icon />} title={route.meta.name}>
           {route.routes.map((route) => mapRoute(route))}
         </Menu.SubMenu>
       );
@@ -30,7 +30,7 @@ function mapRoute(route) {
     // no sub route
     else {
       return (
-        <Menu.Item key={route.path} icon={route.meta.icon}>
+        <Menu.Item key={route.path} icon={<route.meta.icon />}>
           <Link to={route.path}>{route.meta.short || route.meta.name}</Link>
         </Menu.Item>
       );
