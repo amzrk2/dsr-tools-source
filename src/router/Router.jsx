@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import { Spin } from 'antd';
 import 'antd/lib/spin/style/index.less';
 
+import './Router.scss';
 import routes from './index';
 import Construction from '@/views/Construction';
 
@@ -15,14 +16,7 @@ import Construction from '@/views/Construction';
  */
 function RouteLoading() {
   return (
-    <div
-      style={{
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <div className='router__loading'>
       <Spin delay={500} size='large' />
     </div>
   );

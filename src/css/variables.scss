@@ -21,6 +21,10 @@ $color-primary: #8aa2d3;
 $shadow-box: 0 0.1425rem 0.5725rem #eeeeee;
 $border-box: 1px solid #eeeeee;
 
+$header-height: 4.4rem;
+$footer-height: 4.2rem;
+$content-min-height: calc(100vh - 8.6rem);
+
 @mixin responsive($size) {
   @if $size == md {
     @media screen and (max-width: $responsive-lg) {

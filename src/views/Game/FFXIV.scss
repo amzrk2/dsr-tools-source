@@ -1,6 +1,5 @@
 .ffxiv {
   position: relative;
-  min-height: 100%;
   display: flex;
   flex-direction: column;
 
@@ -42,6 +41,12 @@
           background: #ffffff;
           border-color: #ffffff;
         }
+      }
+
+      .ant-alert,
+      .ant-card {
+        margin-left: 1rem;
+        margin-right: 1rem;
       }
     }
   }

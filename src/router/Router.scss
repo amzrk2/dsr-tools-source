@@ -1,0 +1,10 @@
+.router {
+  &__loading {
+    position: relative;
+    min-height: $content-min-height;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
