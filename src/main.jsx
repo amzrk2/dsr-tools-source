@@ -10,7 +10,7 @@ import 'antd/lib/style/index.less';
 
 // google analytics
 import ga from './utils/ga';
-ga(import.meta.env.VITE_GA);
+ga();
 
 // app
 import './css/global.scss';
