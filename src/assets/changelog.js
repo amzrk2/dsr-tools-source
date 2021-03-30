@@ -7,6 +7,7 @@ export const changelog = [
       '修复边栏菜单错误收起的问题',
       '优化 SVG 组件导入方式',
       '修复 iOS Safari flex gap 相关问题',
+      '移除多余的 sidebar tooltip',
     ],
   },
   {

@@ -67,7 +67,7 @@ function Sidebar({ collapsed, onRouteClick }) {
 
   return (
     <Menu className='sidebar' mode='inline' selectedKeys={[active]} defaultOpenKeys={opened}>
-      <Menu.Item className='sidebar__icon' key='icon'>
+      <Menu.Item className='sidebar__icon' key='icon' title={null}>
         <Logo collapsed={collapsed} />
       </Menu.Item>
       {routes.map((route) => mapRoute(route, onRouteClick))}
