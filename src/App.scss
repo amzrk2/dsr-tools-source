@@ -26,5 +26,11 @@
   .ant-layout-sider {
     overflow-y: auto;
     height: 100vh;
+
+    @include responsive(sm) {
+      position: fixed;
+      left: 0;
+      z-index: 999;
+    }
   }
 }

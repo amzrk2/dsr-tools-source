@@ -15,22 +15,27 @@ import Logo from './Logo';
 /**
  * map route to component
  * @param {Object} route
+ * @param {Object} onRouteClick
  * @return {import('react').ReactElement}
  */
-function mapRoute(route) {
+function mapRoute(route, onRouteClick) {
   if (route.meta.icon) {
     // with sub route
     if (route.routes && route.routes.length > 0) {
       return (
         <Menu.SubMenu key={route.path} icon={<route.meta.icon />} title={route.meta.name}>
-          {route.routes.map((route) => mapRoute(route))}
+          {route.routes.map((route) => mapRoute(route, onRouteClick))}
         </Menu.SubMenu>
       );
     }
     // no sub route
     else {
       return (
-        <Menu.Item key={route.path} icon={<route.meta.icon />}>
+        <Menu.Item
+          key={route.path}
+          icon={<route.meta.icon />}
+          onClick={(d) => onRouteClick(d.domEvent)}
+        >
           <Link to={route.path}>{route.meta.short || route.meta.name}</Link>
         </Menu.Item>
       );
@@ -47,7 +52,7 @@ function mapRoute(route) {
  * @param {Object} props
  * @return {import('react').ReactElement}
  */
-function Sidebar({ collapsed }) {
+function Sidebar({ collapsed, onRouteClick }) {
   // current route
   const route = useRoute();
   // current opened group
@@ -62,13 +67,14 @@ function Sidebar({ collapsed }) {
       <Menu.Item className='sidebar__icon' key='icon'>
         <Logo collapsed={collapsed} />
       </Menu.Item>
-      {routes.map((route) => mapRoute(route))}
+      {routes.map((route) => mapRoute(route, onRouteClick))}
     </Menu>
   );
 }
 
 Sidebar.propTypes = {
   collapsed: PropTypes.bool.isRequired,
+  onRouteClick: PropTypes.func.isRequired,
 };
 
 export default Sidebar;

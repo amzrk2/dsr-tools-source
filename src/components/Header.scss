@@ -12,4 +12,25 @@
     width: 128px;
     margin-top: $space-xs;
   }
+
+  @include responsive(sm) {
+    &__clock {
+      display: none;
+    }
+
+    .ant-page-header-heading {
+      flex-wrap: nowrap;
+
+      &-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      &-sub-title {
+        overflow: visible;
+        white-space: nowrap;
+      }
+    }
+  }
 }

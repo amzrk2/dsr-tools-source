@@ -39,12 +39,31 @@ function App() {
         collapsedWidth={minimal ? 0 : 80}
         width={220}
       >
-        <Sidebar collapsed={collapsed} />
+        <Sidebar
+          collapsed={collapsed}
+          onRouteClick={(e) => {
+            // collapse navbar when route change on mobile
+            e.stopPropagation();
+            responsive() === 'sm' && setCollapsed(true);
+          }}
+        />
       </Layout.Sider>
-      <Layout>
+      <Layout
+        onClick={(e) => {
+          e.stopPropagation();
+          setCollapsed(true);
+        }}
+      >
         <Affix className='header__affix'>
           <Layout.Header className='header__layout'>
-            <Header collapsed={collapsed} onCollapsedChange={() => setCollapsed((val) => !val)} />
+            <Header
+              collapsed={collapsed}
+              onCollapsedChange={(e) => {
+                // prevent immedate sidebar collapse when click show button
+                e.stopPropagation();
+                setCollapsed((val) => !val);
+              }}
+            />
           </Layout.Header>
         </Affix>
         <Layout.Content className='content__layout'>
