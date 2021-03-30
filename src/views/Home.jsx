@@ -7,12 +7,13 @@ import './Home.scss';
 import jsdelivr from '@/utils/jsdelivr';
 import { api } from '@/utils/axios';
 
+const image = jsdelivr('/dsr-tools/home/cover-row.webp', 'api');
+
 /**
  * home page
  * @return {import('react').ReactElement}
  */
 function Home() {
-  const image = jsdelivr('/dsr-tools/home/cover-row.webp', 'api');
   const [data, setData] = useState({
     title: '',
     links: [],

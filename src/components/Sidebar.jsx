@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -56,7 +56,7 @@ function Sidebar({ collapsed, onRouteClick }) {
   // current route
   const route = useRoute();
   // current opened group
-  const active = route?.path;
+  const active = useMemo(() => route?.path, [route?.path]);
   const [opened] = useState(() => {
     let arr = ['/' + active?.split('/')[1] || ''];
     if (responsive() !== 'lg') {

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 
@@ -26,7 +26,7 @@ import QRCode from './QRCode';
 function Header({ collapsed, onCollapsedChange }) {
   // title
   const route = useRoute();
-  const title = route?.meta?.name || '';
+  const title = useMemo(() => route?.meta?.name || '', [route?.meta?.name]);
 
   // time updater
   const [clock, setClock] = useState(dayjs());
@@ -36,12 +36,12 @@ function Header({ collapsed, onCollapsedChange }) {
   }, []);
 
   // copy page link
-  const copyShareLink = () => {
+  const copyShareLink = useCallback(() => {
     navigator.clipboard.writeText(window.location.href).then(
       () => message.success('已复制链接至剪贴板'),
       () => message.error('复制链接失败')
     );
-  };
+  }, []);
 
   return (
     <PageHeader

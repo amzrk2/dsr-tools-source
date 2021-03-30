@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 
 import { Tabs, Table, Card, Alert, List } from 'antd';
@@ -23,67 +23,78 @@ const stormblood = () => '4.X STORMBLOOD';
 function FFXIV() {
   const [loading, setLoading] = useState(true);
 
+  // metadata
   const [meta, setMeta] = useState({ lastUpdate: '', license: '' });
-  const metaList = [
-    {
-      title: '数据更新',
-      desc: '数据更新后 CDN 缓存需要约 10-15 分钟全球刷新, 若出现问题则最高需要 12 小时',
-    },
-    {
-      title: '错误反馈',
-      desc: '请使用右下角按钮直接进行客服提问反馈, 或至 NGA 原帖回帖反馈',
-    },
-    {
-      title: '感谢访问',
-      desc: '如果觉得本站对您有所帮助还请多多分享, 用户的使用是我更新的最大动力',
-    },
-    {
-      title: 'NGA 原帖',
-      desc: (
-        <a href={meta.license} target='_blank'>
-          {meta.license}
-        </a>
-      ),
-    },
-  ];
+  const metaList = useMemo(
+    () => [
+      {
+        title: '数据更新',
+        desc: '数据更新后 CDN 缓存需要约 10-15 分钟全球刷新, 若出现问题则最高需要 12 小时',
+      },
+      {
+        title: '错误反馈',
+        desc: '请使用右下角按钮直接进行客服提问反馈, 或至 NGA 原帖回帖反馈',
+      },
+      {
+        title: '感谢访问',
+        desc: '如果觉得本站对您有所帮助还请多多分享, 用户的使用是我更新的最大动力',
+      },
+      {
+        title: 'NGA 原帖',
+        desc: (
+          <a href={meta.license} target='_blank'>
+            {meta.license}
+          </a>
+        ),
+      },
+    ],
+    [meta.license]
+  );
 
-  const [chocobo, setChocobo] = useState({ shadowbringers: [], stormblood: [] });
-  const [moogle, setMoogle] = useState({ shadowbringers: [], stormblood: [] });
-  const [fatCat, setFatCat] = useState({ shadowbringers: [], stormblood: [] });
+  // server records
+  const [data, setData] = useState({ chocobo: {}, moogle: {}, fatCat: {} });
   useEffect(() => {
     (async () => {
       const res = await api.get('/dsr-tools/ffxiv/index.json');
       if (res.data) {
         setMeta({ lastUpdate: res.data.lastUpdate, license: res.data.license });
-        setChocobo(res.data.huntingData.chocobo);
-        setMoogle(res.data.huntingData.moogle);
-        setFatCat(res.data.huntingData.fatCat);
-        setTimeout(() => setLoading(false), 500);
+        setData(res.data.huntingData);
+        setLoading(false);
       }
     })();
   }, []);
 
-  const columns = [
-    { title: '服务器', dataIndex: 'server', key: '服务器', align: 'center' },
-    { title: '早车', dataIndex: ['timeTable', '0'], key: '早车', align: 'center' },
-    { title: '午车', dataIndex: ['timeTable', '1'], key: '午车', align: 'center' },
-    { title: '晚车', dataIndex: ['timeTable', '2'], key: '晚车', align: 'center' },
-    { title: '灵车', dataIndex: ['timeTable', '3'], key: '灵车', align: 'center' },
-    { title: '始发地', dataIndex: 'origin', key: '始发地', align: 'center' },
-    { title: '路线', dataIndex: 'route', key: '路线', align: 'center' },
-  ];
-  const tableProps = {
-    size: 'small',
-    columns,
-    pagination: false,
-    scroll: { x: 'max-content' },
-    rowKey: (record) => record.server,
-  };
-  const tabPanes = [
-    { name: '陆行鸟', records: chocobo },
-    { name: '莫古力', records: moogle },
-    { name: '猫小胖', records: fatCat },
-  ];
+  // table configs
+  const columns = useMemo(
+    () => [
+      { title: '服务器', dataIndex: 'server', key: '服务器', align: 'center' },
+      { title: '早车', dataIndex: ['timeTable', '0'], key: '早车', align: 'center' },
+      { title: '午车', dataIndex: ['timeTable', '1'], key: '午车', align: 'center' },
+      { title: '晚车', dataIndex: ['timeTable', '2'], key: '晚车', align: 'center' },
+      { title: '灵车', dataIndex: ['timeTable', '3'], key: '灵车', align: 'center' },
+      { title: '始发地', dataIndex: 'origin', key: '始发地', align: 'center' },
+      { title: '路线', dataIndex: 'route', key: '路线', align: 'center' },
+    ],
+    []
+  );
+  const tableProps = useMemo(
+    () => ({
+      size: 'small',
+      columns,
+      pagination: false,
+      scroll: { x: 'max-content' },
+      rowKey: (record) => record.server,
+    }),
+    [columns]
+  );
+  const tabPanes = useMemo(
+    () => [
+      { name: '陆行鸟', records: data.chocobo },
+      { name: '莫古力', records: data.moogle },
+      { name: '猫小胖', records: data.fatCat },
+    ],
+    [data.chocobo, data.fatCat, data.moogle]
+  );
 
   return (
     <Loading loading={loading}>
