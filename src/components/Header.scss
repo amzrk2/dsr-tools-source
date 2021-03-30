@@ -1,6 +1,7 @@
 .header {
   padding-top: $space-xs;
   padding-bottom: $space-xs;
+  border-bottom: $border-box;
 
   &__clock {
     width: 7rem;

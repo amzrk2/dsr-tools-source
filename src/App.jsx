@@ -37,6 +37,7 @@ function App() {
         className='sidebar__layout'
         collapsed={collapsed}
         collapsedWidth={minimal ? 0 : 80}
+        width={220}
       >
         <Sidebar collapsed={collapsed} />
       </Layout.Sider>

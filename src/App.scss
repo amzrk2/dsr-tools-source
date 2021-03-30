@@ -9,12 +9,7 @@
   }
 
   .header__affix {
-    border-bottom: $border-box;
     z-index: 99;
-  }
-
-  .footer__layout {
-    border-top: $border-box;
   }
 
   .content__layout {
@@ -26,5 +21,10 @@
   .footer__layout,
   .sidebar__layout {
     background-color: #ffffff;
+  }
+
+  .ant-layout-sider {
+    overflow-y: auto;
+    height: 100vh;
   }
 }
