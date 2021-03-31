@@ -11,7 +11,7 @@ import 'antd/lib/list/style/index.less';
 
 import './FFXIV.scss';
 import Loading from '@/components/Loading';
-import { api } from '@/utils/axios';
+import { xhr } from '@/utils/axios';
 import { setLS, getLS } from '@/utils/storage';
 
 const shadowbringers = () => '5.X SHADOWBRINGERS';
@@ -25,20 +25,20 @@ function FFXIV() {
   const [loading, setLoading] = useState(true);
 
   // metadata
-  const [meta, setMeta] = useState({ message: '', lastUpdate: '', license: '' });
+  const [meta, setMeta] = useState({ message: '', update: '', license: '' });
   const metaList = useMemo(
     () => [
       {
         title: '数据更新',
-        desc: '数据更新后 CDN 缓存需要约 10-15 分钟全球刷新, 若出现问题则最高需要 12 小时',
+        desc: '数据更新后 CDN 缓存需要约 10-15 分钟全球刷新，若出现问题则最高需要 12 小时',
       },
       {
         title: '错误反馈',
-        desc: '请使用右下角按钮直接进行客服提问反馈, 或至 NGA 原帖回帖反馈',
+        desc: '请使用右下角按钮直接进行客服提问反馈，或至 NGA 原帖回帖反馈',
       },
       {
         title: '感谢访问',
-        desc: '如果觉得本站对您有所帮助还请多多分享, 用户的使用是我更新的最大动力',
+        desc: '如果觉得本站对您有所帮助还请多多分享，用户的使用是我更新的最大动力',
       },
       {
         title: 'NGA 原帖',
@@ -53,30 +53,62 @@ function FFXIV() {
   );
 
   // server records
-  const [data, setData] = useState({ chocobo: {}, moogle: {}, fatCat: {} });
+  const [data, setData] = useState({ chocobo: [], moogle: [], fatCat: [] });
+  /**
+   * format time tables from api
+   * @param {Object} data
+   * @returns {Object}
+   */
+  const parseTimes = useCallback((data) => {
+    for (let server of Object.keys(data)) {
+      const sd = data[server];
+      sd.forEach((version) => {
+        version.forEach((record) => {
+          const times = record.times;
+          const ret = new Array(4).fill('');
+          times.forEach((time) => {
+            const hours = Number(time.replace(':', ''));
+            let idx = 0;
+            if (hours >= 0 && hours < 600) {
+              idx = 0; // 灵车
+            } else if (hours >= 600 && hours < 1000) {
+              idx = 1;
+            } else if (hours >= 1000 && hours < 1600) {
+              idx = 2;
+            } else {
+              idx = 3;
+            }
+            ret[idx] = time;
+          });
+          record.times = ret;
+        });
+      });
+    }
+    return data;
+  }, []);
   useEffect(() => {
     (async () => {
-      const res = await api.get('/dsr-tools/ffxiv/index.json');
+      const res = await xhr.get('https://workers.dsrkafuu.su/ffxiv-hunting');
       if (res.data) {
         setMeta({
           message: res.data.message || '',
-          lastUpdate: res.data.lastUpdate,
+          update: res.data.update,
           license: res.data.license,
         });
-        setData(res.data.huntingData);
+        setData(parseTimes(res.data.data));
         setLoading(false);
       }
     })();
-  }, []);
+  }, [parseTimes]);
 
   // table configs
   const columns = useMemo(
     () => [
       { title: '服务器', dataIndex: 'server', key: '服务器', align: 'center' },
-      { title: '早车', dataIndex: ['timeTable', '0'], key: '早车', align: 'center' },
-      { title: '午车', dataIndex: ['timeTable', '1'], key: '午车', align: 'center' },
-      { title: '晚车', dataIndex: ['timeTable', '2'], key: '晚车', align: 'center' },
-      { title: '灵车', dataIndex: ['timeTable', '3'], key: '灵车', align: 'center' },
+      { title: '早车', dataIndex: ['times', '1'], key: '早车', align: 'center' },
+      { title: '午车', dataIndex: ['times', '2'], key: '午车', align: 'center' },
+      { title: '晚车', dataIndex: ['times', '3'], key: '晚车', align: 'center' },
+      { title: '灵车', dataIndex: ['times', '0'], key: '灵车', align: 'center' },
       { title: '始发地', dataIndex: 'origin', key: '始发地', align: 'center' },
       { title: '路线', dataIndex: 'route', key: '路线', align: 'center' },
     ],
@@ -136,16 +168,8 @@ function FFXIV() {
           </Tabs.TabPane>
           {tabPanes.map((dataCenter) => (
             <Tabs.TabPane tab={dataCenter.name} key={dataCenter.name}>
-              <Table
-                {...tableProps}
-                dataSource={dataCenter.records.shadowbringers}
-                title={shadowbringers}
-              />
-              <Table
-                {...tableProps}
-                dataSource={dataCenter.records.stormblood}
-                title={stormblood}
-              />
+              <Table {...tableProps} dataSource={dataCenter.records[0]} title={shadowbringers} />
+              <Table {...tableProps} dataSource={dataCenter.records[1]} title={stormblood} />
             </Tabs.TabPane>
           ))}
         </Tabs>
