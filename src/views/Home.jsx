@@ -22,7 +22,7 @@ function Home() {
 
   useEffect(() => {
     (async () => {
-      const res = await api.get('/dsr-tools/home/index.json');
+      const res = await api.get('/dsr-tools/home/index.min.json');
       if (res.data) {
         setData(res.data);
       }
