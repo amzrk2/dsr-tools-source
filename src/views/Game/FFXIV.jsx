@@ -135,6 +135,9 @@ function FFXIV() {
 
   // selected tab saver
   const savedTab = useMemo(() => getLS('ffxiv-tab') || '', []);
+  /**
+   * @param {string} key
+   */
   const saveTab = useCallback((key) => setLS('ffxiv-tab', key), []);
 
   return (

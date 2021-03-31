@@ -35,7 +35,9 @@ function Header({ collapsed, onCollapsedChange }) {
     return () => clearInterval(timer);
   }, []);
 
-  // copy page link
+  /**
+   * copy page link
+   */
   const copyShareLink = useCallback(() => {
     navigator.clipboard.writeText(window.location.href).then(
       () => message.success('已复制链接至剪贴板'),

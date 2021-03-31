@@ -30,14 +30,20 @@ function App() {
     return () => window.removeEventListener('resize', resizeHandler);
   }, []);
 
-  // collapse navbar when route change/click out on mobile
+  /**
+   * collapse navbar when route change/click out on mobile
+   * @param {Event} e
+   */
   const doCollapse = useCallback((e) => {
     if (responsive() === 'sm') {
       e.stopPropagation();
       setCollapsed(true);
     }
   }, []);
-  // switch collapse status when click button
+  /**
+   * switch collapse status when click button
+   * @param {Event} e
+   */
   const switchCollapse = useCallback((e) => {
     // prevent immedate sidebar collapse when click show button
     e.stopPropagation();
