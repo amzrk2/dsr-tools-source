@@ -2,7 +2,7 @@ export const changelog = [
   {
     version: 'v4.0.2',
     date: '2021-03-31',
-    logs: ['更新 FFXIV 模块 API', '移除未使用的组件', '优化 JSDoc 注释'],
+    logs: ['更新 FFXIV 模块 API', '移除未使用的组件', '优化 JSDoc 注释', '添加 API 请求 fallback'],
   },
   {
     version: 'v4.0.1',
