@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 
-import { Button } from 'antd';
-import 'antd/lib/button/style/index.less';
+// import { Button } from 'antd';
+// import 'antd/lib/button/style/index.less';
 
 import './Anime.scss';
 import { workers, xhr } from '@/utils/axios';
