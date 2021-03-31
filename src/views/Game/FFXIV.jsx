@@ -11,7 +11,7 @@ import 'antd/lib/list/style/index.less';
 
 import './FFXIV.scss';
 import Loading from '@/components/Loading';
-import { xhr, api } from '@/utils/axios';
+import { workers, api } from '@/utils/axios';
 import { setLS, getLS } from '@/utils/storage';
 
 const shadowbringers = () => '5.X SHADOWBRINGERS';
@@ -89,7 +89,7 @@ function FFXIV() {
   useEffect(() => {
     (async () => {
       let res = null;
-      res = await xhr.get('https://workers.dsrkafuu.su/ffxiv-hunting');
+      res = await workers.get('/ffxiv-hunting');
       if (!res) {
         res = await api.get('/dsr-tools/ffxiv/index.min.json');
       }
