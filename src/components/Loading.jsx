@@ -9,7 +9,7 @@ import './Loading.scss';
 /**
  * loading overlay
  * @param {Object} props
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function Loading({ loading, children }) {
   if (loading) {

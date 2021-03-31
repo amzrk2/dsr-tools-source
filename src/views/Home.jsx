@@ -11,7 +11,7 @@ const image = jsdelivr('/dsr-tools/home/cover-row.webp', 'api');
 
 /**
  * home page
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function Home() {
   const [data, setData] = useState({

@@ -19,7 +19,7 @@ const stormblood = () => '4.X STORMBLOOD';
 
 /**
  * ffxiv page
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function FFXIV() {
   const [loading, setLoading] = useState(true);

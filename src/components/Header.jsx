@@ -21,7 +21,7 @@ import QRCode from './QRCode';
 /**
  * custom header
  * @param {Object} props
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function Header({ collapsed, onCollapsedChange }) {
   // title

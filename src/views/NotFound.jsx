@@ -7,7 +7,7 @@ import 'antd/lib/result/style/index.less';
 
 /**
  * not found page
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function NotFound() {
   const history = useHistory();

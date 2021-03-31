@@ -20,7 +20,7 @@ const loadingComponent = (
 /**
  * custom qr component
  * @param {Objecr} props
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function QRCode({ content }) {
   const [status, setStatus] = useState('pending');

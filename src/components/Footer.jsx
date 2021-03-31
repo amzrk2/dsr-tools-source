@@ -9,7 +9,7 @@ import { ReactComponent as ReactIcon } from '@/assets/svg/react.svg';
 
 /**
  * custom footer
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function Footer() {
   return (

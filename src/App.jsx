@@ -14,7 +14,7 @@ import { throttle } from './utils/performance';
 
 /**
  * root app component
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function App() {
   // sidebar collapsed (tablet) or minimal (mobile) mode

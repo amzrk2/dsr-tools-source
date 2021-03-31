@@ -12,7 +12,7 @@ export const setLS = (key, value) => {
 
 /**
  * @param {string} key
- * @return {any}
+ * @returns {any}
  */
 export const getLS = (key) => {
   try {

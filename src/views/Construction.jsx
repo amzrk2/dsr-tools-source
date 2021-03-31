@@ -9,7 +9,7 @@ import { ReactComponent as ConstructionIcon } from '@/assets/svg/construction.sv
 
 /**
  * loading overlay
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function Construction() {
   const history = useHistory();

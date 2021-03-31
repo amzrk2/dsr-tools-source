@@ -7,7 +7,7 @@ import routes from '@/router/index';
  * recursively match routes
  * @param {Array<Object>} routes
  * @param {string} path
- * @return {Object|null}
+ * @returns {Object|null}
  */
 function matchRoute(routes, path) {
   for (let i = 0; i < routes.length; i++) {
@@ -34,7 +34,7 @@ const cache = Object.create(null);
 
 /**
  * get current matched route
- * @return {Object|null}
+ * @returns {Object|null}
  */
 export default function useRoute() {
   const location = useLocation();

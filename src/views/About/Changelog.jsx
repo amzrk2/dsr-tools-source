@@ -8,7 +8,7 @@ import { changelog } from '@/assets/changelog';
 
 /**
  * changelog page
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function Changelog() {
   return (

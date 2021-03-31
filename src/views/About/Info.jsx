@@ -20,7 +20,7 @@ import { dependencies, devDependencies } from '@/../package.json';
 
 /**
  * personal card title
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function Personal() {
   return (
@@ -37,7 +37,7 @@ function Personal() {
 
 /**
  * info page
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function Info() {
   const deps = { ...dependencies, ...devDependencies };

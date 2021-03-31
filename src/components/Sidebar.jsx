@@ -16,7 +16,7 @@ import Logo from './Logo';
  * map route to component
  * @param {Object} route
  * @param {Object} onRouteClick
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function mapRoute(route, onRouteClick) {
   if (route.meta.icon) {
@@ -50,7 +50,7 @@ function mapRoute(route, onRouteClick) {
 /**
  * navidation sidebar
  * @param {Object} props
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function Sidebar({ collapsed, onRouteClick }) {
   // current route

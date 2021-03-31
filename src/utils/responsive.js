@@ -2,7 +2,7 @@ import { RESPONSIVE_LG, RESPONSIVE_MD } from './constants';
 
 /**
  * check responsive status
- * @return {'lg'|'md'|'sm'}
+ * @returns {'lg'|'md'|'sm'}
  */
 export default () => {
   const width = window.innerWidth || document.documentElement.clientWidth;

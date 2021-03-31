@@ -12,7 +12,7 @@ import Construction from '@/views/Construction';
 
 /**
  * route loading indicator
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function RouteLoading() {
   return (
@@ -25,7 +25,7 @@ function RouteLoading() {
 /**
  * flatten routes
  * @param {Array<Object>} routes
- * @return {Array<Object>}
+ * @returns {Array<Object>}
  */
 function flattenRoutes(routes) {
   return routes.reduce((preItem, item) => {
@@ -36,7 +36,7 @@ const flatRoutes = flattenRoutes(routes);
 
 /**
  * app router
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function Router() {
   return (

@@ -12,7 +12,7 @@ import bangumi from '@/utils/bangumi';
 
 /**
  * anime page
- * @return {import('react').ReactElement}
+ * @returns {import('react').ReactElement}
  */
 function Anime() {
   // get cdn hash data
@@ -34,7 +34,7 @@ function Anime() {
       }
       /**
        * fetch bangumi hash from cache
-       * @return {Promise<boolean>}
+       * @returns {Promise<boolean>}
        */
       async function fetchCache() {
         const cacheDate = getLS('bgm-cache-date');
@@ -68,7 +68,7 @@ function Anime() {
       /**
        * parse bangumi api data
        * @param {Array} data
-       * @return {Array} data
+       * @returns {Array} data
        */
       function parseData(data) {
         // replace image with cdn
