@@ -8,7 +8,8 @@ import 'antd/lib/spin/style/index.less';
 
 import './Router.scss';
 import routes from './index';
-import Construction from '@/views/Construction';
+import Construction from './Construction';
+import ErrorBoundary from './ErrorBoundary';
 
 /**
  * route loading indicator
@@ -52,14 +53,16 @@ function Router() {
               <Helmet>
                 <title>{route.meta?.name || ''} | DSRToolS</title>
               </Helmet>
-              <Suspense fallback={<RouteLoading />}>
-                {/* show construction when in prod and not finished */}
-                {!route.component || (import.meta.env.PROD && route.meta.dev) ? (
-                  <Construction {...props} />
-                ) : (
-                  <route.component {...props} />
-                )}
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense fallback={<RouteLoading />}>
+                  {/* show construction when in prod and not finished */}
+                  {!route.component || (import.meta.env.PROD && route.meta.dev) ? (
+                    <Construction {...props} />
+                  ) : (
+                    <route.component {...props} />
+                  )}
+                </Suspense>
+              </ErrorBoundary>
             </Fragment>
           )}
         />

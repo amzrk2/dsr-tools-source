@@ -55,7 +55,7 @@ export default [
       {
         path: '/game/ffxiv',
         exact: true,
-        component: lazy(() => import('@/views/Game/FFXIV')),
+        component: lazy(() => import('@/views/Game/FFXIVs')),
         meta: {
           name: 'FF14 国服狩猎车时间表',
           short: 'FF14 狩猎时间表',

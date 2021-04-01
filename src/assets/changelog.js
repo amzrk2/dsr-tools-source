@@ -1,6 +1,11 @@
 export const changelog = [
   {
     version: 'v4.0.2',
+    date: '2021-04-01',
+    logs: ['移除 loadable component', '添加路由 error boundary'],
+  },
+  {
+    version: 'v4.0.2',
     date: '2021-03-31',
     logs: [
       '更新 FFXIV 模块 API',
