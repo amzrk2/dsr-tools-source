@@ -5,7 +5,7 @@ export default function ga() {
     window.dataLayer.push(arguments);
   }
 
-  if (id) {
+  if (id && import.meta.env.PROD) {
     const script = document.createElement('script');
     script.setAttribute('async', '');
     script.setAttribute('src', `https://www.googletagmanager.com/gtag/js?id=${id}`);

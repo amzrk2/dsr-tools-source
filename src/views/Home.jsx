@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { Button } from 'antd';
 import 'antd/lib/button/style/index.less';
@@ -20,14 +20,16 @@ function Home() {
     license: '',
   });
 
-  useEffect(() => {
-    (async () => {
-      const res = await api.get('/dsr-tools/home/index.min.json');
-      if (res.data) {
-        setData(res.data);
-      }
-    })();
+  /**
+   * fetch data from remote
+   */
+  const fetchData = useCallback(async () => {
+    const res = await api.get('/dsr-tools/home/index.min.json');
+    if (res?.data) {
+      setData(res.data);
+    }
   }, []);
+  useEffect(() => fetchData(), [fetchData]);
 
   return (
     <div className='home' style={{ backgroundImage: `url(${image})` }}>

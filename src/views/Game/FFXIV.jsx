@@ -86,24 +86,26 @@ function FFXIV() {
     }
     return data;
   }, []);
-  useEffect(() => {
-    (async () => {
-      let res = null;
-      res = await workers.get('/ffxiv-hunting');
-      if (!res) {
-        res = await api.get('/dsr-tools/ffxiv/index.min.json');
-      }
-      if (res?.data) {
-        setMeta({
-          message: res.data.message || '',
-          update: res.data.update,
-          license: res.data.license,
-        });
-        setData(parseTimes(res.data.data));
-        setLoading(false);
-      }
-    })();
+  /**
+   * fetch data from remote
+   */
+  const fetchData = useCallback(async () => {
+    let res = null;
+    res = await workers.get('/ffxiv-hunting');
+    if (!res) {
+      res = await api.get('/dsr-tools/ffxiv/index.min.json');
+    }
+    if (res?.data) {
+      setMeta({
+        message: res.data.message || '',
+        update: res.data.update,
+        license: res.data.license,
+      });
+      setData(parseTimes(res.data.data));
+      setLoading(false);
+    }
   }, [parseTimes]);
+  useEffect(() => fetchData(), [fetchData]);
 
   // table configs
   const columns = useMemo(
