@@ -65,9 +65,10 @@
   }
 
   .bangumi {
-    &__item {
-      display: flex;
-    }
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    position: relative;
 
     .ant-image {
       width: 7rem;
@@ -79,6 +80,11 @@
       border-radius: 2px;
     }
 
+    &__wrapper {
+      padding: 0.25rem;
+      padding-right: 0;
+    }
+
     &__image {
       flex: 0 0 auto;
     }
@@ -86,6 +92,36 @@
     &__meta {
       flex: 1 1 auto;
       margin-left: 1rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 7.25rem;
+    }
+
+    &__name {
+      font-size: $font-size-lg;
+    }
+
+    &__sub {
+      font-size: $font-size-sm;
+      color: rgba(0, 0, 0, 0.45);
+    }
+
+    &__name,
+    &__sub {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &__stat {
+      flex: 1 1 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: nowrap;
+      font-size: 1.1rem;
     }
   }
 }

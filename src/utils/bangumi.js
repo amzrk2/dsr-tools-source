@@ -5,7 +5,7 @@ const I64BIT_TABLE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345
 
 /**
  * @param {string|Array} input
- * @returns
+ * @returns {string}
  */
 function hash(input) {
   let hash = 5381;
@@ -27,9 +27,10 @@ const subjectCache = Object.create(null);
 /**
  * @param {string} src
  * @param {Object} HASH_SUBJECT
+ * @returns {string}
  */
 const CDN_OSS_SUBJECT = (src, HASH_SUBJECT) => {
-  if (typeof src !== 'string') {
+  if (!src || typeof src !== 'string') {
     return src;
   }
   if (subjectCache[src]) {

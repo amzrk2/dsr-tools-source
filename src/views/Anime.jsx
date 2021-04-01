@@ -1,19 +1,18 @@
 import React, { useState, useEffect, memo, useCallback, useMemo } from 'react';
 import dayjs from 'dayjs';
 
-import { Card, List, Pagination, Button, Image } from 'antd';
+import { Card, List, Pagination, Button, Image, Rate } from 'antd';
 import 'antd/lib/card/style/index.less';
 import 'antd/lib/list/style/index.less';
 import 'antd/lib/empty/style/index.less'; // list empty
 import 'antd/lib/pagination/style/index.less';
 import 'antd/lib/button/style/index.less';
 import 'antd/lib/image/style/index.less';
+import 'antd/lib/rate/style/index.less';
+import { FireOutlined } from '@ant-design/icons';
 
 import './Anime.scss';
-import { workers, xhr } from '@/utils/axios';
-import { getLS, setLS } from '@/utils/storage';
-import { BANGUMI_HASH } from '@/utils/constants';
-import bangumi from '@/utils/bangumi';
+import { workers } from '@/utils/axios';
 import responsive from '@/utils/responsive';
 import { throttle } from '@/utils/performance';
 
@@ -30,48 +29,6 @@ function formatWeekday(day) {
  * @returns {import('react').ReactElement}
  */
 function Anime() {
-  // get cdn hash data
-  const [hash, setHash] = useState({});
-  /**
-   * fetch bangumi hash from cdn
-   */
-  const fetchHash = useCallback(async () => {
-    const res = await xhr.get(BANGUMI_HASH);
-    if (res.data) {
-      setHash(res.data);
-      setLS('bgm-cache-date', dayjs().toJSON());
-      setLS('bgm-cache', res.data);
-    }
-  }, []);
-  /**
-   * fetch bangumi hash from cache
-   * @returns {Promise<boolean>}
-   */
-  const fetchHashCache = useCallback(async () => {
-    const cacheDate = getLS('bgm-cache-date');
-    if (cacheDate) {
-      try {
-        if (dayjs().diff(dayjs(cacheDate), 'day', true) < 7) {
-          const cache = getLS('bgm-cache');
-          cache && setHash(cache);
-          return true;
-        }
-      } catch {
-        return false;
-      }
-    }
-    return false;
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      const cacheStatus = await fetchHashCache();
-      if (!cacheStatus) {
-        await fetchHash();
-      }
-    })();
-  }, [fetchHash, fetchHashCache]);
-
   // get anime calendar data
   const [data, setData] = useState([]);
   /**
@@ -79,44 +36,35 @@ function Anime() {
    * @param {Array} data
    * @returns {Array} data
    */
-  const parseData = useCallback(
-    (data) => {
-      data.forEach((val) => {
-        val.items.forEach((val) => {
-          // replace url
-          if (val.url) {
-            val.url = val.url.replace('http://', 'https://');
-          }
-          // replace image with cdn
-          if (val.images) {
-            if (typeof val.images.common === 'string') {
-              const image = bangumi(val.images.common, hash);
-              val.image = image;
-            } else if (typeof val.images === 'string') {
-              const image = bangumi(val.images, hash);
-              val.image = image;
-            } else {
-              val.iamge = '';
-            }
-            delete val.images;
-            if (val.image) {
-              val.image = val.image.replace('http://', 'https://');
-            }
-          }
-          // fix missing rating and collection
-          if (!val.rating?.score) {
-            val.rating = { score: 0 };
-          }
-          if (!val.collection?.doing) {
-            val.collection = { doing: 0 };
-          }
-        });
+  const parseData = useCallback((data) => {
+    data.forEach((val) => {
+      val.items.forEach((val) => {
+        // replace url
+        if (val.url) {
+          val.url = val.url.replace('http:', 'https:');
+        }
+        // fix missing image
+        if (!val.images) {
+          val.images = { common: '', large: '' };
+        } else if (typeof val.images === 'string') {
+          val.images = { common: val.images, large: val.images };
+        }
+        // replace image links
+        for (let key of Object.keys(val.images)) {
+          val.images[key] = val.images[key].replace('http:', 'https:');
+        }
+        // fix missing rating and collection
+        if (!val.rating?.score) {
+          val.rating = { score: 0 };
+        }
+        if (!val.collection?.doing) {
+          val.collection = { doing: 0 };
+        }
       });
-      data.unshift(data.pop());
-      return data;
-    },
-    [hash]
-  );
+    });
+    data.unshift(data.pop());
+    return data;
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -156,12 +104,26 @@ function Anime() {
             {items.map((item) => {
               return (
                 <List.Item className='bangumi' key={item.id}>
-                  <div>
-                    <Image className='bangumi__image' src={item.image} />
+                  <div className='bangumi__wrapper'>
+                    <Image
+                      className='bangumi__image'
+                      src={item.images.common}
+                      preview={{
+                        src: item.images.large,
+                      }}
+                    />
                   </div>
                   <div className='bangumi__meta'>
-                    <span>{item.name}</span>
-                    <span>{item.name_cn}</span>
+                    <span className='bangumi__name'>{item.name}</span>
+                    <span className='bangumi__sub'>{item.name_cn}</span>
+                    <div className='bangumi__stat'>
+                      <Rate allowHalf={true} disabled={true} defaultValue={2} />
+                      <div>
+                        <FireOutlined />
+                        &nbsp;
+                        {item.collection.doing}
+                      </div>
+                    </div>
                   </div>
                 </List.Item>
               );
