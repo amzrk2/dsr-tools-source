@@ -1,18 +1,21 @@
 import React, { useState, useEffect, memo, useCallback, useMemo } from 'react';
 import dayjs from 'dayjs';
 
-import { Card, List, Pagination, Button } from 'antd';
+import { Card, List, Pagination, Button, Image } from 'antd';
 import 'antd/lib/card/style/index.less';
 import 'antd/lib/list/style/index.less';
 import 'antd/lib/empty/style/index.less'; // list empty
 import 'antd/lib/pagination/style/index.less';
 import 'antd/lib/button/style/index.less';
+import 'antd/lib/image/style/index.less';
 
 import './Anime.scss';
 import { workers, xhr } from '@/utils/axios';
 import { getLS, setLS } from '@/utils/storage';
 import { BANGUMI_HASH } from '@/utils/constants';
 import bangumi from '@/utils/bangumi';
+import responsive from '@/utils/responsive';
+import { throttle } from '@/utils/performance';
 
 /**
  * @param {number} day
@@ -125,6 +128,17 @@ function Anime() {
     })();
   }, [parseData]);
 
+  // whether show prev weekday and next weekday
+  const [showExtend, setShowExtend] = useState(() => responsive() === 'lg');
+
+  useEffect(() => {
+    const resizeHandler = throttle(() => {
+      setShowExtend(responsive() === 'lg');
+    });
+    window.addEventListener('resize', resizeHandler);
+    return () => window.removeEventListener('resize', resizeHandler);
+  }, []);
+
   // dayjs instance
   const date = dayjs();
   const today = date.day() + 1;
@@ -140,7 +154,17 @@ function Anime() {
         <Card title={formatWeekday(idx)}>
           <List>
             {items.map((item) => {
-              return <List.Item key={item.id}>{item.name}</List.Item>;
+              return (
+                <List.Item className='bangumi' key={item.id}>
+                  <div>
+                    <Image className='bangumi__image' src={item.image} />
+                  </div>
+                  <div className='bangumi__meta'>
+                    <span>{item.name}</span>
+                    <span>{item.name_cn}</span>
+                  </div>
+                </List.Item>
+              );
             })}
           </List>
         </Card>
@@ -193,9 +217,9 @@ function Anime() {
       </div>
 
       <div className='display'>
-        <div className='display-item'>{display[day - 2 < 0 ? 6 : day - 2]}</div>
-        <div className='display-item'>{display[day - 1]}</div>
-        <div className='display-item'>{display[day > 6 ? 0 : day]}</div>
+        {showExtend && <div className='display__item'>{display[day - 2 < 0 ? 6 : day - 2]}</div>}
+        <div className='display__item'>{display[day - 1]}</div>
+        {showExtend && <div className='display__item'>{display[day > 6 ? 0 : day]}</div>}
       </div>
     </div>
   );

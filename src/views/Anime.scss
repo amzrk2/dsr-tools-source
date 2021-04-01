@@ -28,9 +28,9 @@
     display: flex;
     justify-content: center;
 
-    &-item {
-      display: 0 0 auto;
-      width: 20rem;
+    &__item {
+      display: 0 1 auto;
+      width: 25rem;
 
       &:first-child {
         margin: 1.5rem;
@@ -61,6 +61,31 @@
       &-body {
         padding: 0 1rem;
       }
+    }
+  }
+
+  .bangumi {
+    &__item {
+      display: flex;
+    }
+
+    .ant-image {
+      width: 7rem;
+      height: 7rem;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 2px;
+    }
+
+    &__image {
+      flex: 0 0 auto;
+    }
+
+    &__meta {
+      flex: 1 1 auto;
+      margin-left: 1rem;
     }
   }
 }
