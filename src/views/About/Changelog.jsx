@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { Timeline } from 'antd';
 import 'antd/lib/timeline/style/index.less';
@@ -27,4 +27,4 @@ function Changelog() {
   );
 }
 
-export default Changelog;
+export default memo(Changelog);

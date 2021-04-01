@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import { Spin } from 'antd';
@@ -31,4 +31,4 @@ Loading.propTypes = {
   children: PropTypes.element,
 };
 
-export default Loading;
+export default memo(Loading);

@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { Fragment, useCallback, useEffect, useMemo, useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 
@@ -89,4 +89,4 @@ Header.propTypes = {
   onCollapsedChange: PropTypes.func.isRequired,
 };
 
-export default Header;
+export default memo(Header);

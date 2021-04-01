@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState, memo } from 'react';
 import dayjs from 'dayjs';
 
 import { Tabs, Table, Card, Alert, List } from 'antd';
@@ -187,4 +187,4 @@ function FFXIV() {
   );
 }
 
-export default FFXIV;
+export default memo(FFXIV);

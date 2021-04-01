@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 
 import { Button } from 'antd';
 import 'antd/lib/button/style/index.less';
@@ -46,4 +46,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default memo(Home);

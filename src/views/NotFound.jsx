@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { useHistory } from 'react-router';
 
 import { Button, Result } from 'antd';
@@ -37,4 +37,4 @@ function NotFound() {
   );
 }
 
-export default NotFound;
+export default memo(NotFound);

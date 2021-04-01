@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import dayjs from 'dayjs';
 
 // import { Button } from 'antd';
@@ -105,4 +105,4 @@ function Anime() {
   return <div className='anime'>{JSON.stringify(data)}</div>;
 }
 
-export default Anime;
+export default memo(Anime);

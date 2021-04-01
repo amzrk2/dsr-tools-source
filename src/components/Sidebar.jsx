@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, memo } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -80,4 +80,4 @@ Sidebar.propTypes = {
   onRouteClick: PropTypes.func.isRequired,
 };
 
-export default Sidebar;
+export default memo(Sidebar);

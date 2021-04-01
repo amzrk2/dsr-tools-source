@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useHistory } from 'react-router';
 
 import { Button, Result } from 'antd';
@@ -29,4 +29,4 @@ function Construction() {
   );
 }
 
-export default Construction;
+export default memo(Construction);

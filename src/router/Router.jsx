@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense } from 'react';
+import React, { Fragment, Suspense, memo } from 'react';
 import { Switch } from 'react-router-dom';
 import { GuardedRoute } from 'react-router-guards';
 import { Helmet } from 'react-helmet';
@@ -10,18 +10,6 @@ import './Router.scss';
 import routes from './index';
 import Construction from './Construction';
 import ErrorBoundary from './ErrorBoundary';
-
-/**
- * route loading indicator
- * @returns {import('react').ReactElement}
- */
-function RouteLoading() {
-  return (
-    <div className='router__loading'>
-      <Spin delay={500} size='large' />
-    </div>
-  );
-}
 
 /**
  * flatten routes
@@ -54,7 +42,13 @@ function Router() {
                 <title>{route.meta?.name || ''} | DSRToolS</title>
               </Helmet>
               <ErrorBoundary>
-                <Suspense fallback={<RouteLoading />}>
+                <Suspense
+                  fallback={
+                    <div className='router__loading'>
+                      <Spin delay={500} size='large' />
+                    </div>
+                  }
+                >
                   {/* show construction when in prod and not finished */}
                   {!route.component || (import.meta.env.PROD && route.meta.dev) ? (
                     <Construction {...props} />
@@ -71,4 +65,4 @@ function Router() {
   );
 }
 
-export default Router;
+export default memo(Router);

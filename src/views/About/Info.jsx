@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { Row, Col, Card, Image, Collapse, List } from 'antd';
 import 'antd/lib/grid/style/index.less';
@@ -101,4 +101,4 @@ function Info() {
   );
 }
 
-export default Info;
+export default memo(Info);

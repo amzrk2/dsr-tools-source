@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, memo } from 'react';
 
 import { Affix, Layout } from 'antd';
 import 'antd/lib/affix/style/index.less';
@@ -77,4 +77,4 @@ function App() {
   );
 }
 
-export default App;
+export default memo(App);

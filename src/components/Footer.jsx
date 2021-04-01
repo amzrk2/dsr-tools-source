@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import dayjs from 'dayjs';
 
 import { CopyrightOutlined } from '@ant-design/icons';
@@ -23,4 +23,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default memo(Footer);

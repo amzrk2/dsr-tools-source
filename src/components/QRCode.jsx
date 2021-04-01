@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import PropTypes from 'prop-types';
 
 import { Image, Skeleton, Spin } from 'antd';
@@ -70,4 +70,4 @@ QRCode.propTypes = {
   content: PropTypes.string,
 };
 
-export default QRCode;
+export default memo(QRCode);

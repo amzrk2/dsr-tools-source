@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -26,4 +26,4 @@ Logo.propTypes = {
   collapsed: PropTypes.bool.isRequired,
 };
 
-export default Logo;
+export default memo(Logo);
