@@ -1,4 +1,4 @@
-import { lazy } from '@loadable/component';
+import { lazy } from 'react';
 
 import {
   HomeOutlined,
