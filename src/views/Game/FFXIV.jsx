@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { Tabs, Table, Card, Alert, List } from 'antd';
 import 'antd/lib/tabs/style/index.less';
 import 'antd/lib/table/style/index.less';
-import 'antd/lib/empty/style/index.less'; // table
+import 'antd/lib/empty/style/index.less'; // table empty
 import 'antd/lib/card/style/index.less';
 import 'antd/lib/alert/style/index.less';
 import 'antd/lib/list/style/index.less';

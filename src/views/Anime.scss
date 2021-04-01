@@ -1,2 +1,66 @@
 .anime {
+  .weekday {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1.5rem;
+
+    .ant-pagination {
+      margin-right: 0.5714rem;
+
+      &-item {
+        padding: 0 1rem;
+
+        &-active {
+          background-color: $color-primary;
+          color: #ffffff;
+          font-weight: unset;
+        }
+      }
+    }
+
+    b {
+      font-weight: 500;
+    }
+  }
+
+  .display {
+    display: flex;
+    justify-content: center;
+
+    &-item {
+      display: 0 0 auto;
+      width: 20rem;
+
+      &:first-child {
+        margin: 1.5rem;
+      }
+
+      &:not(:first-child) {
+        margin: 1.5rem;
+        margin-left: 0;
+      }
+
+      &:first-child,
+      &:last-child {
+        .ant-card-head-title {
+          font-weight: normal;
+        }
+      }
+    }
+
+    .ant-card {
+      &-head {
+        padding: 0 1rem;
+
+        &-title {
+          padding: 1rem 0;
+        }
+      }
+
+      &-body {
+        padding: 0 1rem;
+      }
+    }
+  }
 }

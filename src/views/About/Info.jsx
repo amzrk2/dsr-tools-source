@@ -6,6 +6,7 @@ import 'antd/lib/card/style/index.less';
 import 'antd/lib/image/style/index.less';
 import 'antd/lib/collapse/style/index.less';
 import 'antd/lib/list/style/index.less';
+import 'antd/lib/empty/style/index.less'; // list empty
 import {
   PaperClipOutlined,
   FileTextOutlined,
