@@ -31,7 +31,6 @@ export default [
       name: '番组每日放送',
       short: '每日番组',
       icon: CalendarOutlined,
-      dev: true,
     },
   },
   {
