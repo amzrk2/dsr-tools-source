@@ -126,7 +126,7 @@
         color: $color-primary;
       }
 
-      .anticon svg {
+      & > div:last-child .anticon svg {
         font-size: 1.1rem;
         color: $color-primary;
       }

@@ -38,6 +38,25 @@ function formatRating(score = 0) {
 }
 
 /**
+ * format hot number to string
+ * @param {number} hot
+ * @returns {string}
+ */
+function formatHot(hot = 0) {
+  if (hot > 10000) {
+    hot = (hot / 1000).toFixed(2).split('');
+    // remove end 0
+    while (hot[hot.length - 1] === '.' || hot[hot.length - 1] === '0') {
+      hot.pop();
+    }
+    hot = hot.join('');
+    return `${hot}k`;
+  } else if (hot) {
+    return `${hot}`;
+  }
+}
+
+/**
  * weekday card renderer
  * @param {Object} props
  * @returns {React.NamedExoticComponent}
@@ -52,7 +71,7 @@ const Weekday = memo(function Weekday({ items, weekday }) {
           const jpName = item.name;
           const cnName = item.name_cn;
           const [rating10, rating5] = formatRating(item.rating.score);
-          const hot = item.collection.doing;
+          const hot = formatHot(item.collection.doing);
 
           return (
             <List.Item className='bangumi' key={item.id}>
