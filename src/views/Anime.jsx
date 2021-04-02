@@ -2,7 +2,7 @@ import React, { useState, useEffect, memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 
-import { Card, List, Pagination, Button, Image, Rate } from 'antd';
+import { Card, List, Pagination, Button, Image, Rate, Tooltip } from 'antd';
 import 'antd/lib/card/style/index.less';
 import 'antd/lib/list/style/index.less';
 import 'antd/lib/empty/style/index.less'; // list empty
@@ -10,6 +10,7 @@ import 'antd/lib/pagination/style/index.less';
 import 'antd/lib/button/style/index.less';
 import 'antd/lib/image/style/index.less';
 import 'antd/lib/rate/style/index.less';
+import 'antd/lib/tooltip/style/index.less';
 import { FireOutlined } from '@ant-design/icons';
 
 import './Anime.scss';
@@ -31,8 +32,9 @@ function formatWeekday(day) {
  * @param {Array<Number>} score
  */
 function formatRating(score = 0) {
-  const rating = Number((Math.ceil(score) / 2).toFixed(1));
-  return [score, rating];
+  const rating = (Math.ceil(score) / 2).toFixed(1);
+  const _score = score.toFixed(1);
+  return [_score, rating];
 }
 
 /**
@@ -65,7 +67,11 @@ const Weekday = memo(function Weekday({ items, weekday }) {
                 <span className='bangumi__name'>{jpName}</span>
                 <span className='bangumi__sub'>{cnName}</span>
                 <div className='bangumi__stat'>
-                  <Rate allowHalf={true} disabled={true} defaultValue={rating5} />
+                  <Tooltip title={Number(rating10) ? rating10 : '暂无数据'}>
+                    <div>
+                      <Rate allowHalf={true} disabled={true} defaultValue={Number(rating5)} />
+                    </div>
+                  </Tooltip>
                   <div>
                     {hot}&nbsp;
                     <FireOutlined />
