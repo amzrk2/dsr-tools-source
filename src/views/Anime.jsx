@@ -19,6 +19,7 @@ import { workers } from '@/utils/axios';
 import responsive from '@/utils/responsive';
 import { throttle } from '@/utils/performance';
 import { IMAGE_FALLBACK } from '@/utils/constants';
+import Loading from '@/components/Loading';
 
 /**
  * format weekday from idx to cn string
@@ -280,20 +281,22 @@ const Anime = memo(function Anime() {
   }, [data, sortRule]);
 
   return (
-    <div className='anime'>
-      <Weekday day={day} today={today} onDayChange={setDay} />
-      <Meta
-        totalCount={totalCount}
-        todayCount={todayCount}
-        sortRule={sortRule}
-        onSortRuleChange={setSortRule}
-      />
-      <div className='display'>
-        {showExtend && <div className='display__item'>{display[day - 2 < 0 ? 6 : day - 2]}</div>}
-        <div className='display__item'>{display[day - 1]}</div>
-        {showExtend && <div className='display__item'>{display[day > 6 ? 0 : day]}</div>}
+    <Loading loading={data.length === 0}>
+      <div className='anime'>
+        <Weekday day={day} today={today} onDayChange={setDay} />
+        <Meta
+          totalCount={totalCount}
+          todayCount={todayCount}
+          sortRule={sortRule}
+          onSortRuleChange={setSortRule}
+        />
+        <div className='display'>
+          {showExtend && <div className='display__item'>{display[day - 2 < 0 ? 6 : day - 2]}</div>}
+          <div className='display__item'>{display[day - 1]}</div>
+          {showExtend && <div className='display__item'>{display[day > 6 ? 0 : day]}</div>}
+        </div>
       </div>
-    </div>
+    </Loading>
   );
 });
 
