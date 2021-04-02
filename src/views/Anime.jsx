@@ -64,8 +64,12 @@ const Weekday = memo(function Weekday({ items, weekday }) {
                 />
               </div>
               <div className='bangumi__meta'>
-                <span className='bangumi__name'>{jpName}</span>
-                <span className='bangumi__sub'>{cnName}</span>
+                <Tooltip title={jpName}>
+                  <span className='bangumi__name'>{jpName}</span>
+                </Tooltip>
+                <Tooltip title={cnName}>
+                  <span className='bangumi__sub'>{cnName}</span>
+                </Tooltip>
                 <div className='bangumi__stat'>
                   <Tooltip title={Number(rating10) ? rating10 : '暂无数据'}>
                     <div>

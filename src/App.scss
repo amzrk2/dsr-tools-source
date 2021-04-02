@@ -1,8 +1,31 @@
 .app {
   min-height: 100vh;
 
-  .header__layout,
-  .footer__layout {
+  // sidebar
+  .ant-layout-sider {
+    overflow-y: auto;
+    min-height: 100vh;
+    height: 100vh;
+
+    @include responsive(sm) {
+      position: fixed;
+      left: 0;
+      z-index: 999;
+    }
+  }
+
+  .sidebar__layout {
+    background-color: #ffffff;
+  }
+
+  // content
+  .ant-layout {
+    overflow-y: auto;
+    min-height: 100vh;
+    height: 100vh;
+  }
+
+  .header__layout {
     padding: 0 0;
     height: unset;
     line-height: unset;
@@ -15,22 +38,19 @@
   .content__layout {
     z-index: 10;
     overflow-x: hidden;
-  }
+    display: flex;
+    flex-direction: column;
 
-  .header__layout,
-  .footer__layout,
-  .sidebar__layout {
-    background-color: #ffffff;
-  }
-
-  .ant-layout-sider {
-    overflow-y: auto;
-    height: 100vh;
-
-    @include responsive(sm) {
-      position: fixed;
-      left: 0;
-      z-index: 999;
+    & > * {
+      flex: 1 1 auto;
     }
+
+    .footer {
+      flex: 0 0 auto;
+    }
+  }
+
+  .header__layout {
+    background-color: #ffffff;
   }
 }

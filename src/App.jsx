@@ -68,10 +68,8 @@ function App() {
         </Affix>
         <Layout.Content className='content__layout'>
           <Router />
-        </Layout.Content>
-        <Layout.Footer className='footer__layout'>
           <Footer />
-        </Layout.Footer>
+        </Layout.Content>
       </Layout>
     </Layout>
   );
