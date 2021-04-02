@@ -19,6 +19,21 @@
       }
     }
 
+    @include responsive(md) {
+      .ant-pagination-item:not(.ant-pagination-item-active) {
+        display: none;
+      }
+
+      .ant-pagination-item-active {
+        background-color: #ffffff;
+        color: unset;
+      }
+
+      .ant-pagination-item-link {
+        padding: 0 2rem;
+      }
+    }
+
     b {
       font-weight: 500;
     }
@@ -32,6 +47,15 @@
 
     &__sort > span {
       margin-right: 0.75rem;
+    }
+
+    @include responsive(md) {
+      flex-direction: column;
+      justify-content: center;
+
+      &__sort {
+        margin-top: 0.5rem;
+      }
     }
   }
 
