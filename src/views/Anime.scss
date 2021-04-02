@@ -30,7 +30,8 @@
 
     &__item {
       display: 0 1 auto;
-      width: 25rem;
+      flex: 1 1 33%;
+      overflow: hidden;
 
       &:first-child {
         margin: 1.5rem;
@@ -51,11 +52,7 @@
 
     .ant-card {
       &-head {
-        padding: 0 1rem;
-
-        &-title {
-          padding: 1rem 0;
-        }
+        text-align: center;
       }
 
       &-body {
@@ -71,8 +68,8 @@
     position: relative;
 
     .ant-image {
-      width: 7rem;
-      height: 7rem;
+      width: 5rem;
+      height: 5rem;
       overflow: hidden;
       display: flex;
       justify-content: center;
@@ -95,7 +92,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      height: 7.25rem;
+      height: 5.25rem;
     }
 
     &__name {
@@ -122,6 +119,15 @@
       align-items: flex-end;
       flex-wrap: nowrap;
       font-size: 1.1rem;
+
+      .ant-rate {
+        font-size: 1.125rem;
+        color: $color-primary;
+      }
+
+      & > div {
+        font-size: 1rem;
+      }
     }
   }
 }

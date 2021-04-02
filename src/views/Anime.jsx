@@ -1,4 +1,5 @@
 import React, { useState, useEffect, memo, useCallback, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 
 import { Card, List, Pagination, Button, Image, Rate } from 'antd';
@@ -17,6 +18,7 @@ import responsive from '@/utils/responsive';
 import { throttle } from '@/utils/performance';
 
 /**
+ * format weekday from idx to cn string
  * @param {number} day
  */
 function formatWeekday(day) {
@@ -25,10 +27,69 @@ function formatWeekday(day) {
 }
 
 /**
- * anime page
- * @returns {import('react').ReactElement}
+ * format score to 5 star rating
+ * @param {Array<Number>} score
  */
-function Anime() {
+function formatRating(score = 0) {
+  const rating = Number((Math.ceil(score) / 2).toFixed(1));
+  return [score, rating];
+}
+
+/**
+ * weekday card renderer
+ * @param {Object} props
+ * @returns {React.NamedExoticComponent}
+ */
+const Weekday = memo(function Weekday({ items, weekday }) {
+  return (
+    <Card title={weekday}>
+      <List>
+        {items.map((item) => {
+          const previewImage = item.images.common;
+          const largeImage = item.images.large;
+          const jpName = item.name;
+          const cnName = item.name_cn;
+          const [rating10, rating5] = formatRating(item.rating.score);
+          const hot = item.collection.doing;
+
+          return (
+            <List.Item className='bangumi' key={item.id}>
+              <div className='bangumi__wrapper'>
+                <Image
+                  className='bangumi__image'
+                  src={previewImage}
+                  preview={{ src: largeImage }}
+                />
+              </div>
+              <div className='bangumi__meta'>
+                <span className='bangumi__name'>{jpName}</span>
+                <span className='bangumi__sub'>{cnName}</span>
+                <div className='bangumi__stat'>
+                  <Rate allowHalf={true} disabled={true} defaultValue={rating5} />
+                  <div>
+                    {hot}&nbsp;
+                    <FireOutlined />
+                  </div>
+                </div>
+              </div>
+            </List.Item>
+          );
+        })}
+      </List>
+    </Card>
+  );
+});
+
+Weekday.propTypes = {
+  items: PropTypes.array.isRequired,
+  weekday: PropTypes.string.isRequired,
+};
+
+/**
+ * anime page
+ * @returns {React.NamedExoticComponent}
+ */
+const Anime = memo(function Anime() {
   // get anime calendar data
   const [data, setData] = useState([]);
   /**
@@ -97,65 +158,11 @@ function Anime() {
   const display = useMemo(() => {
     const ret = [];
     data.forEach((val, idx) => {
-      const items = val.items;
-      const element = (
-        <Card title={formatWeekday(idx)}>
-          <List>
-            {items.map((item) => {
-              return (
-                <List.Item className='bangumi' key={item.id}>
-                  <div className='bangumi__wrapper'>
-                    <Image
-                      className='bangumi__image'
-                      src={item.images.common}
-                      preview={{
-                        src: item.images.large,
-                      }}
-                    />
-                  </div>
-                  <div className='bangumi__meta'>
-                    <span className='bangumi__name'>{item.name}</span>
-                    <span className='bangumi__sub'>{item.name_cn}</span>
-                    <div className='bangumi__stat'>
-                      <Rate allowHalf={true} disabled={true} defaultValue={2} />
-                      <div>
-                        <FireOutlined />
-                        &nbsp;
-                        {item.collection.doing}
-                      </div>
-                    </div>
-                  </div>
-                </List.Item>
-              );
-            })}
-          </List>
-        </Card>
-      );
-      ret.push(element);
+      ret.push(<Weekday items={val.items} weekday={formatWeekday(idx)} />);
     });
     return ret;
   }, [data]);
 
-  // const d = [
-  //   {
-  //     title: 'Title 1',
-  //   },
-  //   {
-  //     title: 'Title 2',
-  //   },
-  //   {
-  //     title: 'Title 3',
-  //   },
-  //   {
-  //     title: 'Title 4',
-  //   },
-  //   {
-  //     title: 'Title 5',
-  //   },
-  //   {
-  //     title: 'Title 6',
-  //   },
-  // ];
   return (
     <div className='anime'>
       <div className='weekday'>
@@ -185,6 +192,6 @@ function Anime() {
       </div>
     </div>
   );
-}
+});
 
-export default memo(Anime);
+export default Anime;
