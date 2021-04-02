@@ -128,7 +128,7 @@ Meta.propTypes = {
 const Bangumi = memo(function Bangumi({ items, weekday, sortRule }) {
   const sortedItems = useMemo(() => {
     const res = [...items];
-    if (!sortRule || sortRule === 'native') {
+    if (!sortRule || sortRule === 'hot') {
       return res;
     }
     if (sortRule === 'ranking') {
