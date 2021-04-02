@@ -7,7 +7,7 @@ import 'antd/lib/skeleton/style/index.less';
 import 'antd/lib/spin/style/index.less';
 
 import './QRCode.scss';
-import { SCRIPT_AWESOME_QR } from '@/utils/constants';
+import { IMAGE_FALLBACK, SCRIPT_AWESOME_QR } from '@/utils/constants';
 
 const size = 128;
 const errorComponent = <Skeleton.Image className='qrcode qrcode--error' />;
@@ -62,7 +62,14 @@ function QRCode({ content }) {
     return errorComponent;
   }
   return (
-    <Image className='qrcode' width={size} height={size} src={qrCode} alt='Share Link QRCode' />
+    <Image
+      className='qrcode'
+      width={size}
+      height={size}
+      src={qrCode}
+      alt='Share Link QRCode'
+      fallback={IMAGE_FALLBACK}
+    />
   );
 }
 

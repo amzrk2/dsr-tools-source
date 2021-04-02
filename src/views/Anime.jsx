@@ -18,6 +18,7 @@ import './Anime.scss';
 import { workers } from '@/utils/axios';
 import responsive from '@/utils/responsive';
 import { throttle } from '@/utils/performance';
+import { IMAGE_FALLBACK } from '@/utils/constants';
 
 /**
  * format weekday from idx to cn string
@@ -156,6 +157,8 @@ const Bangumi = memo(function Bangumi({ items, weekday, sortRule }) {
                   className='bangumi__image'
                   src={previewImage}
                   preview={{ src: largeImage }}
+                  fallback={IMAGE_FALLBACK}
+                  alt='Bangumi Preview Image'
                 />
               </div>
               <div className='bangumi__meta'>

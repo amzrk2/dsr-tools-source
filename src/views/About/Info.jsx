@@ -18,6 +18,7 @@ import './Info.scss';
 import jsdelivr from '@/utils/jsdelivr';
 import statements from '@/assets/statements';
 import { dependencies, devDependencies } from '@/../package.json';
+import { IMAGE_FALLBACK } from '@/utils/constants';
 
 /**
  * personal card title
@@ -69,6 +70,7 @@ function Info() {
               className='personal__image'
               alt='Personal Image'
               src={jsdelivr('/images/banners/84199396_CUnet.jpg', 'cdn')}
+              fallback={IMAGE_FALLBACK}
             />
           </Card>
           <Card title='版权信息'>
