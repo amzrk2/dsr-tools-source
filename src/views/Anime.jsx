@@ -2,7 +2,7 @@ import React, { useState, useEffect, memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 
-import { Card, List, Pagination, Button, Image, Rate, Tooltip } from 'antd';
+import { Card, List, Pagination, Button, Image, Rate, Tooltip, Radio } from 'antd';
 import 'antd/lib/card/style/index.less';
 import 'antd/lib/list/style/index.less';
 import 'antd/lib/empty/style/index.less'; // list empty
@@ -11,6 +11,7 @@ import 'antd/lib/button/style/index.less';
 import 'antd/lib/image/style/index.less';
 import 'antd/lib/rate/style/index.less';
 import 'antd/lib/tooltip/style/index.less';
+import 'antd/lib/radio/style/index.less';
 import { FireOutlined } from '@ant-design/icons';
 
 import './Anime.scss';
@@ -57,15 +58,86 @@ function formatHot(hot = 0) {
 }
 
 /**
- * weekday card renderer
- * @param {Object} props
- * @returns {React.NamedExoticComponent}
+ * weekday selector renderer
  */
-const Weekday = memo(function Weekday({ items, weekday }) {
+const Weekday = memo(function Weekday({ day, today, onDayChange }) {
+  return (
+    <div className='weekday'>
+      <Pagination
+        defaultCurrent={today}
+        total={7}
+        pageSize={1}
+        current={day}
+        onChange={(day) => onDayChange(day)}
+        itemRender={(cur, type, original) => {
+          if (type === 'page') {
+            if (cur === today) {
+              return <b>{formatWeekday(cur - 1)}</b>;
+            }
+            return formatWeekday(cur - 1);
+          }
+          return original;
+        }}
+      />
+      <Button onClick={() => onDayChange(today)}>今天</Button>
+    </div>
+  );
+});
+
+Weekday.propTypes = {
+  day: PropTypes.number.isRequired,
+  today: PropTypes.number.isRequired,
+  onDayChange: PropTypes.func.isRequired,
+};
+
+/**
+ * meta data renderer
+ */
+const Meta = memo(function Meta({ sortRule, onSortRuleChange }) {
+  return (
+    <div className='meta'>
+      <div className='meta__info'>inf</div>
+      <div className='meta__sort'>
+        <Radio.Group
+          options={[
+            { label: '未排序', value: 'native' },
+            { label: '评分排序', value: 'ranking' },
+            { label: '热度排序', value: 'hot' },
+          ]}
+          onChange={(e) => onSortRuleChange(e.target.value || 'native')}
+          value={sortRule}
+        />
+      </div>
+    </div>
+  );
+});
+
+Meta.propTypes = {
+  sortRule: PropTypes.string.isRequired,
+  onSortRuleChange: PropTypes.func.isRequired,
+};
+
+/**
+ * bangumi list renderer
+ */
+const Bangumi = memo(function Bangumi({ items, weekday, sortRule }) {
+  const sortedItems = useMemo(() => {
+    const res = [...items];
+    if (!sortRule || sortRule === 'native') {
+      return res;
+    }
+    if (sortRule === 'ranking') {
+      res.sort((a, b) => b.rating.score - a.rating.score);
+    } else if (sortRule === 'hot') {
+      res.sort((a, b) => b.collection.doing - a.collection.doing);
+    }
+    return res;
+  }, [items, sortRule]);
+
   return (
     <Card title={weekday}>
       <List>
-        {items.map((item) => {
+        {sortedItems.map((item) => {
           const previewImage = item.images.common;
           const largeImage = item.images.large;
           const jpName = item.name;
@@ -109,14 +181,14 @@ const Weekday = memo(function Weekday({ items, weekday }) {
   );
 });
 
-Weekday.propTypes = {
+Bangumi.propTypes = {
   items: PropTypes.array.isRequired,
   weekday: PropTypes.string.isRequired,
+  sortRule: PropTypes.string.isRequired,
 };
 
 /**
  * anime page
- * @returns {React.NamedExoticComponent}
  */
 const Anime = memo(function Anime() {
   // get anime calendar data
@@ -178,42 +250,25 @@ const Anime = memo(function Anime() {
   }, []);
 
   // dayjs instance
-  const date = dayjs();
-  const today = date.day() + 1;
+  const today = dayjs().day() + 1;
   // date control
   const [day, setDay] = useState(today);
 
+  // weekday sort rule
+  const [sortRule, setSortRule] = useState('native');
   // weekday renderers
   const display = useMemo(() => {
     const ret = [];
     data.forEach((val, idx) => {
-      ret.push(<Weekday items={val.items} weekday={formatWeekday(idx)} />);
+      ret.push(<Bangumi items={val.items} weekday={formatWeekday(idx)} sortRule={sortRule} />);
     });
     return ret;
-  }, [data]);
+  }, [data, sortRule]);
 
   return (
     <div className='anime'>
-      <div className='weekday'>
-        <Pagination
-          defaultCurrent={today}
-          total={7}
-          pageSize={1}
-          current={day}
-          onChange={(day) => setDay(day)}
-          itemRender={(cur, type, original) => {
-            if (type === 'page') {
-              if (cur - 1 === date.day()) {
-                return <b>{formatWeekday(cur - 1)}</b>;
-              }
-              return formatWeekday(cur - 1);
-            }
-            return original;
-          }}
-        />
-        <Button onClick={() => setDay(today)}>今天</Button>
-      </div>
-
+      <Weekday day={day} today={today} onDayChange={setDay} />
+      <Meta sortRule={sortRule} onSortRuleChange={setSortRule} />
       <div className='display'>
         {showExtend && <div className='display__item'>{display[day - 2 < 0 ? 6 : day - 2]}</div>}
         <div className='display__item'>{display[day - 1]}</div>

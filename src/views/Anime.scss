@@ -24,6 +24,17 @@
     }
   }
 
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 1.5rem;
+
+    &__sort > span {
+      margin-right: 0.75rem;
+    }
+  }
+
   .display {
     display: flex;
     justify-content: center;
