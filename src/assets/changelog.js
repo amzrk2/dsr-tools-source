@@ -1,5 +1,10 @@
 export const changelog = [
   {
+    version: 'v4.0.4',
+    date: '2021-04-02',
+    logs: ['添加每日番组模块'],
+  },
+  {
     version: 'v4.0.3',
     date: '2021-04-01',
     logs: ['移除 loadable component', '添加路由 error boundary'],
