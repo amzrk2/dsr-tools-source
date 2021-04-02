@@ -93,10 +93,12 @@ Weekday.propTypes = {
 /**
  * meta data renderer
  */
-const Meta = memo(function Meta({ sortRule, onSortRuleChange }) {
+const Meta = memo(function Meta({ totalCount, todayCount, sortRule, onSortRuleChange }) {
   return (
     <div className='meta'>
-      <div className='meta__info'>inf</div>
+      <div className='meta__info'>
+        本季度共 {totalCount} 部番组 | 今日上映 {todayCount} 部
+      </div>
       <div className='meta__sort'>
         <Radio.Group
           options={[
@@ -113,6 +115,8 @@ const Meta = memo(function Meta({ sortRule, onSortRuleChange }) {
 });
 
 Meta.propTypes = {
+  totalCount: PropTypes.number.isRequired,
+  todayCount: PropTypes.number.isRequired,
   sortRule: PropTypes.string.isRequired,
   onSortRuleChange: PropTypes.func.isRequired,
 };
@@ -249,10 +253,17 @@ const Anime = memo(function Anime() {
     return () => window.removeEventListener('resize', resizeHandler);
   }, []);
 
-  // dayjs instance
-  const today = dayjs().day() + 1;
   // date control
+  const today = useMemo(() => dayjs().day() + 1, []);
   const [day, setDay] = useState(today);
+
+  // total count and today count
+  const totalCount = useMemo(() => {
+    let sum = 0;
+    data.forEach((weekday) => (sum += weekday?.items?.length || 0));
+    return sum;
+  }, [data]);
+  const todayCount = useMemo(() => data[today - 1]?.items?.length || 0, [data, today]);
 
   // weekday sort rule
   const [sortRule, setSortRule] = useState('native');
@@ -268,7 +279,12 @@ const Anime = memo(function Anime() {
   return (
     <div className='anime'>
       <Weekday day={day} today={today} onDayChange={setDay} />
-      <Meta sortRule={sortRule} onSortRuleChange={setSortRule} />
+      <Meta
+        totalCount={totalCount}
+        todayCount={todayCount}
+        sortRule={sortRule}
+        onSortRuleChange={setSortRule}
+      />
       <div className='display'>
         {showExtend && <div className='display__item'>{display[day - 2 < 0 ? 6 : day - 2]}</div>}
         <div className='display__item'>{display[day - 1]}</div>
