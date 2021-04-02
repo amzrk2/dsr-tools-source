@@ -20,11 +20,7 @@ import statements from '@/assets/statements';
 import { dependencies, devDependencies } from '@/../package.json';
 import { IMAGE_FALLBACK } from '@/utils/constants';
 
-/**
- * personal card title
- * @returns {import('react').ReactElement}
- */
-function Personal() {
+const Personal = memo(function Personal() {
   return (
     <div className='personal'>
       <img
@@ -35,13 +31,9 @@ function Personal() {
       <span className='personal__id'>DSRKafuU</span>
     </div>
   );
-}
+});
 
-/**
- * info page
- * @returns {import('react').ReactElement}
- */
-function Info() {
+const Info = memo(function Info() {
   const deps = { ...dependencies, ...devDependencies };
 
   return (
@@ -102,6 +94,6 @@ function Info() {
       </Row>
     </div>
   );
-}
+});
 
-export default memo(Info);
+export default Info;

@@ -18,11 +18,6 @@ import './Header.scss';
 import useRoute from '@/hooks/useRoute';
 import QRCode from './QRCode';
 
-/**
- * custom header
- * @param {Object} props
- * @returns {import('react').ReactElement}
- */
 function Header({ collapsed, onCollapsedChange }) {
   // title
   const route = useRoute();

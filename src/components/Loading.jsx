@@ -6,11 +6,6 @@ import 'antd/lib/spin/style/index.less';
 
 import './Loading.scss';
 
-/**
- * loading overlay
- * @param {Object} props
- * @returns {import('react').ReactElement}
- */
 function Loading({ loading, children }) {
   if (loading) {
     return (

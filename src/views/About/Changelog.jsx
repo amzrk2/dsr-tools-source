@@ -6,11 +6,7 @@ import 'antd/lib/timeline/style/index.less';
 import './Changelog.scss';
 import { changelog } from '@/assets/changelog';
 
-/**
- * changelog page
- * @returns {import('react').ReactElement}
- */
-function Changelog() {
+const Changelog = memo(function Changelog() {
   return (
     <div className='changelog'>
       <Timeline className='changelog__list' mode='left'>
@@ -25,6 +21,6 @@ function Changelog() {
       </Timeline>
     </div>
   );
-}
+});
 
-export default memo(Changelog);
+export default Changelog;

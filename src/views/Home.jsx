@@ -13,7 +13,7 @@ const image = jsdelivr('/dsr-tools/home/cover-row.webp', 'api');
  * home page
  * @returns {import('react').ReactElement}
  */
-function Home() {
+const Home = memo(function Home() {
   const [data, setData] = useState({
     title: '',
     links: [],
@@ -44,6 +44,6 @@ function Home() {
       <div className='home__license'>{data.license}</div>
     </div>
   );
-}
+});
 
-export default memo(Home);
+export default Home;

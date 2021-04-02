@@ -17,11 +17,7 @@ import { setLS, getLS } from '@/utils/storage';
 const shadowbringers = () => '5.X SHADOWBRINGERS';
 const stormblood = () => '4.X STORMBLOOD';
 
-/**
- * ffxiv page
- * @returns {import('react').ReactElement}
- */
-function FFXIV() {
+const FFXIV = memo(function FFXIV() {
   const [loading, setLoading] = useState(true);
 
   // metadata
@@ -185,6 +181,6 @@ function FFXIV() {
       </div>
     </Loading>
   );
-}
+});
 
-export default memo(FFXIV);
+export default FFXIV;

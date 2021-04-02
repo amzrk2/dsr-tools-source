@@ -47,11 +47,6 @@ function mapRoute(route, onRouteClick) {
   }
 }
 
-/**
- * navidation sidebar
- * @param {Object} props
- * @returns {import('react').ReactElement}
- */
 function Sidebar({ collapsed, onRouteClick }) {
   // current route
   const route = useRoute();

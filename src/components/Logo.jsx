@@ -5,11 +5,6 @@ import classNames from 'classnames';
 import './Logo.scss';
 import jsdelivr from '@/utils/jsdelivr';
 
-/**
- * sidebar logo
- * @param {Object} props
- * @returns {import('react').ReactElement}
- */
 function Logo({ collapsed }) {
   return (
     <div className='logo'>

@@ -7,10 +7,6 @@ import './Footer.scss';
 import { version } from '@/assets/changelog';
 import { ReactComponent as ReactIcon } from '@/assets/svg/react.svg';
 
-/**
- * custom footer
- * @returns {import('react').ReactElement}
- */
 function Footer() {
   return (
     <div className='footer'>

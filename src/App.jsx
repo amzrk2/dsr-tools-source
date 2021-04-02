@@ -12,11 +12,7 @@ import Footer from './components/Footer';
 import responsive from './utils/responsive';
 import { throttle } from './utils/performance';
 
-/**
- * root app component
- * @returns {import('react').ReactElement}
- */
-function App() {
+const App = memo(function App() {
   // sidebar collapsed (tablet) or minimal (mobile) mode
   const [collapsed, setCollapsed] = useState(() => responsive() !== 'lg');
   const [minimal, setMinimal] = useState(() => responsive() === 'sm');
@@ -73,6 +69,6 @@ function App() {
       </Layout>
     </Layout>
   );
-}
+});
 
-export default memo(App);
+export default App;
