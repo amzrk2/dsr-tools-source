@@ -12,8 +12,9 @@ ga();
 
 // antd
 import 'normalize.css';
-import { ConfigProvider } from 'antd';
 import 'antd/lib/style/index.less';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/lib/locale/zh_CN';
 
 // app
 import './css/global.scss';
@@ -22,7 +23,7 @@ import App from './App';
 
 ReactDOM.render(
   /* <React.StrictMode> */
-  <ConfigProvider autoInsertSpaceInButton={false}>
+  <ConfigProvider autoInsertSpaceInButton={false} locale={zhCN}>
     <BrowserRouter>
       <GuardProvider guards={guards}>
         <App />
