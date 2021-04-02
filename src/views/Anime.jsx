@@ -129,7 +129,7 @@ Meta.propTypes = {
 const Bangumi = memo(function Bangumi({ items, weekday, sortRule }) {
   const sortedItems = useMemo(() => {
     const res = [...items];
-    if (!sortRule || sortRule === 'hot') {
+    if (!sortRule || sortRule === 'native') {
       return res;
     }
     if (sortRule === 'ranking') {
@@ -270,7 +270,7 @@ const Anime = memo(function Anime() {
   const todayCount = useMemo(() => data[today - 1]?.items?.length || 0, [data, today]);
 
   // weekday sort rule
-  const [sortRule, setSortRule] = useState('native');
+  const [sortRule, setSortRule] = useState('hot');
   // weekday renderers
   const display = useMemo(() => {
     const ret = [];
