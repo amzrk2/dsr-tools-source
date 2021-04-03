@@ -7,10 +7,6 @@ import 'antd/lib/result/style/index.less';
 
 import { ReactComponent as ConstructionIcon } from '@/assets/svg/construction.svg';
 
-/**
- * loading overlay
- * @returns {import('react').ReactElement}
- */
 function Construction() {
   const history = useHistory();
 

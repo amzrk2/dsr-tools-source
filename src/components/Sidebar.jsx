@@ -16,7 +16,7 @@ import Logo from './Logo';
  * map route to component
  * @param {Object} route
  * @param {Object} onRouteClick
- * @returns {import('react').ReactElement}
+ * @returns {React.ReactElement}
  */
 function mapRoute(route, onRouteClick) {
   if (route.meta.icon) {

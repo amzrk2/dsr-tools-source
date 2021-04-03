@@ -1,5 +1,10 @@
 export const changelog = [
   {
+    version: 'v4.0.5',
+    date: '2021-04-03',
+    logs: ['添加通知模块', '修复路由跳转页面重置'],
+  },
+  {
     version: 'v4.0.4',
     date: '2021-04-02',
     logs: ['添加每日番组模块'],

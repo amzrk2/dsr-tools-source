@@ -112,6 +112,14 @@ export default [
     ],
   },
   {
+    path: '/notification',
+    exact: true,
+    component: lazy(() => import('@/views/Notification')),
+    meta: {
+      name: '通知',
+    },
+  },
+  {
     path: '/**',
     component: lazy(() => import('@/views/NotFound')),
     meta: {
