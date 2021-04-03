@@ -129,6 +129,11 @@
       flex-direction: column;
       height: 5.25rem;
       align-items: flex-start;
+      cursor: pointer;
+
+      .ant-rate-disabled .ant-rate-star {
+        cursor: pointer;
+      }
     }
 
     &__name {

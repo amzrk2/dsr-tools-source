@@ -140,10 +140,20 @@ const Bangumi = memo(function Bangumi({ items, weekday, sortRule }) {
     return res;
   }, [items, sortRule]);
 
+  /**
+   * @param {React.BaseSyntheticEvent} e
+   * @param {string} url
+   */
+  const handleClick = useCallback((e, url) => {
+    e.stopPropagation();
+    window.open(url);
+  }, []);
+
   return (
     <Card title={weekday}>
       <List>
         {sortedItems.map((item) => {
+          const url = item.url;
           const previewImage = item.images.common;
           const largeImage = item.images.large;
           const jpName = item.name;
@@ -162,7 +172,7 @@ const Bangumi = memo(function Bangumi({ items, weekday, sortRule }) {
                   alt='Bangumi Preview Image'
                 />
               </div>
-              <div className='bangumi__meta'>
+              <div className='bangumi__meta' onClick={(e) => handleClick(e, url)}>
                 <Tooltip title={jpName}>
                   <span className='bangumi__name'>{jpName}</span>
                 </Tooltip>
