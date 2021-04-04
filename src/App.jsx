@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState, memo } from 'react';
 
-import { Affix, Layout } from 'antd';
-import 'antd/lib/affix/style/index.less';
+import { Layout } from 'antd';
 import 'antd/lib/layout/style/index.less';
 import 'antd/lib/alert/style/index.less';
 
@@ -15,6 +14,11 @@ import { throttle } from './utils/performance';
 import { NotificationBanner } from './views/Notification';
 
 const App = memo(function App() {
+  // dynamic height for support of mobile devices
+  const [height, setHeight] = useState(() =>
+    window.innerHeight ? `${window.innerHeight}px` : '100vh'
+  );
+
   // sidebar collapsed (tablet) or minimal (mobile) mode
   const [collapsed, setCollapsed] = useState(() => responsive() !== 'lg');
   const [minimal, setMinimal] = useState(() => responsive() === 'sm');
@@ -22,6 +26,7 @@ const App = memo(function App() {
   // react screen size change
   useEffect(() => {
     const resizeHandler = throttle(() => {
+      setHeight(window.innerHeight ? `${window.innerHeight}px` : '100vh');
       setMinimal(responsive() === 'sm');
     });
     window.addEventListener('resize', resizeHandler);
@@ -49,22 +54,20 @@ const App = memo(function App() {
   }, []);
 
   return (
-    <Layout className='app'>
+    <Layout className='app' style={{ height }}>
       <Layout.Sider
-        className='sidebar__layout'
         collapsed={collapsed}
         collapsedWidth={minimal ? 0 : 80}
         width={220}
+        style={{ height }}
       >
         <Sidebar collapsed={collapsed} onRouteClick={doCollapse} />
       </Layout.Sider>
-      <Layout onClick={doCollapse}>
+      <Layout onClick={doCollapse} style={{ height }}>
         <NotificationBanner />
-        <Affix className='header__affix'>
-          <Layout.Header className='header__layout'>
-            <Header collapsed={collapsed} onCollapsedChange={switchCollapse} />
-          </Layout.Header>
-        </Affix>
+        <Layout.Header className='header__layout'>
+          <Header collapsed={collapsed} onCollapsedChange={switchCollapse} />
+        </Layout.Header>
         <Layout.Content className='content__layout'>
           <Router />
           <Footer />

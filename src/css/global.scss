@@ -2,13 +2,10 @@ html,
 body {
   font-family: $font-family-base;
   font-size: $font-size-base;
+  overflow: hidden;
 }
 
 pre,
 code {
   font-family: $font-family-mono;
-}
-
-#root {
-  min-height: 100vh;
 }
