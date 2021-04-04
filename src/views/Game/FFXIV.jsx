@@ -50,38 +50,7 @@ const FFXIV = memo(function FFXIV() {
 
   // server records
   const [data, setData] = useState({ chocobo: [], moogle: [], fatCat: [] });
-  /**
-   * format time tables from api
-   * @param {Object} data
-   * @returns {Object}
-   */
-  const parseTimes = useCallback((data) => {
-    for (let server of Object.keys(data)) {
-      const sd = data[server];
-      sd.forEach((version) => {
-        version.forEach((record) => {
-          const times = record.times;
-          const ret = new Array(4).fill('');
-          times.forEach((time) => {
-            const hours = Number(time.replace(':', ''));
-            let idx = 0;
-            if (hours >= 0 && hours < 600) {
-              idx = 0; // 灵车
-            } else if (hours >= 600 && hours < 1000) {
-              idx = 1;
-            } else if (hours >= 1000 && hours < 1600) {
-              idx = 2;
-            } else {
-              idx = 3;
-            }
-            ret[idx] = time;
-          });
-          record.times = ret;
-        });
-      });
-    }
-    return data;
-  }, []);
+
   /**
    * fetch data from remote
    */
@@ -97,10 +66,10 @@ const FFXIV = memo(function FFXIV() {
         update: res.data.update,
         license: res.data.license,
       });
-      setData(parseTimes(res.data.data));
+      setData(res.data.data);
       setLoading(false);
     }
-  }, [parseTimes]);
+  }, []);
   useEffect(() => fetchData(), [fetchData]);
 
   // table configs
