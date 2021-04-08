@@ -1,6 +1,7 @@
 {
   "name": "dsr-tools",
   "version": "4.0.5",
+  "author": "DSRKafuU <dsrkafuu@outlook.com> (https://dsrkafuu.su)",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development vite",
