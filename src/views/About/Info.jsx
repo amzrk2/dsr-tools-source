@@ -33,7 +33,7 @@ const Personal = memo(function Personal() {
   );
 });
 
-const Info = memo(function Info() {
+function Info() {
   const deps = { ...dependencies, ...devDependencies };
 
   return (
@@ -94,6 +94,6 @@ const Info = memo(function Info() {
       </Row>
     </div>
   );
-});
+}
 
-export default Info;
+export default memo(Info);

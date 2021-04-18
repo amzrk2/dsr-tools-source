@@ -44,7 +44,7 @@ export const NotificationBanner = memo(function NotificationBanner() {
   }
 });
 
-const Notification = memo(function Notification() {
+function Notification() {
   const history = useHistory();
 
   return (
@@ -62,6 +62,6 @@ const Notification = memo(function Notification() {
       </Result>
     </div>
   );
-});
+}
 
-export default Notification;
+export default memo(Notification);

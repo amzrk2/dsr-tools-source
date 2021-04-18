@@ -5,7 +5,7 @@ import { Button, Result } from 'antd';
 import 'antd/lib/button/style/index.less';
 import 'antd/lib/result/style/index.less';
 
-const NotFound = memo(function NotFound() {
+function NotFound() {
   const history = useHistory();
 
   // count down
@@ -31,6 +31,6 @@ const NotFound = memo(function NotFound() {
       />
     </div>
   );
-});
+}
 
-export default NotFound;
+export default memo(NotFound);

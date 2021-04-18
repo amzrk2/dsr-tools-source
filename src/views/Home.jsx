@@ -9,11 +9,7 @@ import { api } from '@/utils/axios';
 
 const image = jsdelivr('/dsr-tools/home/cover-row.webp', 'api');
 
-/**
- * home page
- * @returns {import('react').ReactElement}
- */
-const Home = memo(function Home() {
+function Home() {
   const [data, setData] = useState({
     title: '',
     links: [],
@@ -44,6 +40,6 @@ const Home = memo(function Home() {
       <div className='home__license'>{data.license}</div>
     </div>
   );
-});
+}
 
-export default Home;
+export default memo(Home);

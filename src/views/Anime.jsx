@@ -208,7 +208,7 @@ Bangumi.propTypes = {
 /**
  * anime page
  */
-const Anime = memo(function Anime() {
+function Anime() {
   // get anime calendar data
   const [data, setData] = useState([]);
   /**
@@ -308,6 +308,6 @@ const Anime = memo(function Anime() {
       </div>
     </Loading>
   );
-});
+}
 
-export default Anime;
+export default memo(Anime);

@@ -11,6 +11,7 @@ import {
   CloudServerOutlined,
   StarOutlined,
   MacCommandOutlined,
+  CodeOutlined,
 } from '@ant-design/icons';
 
 export default [
@@ -31,6 +32,16 @@ export default [
       name: '番组每日放送',
       short: '每日番组',
       icon: CalendarOutlined,
+    },
+  },
+  {
+    path: '/katacode',
+    exact: true,
+    component: lazy(() => import('@/views/KataCode')),
+    meta: {
+      name: 'KataCode 片假名加密编码',
+      short: '片假加密编码',
+      icon: CodeOutlined,
     },
   },
   {
