@@ -3,10 +3,18 @@
   display: flex;
   flex-direction: column;
 
+  @include responsive(sm) {
+    padding: 1rem;
+  }
+
   &-func {
     flex: 1 1 auto;
     display: flex;
     justify-content: center;
+
+    @include responsive(sm) {
+      flex-direction: column;
+    }
   }
 
   &-source,
@@ -16,15 +24,39 @@
     textarea {
       resize: none;
       height: 100%;
+
+      @include responsive(sm) {
+        height: 20vh;
+      }
     }
   }
 
   &-ctrl {
     align-self: center;
     padding: 0 2rem;
+
+    @include responsive(sm) {
+      padding: 1rem;
+
+      .ant-space {
+        flex-direction: row;
+
+        &-item {
+          margin-bottom: 0 !important;
+
+          &:not(:first-child) {
+            margin-left: 0.5rem;
+          }
+        }
+      }
+    }
   }
 
   &-info {
     padding-top: 2rem;
+
+    @include responsive(sm) {
+      padding-top: 1rem;
+    }
   }
 }
