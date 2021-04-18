@@ -1,5 +1,10 @@
 export const changelog = [
   {
+    version: 'v4.0.6',
+    date: '2021-04-18',
+    logs: ['添加 KataCode 加解密模块'],
+  },
+  {
     version: 'v4.0.5',
     date: '2021-04-04',
     logs: ['添加通知模块', '修复路由跳转页面重置', '修复移动端页面溢出问题'],
