@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 export default {
-  show: true,
+  show: false,
   key: 'notification-auto-redirect',
   type: 'warning',
   title: '自动路径跳转即将取消',
