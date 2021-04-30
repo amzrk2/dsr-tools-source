@@ -3,6 +3,39 @@
   display: flex;
   flex-direction: column;
 
+  .messages {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    margin: 1rem;
+
+    & > .ant-alert {
+      flex: 1 1 auto;
+
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+
+    @include responsive(md) {
+      max-width: 45.7143rem;
+      flex-wrap: wrap;
+      margin: 1rem auto;
+
+      & > .ant-alert {
+        flex: 1 1 100%;
+        margin-left: 1rem;
+        margin-right: 1rem;
+
+        &:not(:last-child) {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+
   .ant-tabs {
     flex: 1 1 auto;
     display: flex;

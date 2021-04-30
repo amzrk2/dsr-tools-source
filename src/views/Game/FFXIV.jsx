@@ -114,6 +114,14 @@ function FFXIV() {
   return (
     <Loading loading={loading}>
       <div className='ffxiv'>
+        <div className='messages'>
+          {meta.message && <Alert message={meta.message} type='error' showIcon={true} />}
+          <Alert
+            message={`最后更新于 ${dayjs(meta.lastUpdate).format('YYYY-MM-DD HH:mm:ss')}`}
+            type='success'
+            showIcon={true}
+          />
+        </div>
         <Tabs
           type='card'
           size='large'
@@ -123,12 +131,6 @@ function FFXIV() {
           defaultActiveKey={savedTab}
         >
           <Tabs.TabPane tab='关于' key='关于' className='tabs-about'>
-            {meta.message && <Alert message={meta.message} type='error' showIcon={true} />}
-            <Alert
-              message={`最后更新于 ${dayjs(meta.lastUpdate).format('YYYY-MM-DD HH:mm:ss')}`}
-              type='success'
-              showIcon={true}
-            />
             <Card>
               <List
                 dataSource={metaList}
