@@ -7,31 +7,16 @@
     display: flex;
     justify-content: center;
     align-items: stretch;
-    flex-wrap: nowrap;
-    max-width: 100%;
-    margin: 1rem;
+    flex-wrap: wrap;
+    max-width: 45.7143rem;
+    margin: 1rem auto;
 
     & > .ant-alert {
       flex: 1 1 auto;
+      margin: 0 1rem;
 
       &:not(:last-child) {
-        margin-right: 1rem;
-      }
-    }
-
-    @include responsive(md) {
-      max-width: 45.7143rem;
-      flex-wrap: wrap;
-      margin: 1rem auto;
-
-      & > .ant-alert {
-        flex: 1 1 100%;
-        margin-left: 1rem;
-        margin-right: 1rem;
-
-        &:not(:last-child) {
-          margin-bottom: 1rem;
-        }
+        margin-bottom: 1rem;
       }
     }
   }

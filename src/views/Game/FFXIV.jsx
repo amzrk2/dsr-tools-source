@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useState, memo } from 'react';
-import dayjs from 'dayjs';
 
 import { Tabs, Table, Card, Alert, List } from 'antd';
 import 'antd/lib/tabs/style/index.less';
@@ -10,6 +9,7 @@ import 'antd/lib/alert/style/index.less';
 import 'antd/lib/list/style/index.less';
 
 import './FFXIV.scss';
+import dayjs from '@/utils/dayjs';
 import Loading from '@/components/Loading';
 import { workers, api } from '@/utils/axios';
 import { setLS, getLS } from '@/utils/storage';
@@ -73,17 +73,23 @@ function FFXIV() {
   useEffect(() => fetchData(), [fetchData]);
 
   // table configs
+  const render = useCallback((t) => {
+    if (!t) {
+      return '';
+    }
+    return dayjs.tz(`2000-01-01 ${t}`, 'Asia/Shanghai').local().format('HH:mm');
+  }, []);
   const columns = useMemo(
     () => [
       { title: '服务器', dataIndex: 'server', key: '服务器', align: 'center' },
-      { title: '早车', dataIndex: ['times', '1'], key: '早车', align: 'center' },
-      { title: '午车', dataIndex: ['times', '2'], key: '午车', align: 'center' },
-      { title: '晚车', dataIndex: ['times', '3'], key: '晚车', align: 'center' },
-      { title: '灵车', dataIndex: ['times', '0'], key: '灵车', align: 'center' },
+      { title: '早车', dataIndex: ['times', '1'], key: '早车', align: 'center', render },
+      { title: '午车', dataIndex: ['times', '2'], key: '午车', align: 'center', render },
+      { title: '晚车', dataIndex: ['times', '3'], key: '晚车', align: 'center', render },
+      { title: '灵车', dataIndex: ['times', '0'], key: '灵车', align: 'center', render },
       { title: '始发地', dataIndex: 'origin', key: '始发地', align: 'center' },
       { title: '路线', dataIndex: 'route', key: '路线', align: 'center' },
     ],
-    []
+    [render]
   );
   const tableProps = useMemo(
     () => ({
@@ -111,16 +117,21 @@ function FFXIV() {
    */
   const saveTab = useCallback((key) => setLS('ffxiv-tab', key), []);
 
+  const statusMessage = useMemo(() => {
+    let text = `更新于 ${dayjs(meta.lastUpdate).format('YYYY-MM-DD HH:mm:ss')}`;
+    const tz = dayjs.tz.guess();
+    if (tz) {
+      text += ` | 时区 ${dayjs.tz.guess().replace(/\//gi, ' / ')}`;
+    }
+    return text;
+  }, [meta.lastUpdate]);
+
   return (
     <Loading loading={loading}>
       <div className='ffxiv'>
         <div className='messages'>
           {meta.message && <Alert message={meta.message} type='error' showIcon={true} />}
-          <Alert
-            message={`最后更新于 ${dayjs(meta.lastUpdate).format('YYYY-MM-DD HH:mm:ss')}`}
-            type='success'
-            showIcon={true}
-          />
+          <Alert message={statusMessage} type='success' showIcon={true} />
         </div>
         <Tabs
           type='card'

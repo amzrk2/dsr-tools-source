@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
-import dayjs from 'dayjs';
 
 import { CopyrightOutlined } from '@ant-design/icons';
 
 import './Footer.scss';
+import dayjs from '@/utils/dayjs';
 import { version } from '@/assets/changelog';
 import { ReactComponent as ReactIcon } from '@/assets/svg/react.svg';
 

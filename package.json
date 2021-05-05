@@ -1,6 +1,6 @@
 {
   "name": "dsr-tools",
-  "version": "4.0.6",
+  "version": "4.0.7",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development vite",
@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "@ant-design/icons": "~4.6.2",
-    "@sentry/react": "~6.3.4",
-    "@sentry/tracing": "~6.3.4",
-    "antd": "~4.15.3",
+    "@sentry/react": "~6.3.5",
+    "@sentry/tracing": "~6.3.5",
+    "antd": "~4.15.4",
     "aofuji-tracker": "~0.1.5",
     "axios": "~0.21.1",
     "classnames": "~2.3.1",
@@ -36,6 +36,6 @@
     "less": "^4.1.1",
     "prettier": "^2.2.1",
     "sass": "^1.32.12",
-    "vite": "^2.2.3"
+    "vite": "^2.2.4"
   }
 }

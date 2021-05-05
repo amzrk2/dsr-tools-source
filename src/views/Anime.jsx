@@ -1,6 +1,5 @@
 import React, { useState, useEffect, memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import dayjs from 'dayjs';
 
 import { Card, List, Pagination, Button, Image, Rate, Tooltip, Radio } from 'antd';
 import 'antd/lib/card/style/index.less';
@@ -15,6 +14,7 @@ import 'antd/lib/radio/style/index.less';
 import { FireOutlined } from '@ant-design/icons';
 
 import './Anime.scss';
+import dayjs from '@/utils/dayjs';
 import { workers } from '@/utils/axios';
 import responsive from '@/utils/responsive';
 import { throttle } from '@/utils/performance';

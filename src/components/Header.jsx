@@ -1,6 +1,5 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useState, memo } from 'react';
 import PropTypes from 'prop-types';
-import dayjs from 'dayjs';
 
 import { Button, message, PageHeader, Popover } from 'antd';
 import 'antd/lib/button/style/index.less';
@@ -15,6 +14,7 @@ import {
 } from '@ant-design/icons';
 
 import './Header.scss';
+import dayjs from '@/utils/dayjs';
 import useRoute from '@/hooks/useRoute';
 import QRCode from './QRCode';
 
@@ -24,9 +24,9 @@ function Header({ collapsed, onCollapsedChange }) {
   const title = useMemo(() => route?.meta?.name || '', [route?.meta?.name]);
 
   // time updater
-  const [clock, setClock] = useState(dayjs());
+  const [clock, setClock] = useState(dayjs().format('HH:mm:ss'));
   useEffect(() => {
-    const timer = setInterval(() => setClock(dayjs()), 1000);
+    const timer = setInterval(() => setClock(dayjs().format('HH:mm:ss')), 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -52,7 +52,7 @@ function Header({ collapsed, onCollapsedChange }) {
       subTitle='DSRToolS'
       extra={[
         <Button className='header__clock' type='text' key='time'>
-          {clock.format('HH:mm:ss')}
+          {clock}
         </Button>,
         <Button
           type='primary'
