@@ -2,7 +2,7 @@ export const changelog = [
   {
     version: 'v4.0.7',
     date: '2021-05-05',
-    logs: ['更新 FFXIV 模块时区显示'],
+    logs: ['更新 FFXIV 模块时区显示', '迁移托管服务至 CloudFlare Pages'],
   },
   {
     version: 'v4.0.6',
