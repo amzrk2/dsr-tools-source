@@ -3,12 +3,21 @@ import reactRefresh from '@vitejs/plugin-react-refresh';
 import svgr from '@svgr/rollup';
 import path from 'path';
 import antd from './src/css/antd';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 /**
  * https://vitejs.dev/config/
  */
 export default defineConfig({
-  plugins: [reactRefresh(), svgr()],
+  plugins: [
+    reactRefresh(),
+    svgr(),
+    visualizer({
+      filename: 'dist/bundle.html',
+      gzipSize: true,
+      brotliSize: true,
+    }),
+  ],
 
   resolve: {
     alias: {
