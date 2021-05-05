@@ -1,8 +1,13 @@
 export const changelog = [
   {
-    version: 'v4.0.7',
+    version: 'v4.1.7',
     date: '2021-05-05',
-    logs: ['更新 FFXIV 模块时区显示', '迁移托管服务至 CloudFlare Pages', '全局字体调整'],
+    logs: [
+      '优化 FFXIV 模块时区显示',
+      '添加 FFXIV 模块备注',
+      '迁移托管服务至 CloudFlare Pages',
+      '全局字体调整',
+    ],
   },
   {
     version: 'v4.0.6',

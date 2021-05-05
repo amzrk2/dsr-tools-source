@@ -88,6 +88,7 @@ function FFXIV() {
       { title: '灵车', dataIndex: ['times', '0'], key: '灵车', align: 'center', render },
       { title: '始发地', dataIndex: 'origin', key: '始发地', align: 'center' },
       { title: '路线', dataIndex: 'route', key: '路线', align: 'center' },
+      { title: '备注', dataIndex: 'comment', key: '备注', align: 'center' },
     ],
     [render]
   );
