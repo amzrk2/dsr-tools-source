@@ -1,5 +1,10 @@
 export const changelog = [
   {
+    version: 'v4.0.7',
+    date: '2021-05-05',
+    logs: ['更新 FFXIV 模块时区显示'],
+  },
+  {
     version: 'v4.0.6',
     date: '2021-04-18',
     logs: ['添加 KataCode 加解密模块'],
