@@ -1,6 +1,6 @@
 {
   "name": "dsr-tools",
-  "version": "4.0.8",
+  "version": "4.1.8",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development vite",

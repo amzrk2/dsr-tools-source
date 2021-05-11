@@ -1,5 +1,10 @@
 export const changelog = [
   {
+    version: 'v4.1.8',
+    date: '2021-05-11',
+    logs: ['修复 FFXIV 模块时区夏令时显示问题', '调整 FFXIV 模块 tab 切换模式'],
+  },
+  {
     version: 'v4.1.7',
     date: '2021-05-05',
     logs: [
