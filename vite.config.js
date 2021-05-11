@@ -19,6 +19,19 @@ export default defineConfig({
     }),
   ],
 
+  build: {
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          antd: ['antd'],
+          icons: ['@ant-design/icons'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1024,
+  },
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
