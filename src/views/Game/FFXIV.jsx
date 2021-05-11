@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState, memo } from 'react';
+import { useHistory } from 'react-router';
 
 import { Tabs, Table, Card, Alert, List } from 'antd';
 import 'antd/lib/tabs/style/index.less';
@@ -12,16 +13,76 @@ import './FFXIV.scss';
 import dayjs from '@/utils/dayjs';
 import Loading from '@/components/Loading';
 import { workers, api } from '@/utils/axios';
-import { setLS, getLS } from '@/utils/storage';
 
+// table configs
 const shadowbringers = () => '5.X SHADOWBRINGERS';
 const stormblood = () => '4.X STORMBLOOD';
+
+// table configs
+const cstDay = dayjs().tz('Asia/Shanghai').format('YYYY-MM-DD');
+const render = (t) => {
+  if (!t) {
+    return '';
+  }
+  return dayjs.tz(`${cstDay} ${t}`, 'Asia/Shanghai').local().format('HH:mm');
+};
+const columns = [
+  { title: '服务器', dataIndex: 'server', key: 'server', align: 'center' },
+  { title: '早车', dataIndex: ['times', '1'], key: 'times-1', align: 'center', render },
+  { title: '午车', dataIndex: ['times', '2'], key: 'times-2', align: 'center', render },
+  { title: '晚车', dataIndex: ['times', '3'], key: 'times-3', align: 'center', render },
+  { title: '灵车', dataIndex: ['times', '0'], key: 'times-0', align: 'center', render },
+  { title: '始发地', dataIndex: 'origin', key: 'origin', align: 'center' },
+  { title: '路线', dataIndex: 'route', key: 'route', align: 'center' },
+  { title: '备注', dataIndex: 'comment', key: 'comment', align: 'center' },
+];
+const tableProps = {
+  size: 'small',
+  columns,
+  pagination: false,
+  scroll: { x: 'max-content' },
+  rowKey: (record) => record.server,
+};
 
 function FFXIV() {
   const [loading, setLoading] = useState(true);
 
-  // metadata
+  // metadata and server records
   const [meta, setMeta] = useState({ message: '', update: '', license: '' });
+  const [data, setData] = useState({ chocobo: [], moogle: [], fatCat: [] });
+
+  /**
+   * fetch data from remote
+   */
+  const fetchData = useCallback(async () => {
+    let res = null;
+    res = await workers.get('/ffxiv-hunting');
+    if (!res) {
+      res = await api.get('/dsr-tools/ffxiv/index.min.json');
+    }
+    if (res?.data) {
+      setMeta({
+        message: res.data.message || '',
+        update: res.data.update,
+        license: res.data.license,
+      });
+      setData(res.data.data);
+      setLoading(false);
+    }
+  }, []);
+  useEffect(() => fetchData(), [fetchData]);
+
+  // tab settings
+  const tabPanes = useMemo(
+    () => [
+      { name: '陆行鸟', key: 'chocobo', records: data.chocobo },
+      { name: '莫古力', key: 'moogle', records: data.moogle },
+      { name: '猫小胖', key: 'fatcat', records: data.fatCat },
+    ],
+    [data.chocobo, data.fatCat, data.moogle]
+  );
+
+  // settings panel meta list
   const metaList = useMemo(
     () => [
       {
@@ -48,80 +109,6 @@ function FFXIV() {
     [meta.license]
   );
 
-  // server records
-  const [data, setData] = useState({ chocobo: [], moogle: [], fatCat: [] });
-
-  /**
-   * fetch data from remote
-   */
-  const fetchData = useCallback(async () => {
-    let res = null;
-    res = await workers.get('/ffxiv-hunting');
-    if (!res) {
-      res = await api.get('/dsr-tools/ffxiv/index.min.json');
-    }
-    if (res?.data) {
-      setMeta({
-        message: res.data.message || '',
-        update: res.data.update,
-        license: res.data.license,
-      });
-      setData(res.data.data);
-      setLoading(false);
-    }
-  }, []);
-  useEffect(() => fetchData(), [fetchData]);
-
-  // table configs
-  const cstDay = useMemo(() => dayjs().tz('Asia/Shanghai').format('YYYY-MM-DD'), []);
-  const render = useCallback(
-    (t) => {
-      if (!t) {
-        return '';
-      }
-      return dayjs.tz(`${cstDay} ${t}`, 'Asia/Shanghai').local().format('HH:mm');
-    },
-    [cstDay]
-  );
-  const columns = useMemo(
-    () => [
-      { title: '服务器', dataIndex: 'server', key: '服务器', align: 'center' },
-      { title: '早车', dataIndex: ['times', '1'], key: '早车', align: 'center', render },
-      { title: '午车', dataIndex: ['times', '2'], key: '午车', align: 'center', render },
-      { title: '晚车', dataIndex: ['times', '3'], key: '晚车', align: 'center', render },
-      { title: '灵车', dataIndex: ['times', '0'], key: '灵车', align: 'center', render },
-      { title: '始发地', dataIndex: 'origin', key: '始发地', align: 'center' },
-      { title: '路线', dataIndex: 'route', key: '路线', align: 'center' },
-      { title: '备注', dataIndex: 'comment', key: '备注', align: 'center' },
-    ],
-    [render]
-  );
-  const tableProps = useMemo(
-    () => ({
-      size: 'small',
-      columns,
-      pagination: false,
-      scroll: { x: 'max-content' },
-      rowKey: (record) => record.server,
-    }),
-    [columns]
-  );
-  const tabPanes = useMemo(
-    () => [
-      { name: '陆行鸟', records: data.chocobo },
-      { name: '莫古力', records: data.moogle },
-      { name: '猫小胖', records: data.fatCat },
-    ],
-    [data.chocobo, data.fatCat, data.moogle]
-  );
-
-  // selected tab saver
-  const savedTab = useMemo(() => getLS('ffxiv-tab') || '', []);
-  /**
-   * @param {string} key
-   */
-  const saveTab = useCallback((key) => setLS('ffxiv-tab', key), []);
-
   const statusMessage = useMemo(() => {
     let text = `更新于 ${dayjs(meta.update).format('YYYY-MM-DD HH:mm:ss')}`;
     const tz = dayjs.tz.guess();
@@ -130,6 +117,26 @@ function FFXIV() {
     }
     return text;
   }, [meta.update]);
+
+  // router selected tab detector
+  const history = useHistory();
+  const curTab = useMemo(() => {
+    const search = new URLSearchParams(history.location.search);
+    return search.get('tab') || 'settings';
+  }, [history.location.search]);
+  /**
+   * @param {string} key
+   */
+  const onTabChange = useCallback(
+    (key) => {
+      const search = new URLSearchParams();
+      search.set('tab', key);
+      history.replace({
+        search: '?' + search.toString(),
+      });
+    },
+    [history]
+  );
 
   return (
     <Loading loading={loading}>
@@ -143,10 +150,11 @@ function FFXIV() {
           size='large'
           centered={true}
           animated={true}
-          onChange={saveTab}
-          defaultActiveKey={savedTab}
+          onChange={onTabChange}
+          defaultActiveKey={curTab}
+          activeKey={curTab}
         >
-          <Tabs.TabPane tab='关于' key='关于' className='tabs-about'>
+          <Tabs.TabPane tab='设置' key='settings' className='tabs-settings'>
             <Card>
               <List
                 dataSource={metaList}
@@ -159,7 +167,7 @@ function FFXIV() {
             </Card>
           </Tabs.TabPane>
           {tabPanes.map((dataCenter) => (
-            <Tabs.TabPane tab={dataCenter.name} key={dataCenter.name}>
+            <Tabs.TabPane tab={dataCenter.name} key={dataCenter.key}>
               <Table {...tableProps} dataSource={dataCenter.records[0]} title={shadowbringers} />
               <Table {...tableProps} dataSource={dataCenter.records[1]} title={stormblood} />
             </Tabs.TabPane>
