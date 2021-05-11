@@ -18,32 +18,6 @@ import { workers, api } from '@/utils/axios';
 const shadowbringers = () => '5.X SHADOWBRINGERS';
 const stormblood = () => '4.X STORMBLOOD';
 
-// table configs
-const cstDay = dayjs().tz('Asia/Shanghai').format('YYYY-MM-DD');
-const render = (t) => {
-  if (!t) {
-    return '';
-  }
-  return dayjs.tz(`${cstDay} ${t}`, 'Asia/Shanghai').local().format('HH:mm');
-};
-const columns = [
-  { title: '服务器', dataIndex: 'server', key: 'server', align: 'center' },
-  { title: '早车', dataIndex: ['times', '1'], key: 'times-1', align: 'center', render },
-  { title: '午车', dataIndex: ['times', '2'], key: 'times-2', align: 'center', render },
-  { title: '晚车', dataIndex: ['times', '3'], key: 'times-3', align: 'center', render },
-  { title: '灵车', dataIndex: ['times', '0'], key: 'times-0', align: 'center', render },
-  { title: '始发地', dataIndex: 'origin', key: 'origin', align: 'center' },
-  { title: '路线', dataIndex: 'route', key: 'route', align: 'center' },
-  { title: '备注', dataIndex: 'comment', key: 'comment', align: 'center' },
-];
-const tableProps = {
-  size: 'small',
-  columns,
-  pagination: false,
-  scroll: { x: 'max-content' },
-  rowKey: (record) => record.server,
-};
-
 function FFXIV() {
   const [loading, setLoading] = useState(true);
 
@@ -82,7 +56,43 @@ function FFXIV() {
     [data.chocobo, data.fatCat, data.moogle]
   );
 
-  // settings panel meta list
+  // table configs
+  const curTZ = useMemo(() => dayjs.tz.guess() || 'Asia/Shanghai', []);
+  const cstDay = useMemo(() => dayjs().tz('Asia/Shanghai').format('YYYY-MM-DD'), []);
+  const render = useCallback(
+    (t) => {
+      if (!t) {
+        return '';
+      }
+      return dayjs.tz(`${cstDay} ${t}`, 'Asia/Shanghai').tz(curTZ).format('HH:mm');
+    },
+    [cstDay, curTZ]
+  );
+  const columns = useMemo(
+    () => [
+      { title: '服务器', dataIndex: 'server', key: 'server', align: 'center' },
+      { title: '早车', dataIndex: ['times', '1'], key: 'times-1', align: 'center', render },
+      { title: '午车', dataIndex: ['times', '2'], key: 'times-2', align: 'center', render },
+      { title: '晚车', dataIndex: ['times', '3'], key: 'times-3', align: 'center', render },
+      { title: '灵车', dataIndex: ['times', '0'], key: 'times-0', align: 'center', render },
+      { title: '始发地', dataIndex: 'origin', key: 'origin', align: 'center' },
+      { title: '路线', dataIndex: 'route', key: 'route', align: 'center' },
+      { title: '备注', dataIndex: 'comment', key: 'comment', align: 'center' },
+    ],
+    [render]
+  );
+  const tableProps = useMemo(
+    () => ({
+      size: 'small',
+      columns,
+      pagination: false,
+      scroll: { x: 'max-content' },
+      rowKey: (record) => record.server,
+    }),
+    [columns]
+  );
+
+  // settings panel data
   const metaList = useMemo(
     () => [
       {
@@ -108,15 +118,13 @@ function FFXIV() {
     ],
     [meta.license]
   );
-
-  const statusMessage = useMemo(() => {
-    let text = `更新于 ${dayjs(meta.update).format('YYYY-MM-DD HH:mm:ss')}`;
-    const tz = dayjs.tz.guess();
-    if (tz) {
-      text += ` | 时区 ${dayjs.tz.guess().replace(/\//gi, ' / ')}`;
+  const updateMessage = useMemo(() => {
+    let text = `更新于 ${dayjs(meta.update).format('YYYY-MM-DD HH:mm:ss')} | 时区 ${curTZ}`;
+    if (dayjs().isDST()) {
+      text += ' (DST)';
     }
     return text;
-  }, [meta.update]);
+  }, [curTZ, meta.update]);
 
   // router selected tab detector
   const history = useHistory();
@@ -141,10 +149,6 @@ function FFXIV() {
   return (
     <Loading loading={loading}>
       <div className='ffxiv'>
-        <div className='messages'>
-          {meta.message && <Alert message={meta.message} type='error' showIcon={true} />}
-          <Alert message={statusMessage} type='success' showIcon={true} />
-        </div>
         <Tabs
           type='card'
           size='large'
@@ -156,6 +160,10 @@ function FFXIV() {
         >
           <Tabs.TabPane tab='设置' key='settings' className='tabs-settings'>
             <Card>
+              <div className='messages'>
+                {meta.message && <Alert message={meta.message} type='error' showIcon={true} />}
+                <Alert message={updateMessage} type='success' showIcon={true} />
+              </div>
               <List
                 dataSource={metaList}
                 renderItem={(item) => (
