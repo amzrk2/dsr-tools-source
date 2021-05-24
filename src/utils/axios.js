@@ -6,13 +6,13 @@ import 'antd/lib/message/style/index.less';
 import jsdelivr from './jsdelivr';
 
 export const api = axios.create({
-  baseURL: jsdelivr('', 'api'),
+  baseURL: jsdelivr('', 'dsr-cdn-api'),
 });
 export const cdn = axios.create({
-  baseURL: jsdelivr('', 'cdn'),
+  baseURL: jsdelivr('', 'dsr-cdn-main'),
 });
 export const workers = axios.create({
-  baseURL: 'https://workers.dsrkafuu.su',
+  baseURL: 'https://workers.dsrkafuu.su/dsr-cdn-api',
 });
 export const xhr = axios.create();
 

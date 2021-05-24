@@ -7,7 +7,7 @@ import './Home.scss';
 import jsdelivr from '@/utils/jsdelivr';
 import { api } from '@/utils/axios';
 
-const image = jsdelivr('/dsr-tools/home/cover-row.webp', 'api');
+const image = jsdelivr('/dsr-tools/home/cover-row.webp', 'dsr-cdn-api');
 
 function Home() {
   const [data, setData] = useState({

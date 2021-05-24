@@ -26,7 +26,7 @@ const Personal = memo(function Personal() {
       <img
         className='personal__avatar'
         alt='Personal Avatar'
-        src={jsdelivr('/images/avatars/dsrkafuu_256p.jpg', 'cdn')}
+        src={jsdelivr('/images/avatars/dsrkafuu_256p.jpg', 'dsr-cdn-main')}
       />
       <span className='personal__id'>DSRKafuU</span>
     </div>
@@ -61,7 +61,7 @@ function Info() {
             <Image
               className='personal__image'
               alt='Personal Image'
-              src={jsdelivr('/images/banners/84199396_CUnet.jpg', 'cdn')}
+              src={jsdelivr('/images/banners/84199396.jpg', 'dsr-cdn-main')}
               fallback={IMAGE_FALLBACK}
             />
           </Card>

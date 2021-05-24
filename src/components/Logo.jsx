@@ -10,7 +10,7 @@ function Logo({ collapsed }) {
     <div className='logo'>
       <img
         className={classNames('logo__image', { 'logo__image--collapsed': collapsed })}
-        src={jsdelivr('/dsr-tools/home/dsrca_head.webp', 'api')}
+        src={jsdelivr('/dsr-tools/home/dsrca_head.webp', 'dsr-cdn-api')}
         alt='Logo'
       />
     </div>
