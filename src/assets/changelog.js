@@ -1,5 +1,10 @@
 export const changelog = [
   {
+    version: 'v4.1.9',
+    date: '2021-05-26',
+    logs: ['修复字体显示', '修复 CDN 链接'],
+  },
+  {
     version: 'v4.1.8',
     date: '2021-05-11',
     logs: ['修复 FFXIV 模块时区夏令时显示问题', '调整 FFXIV 模块 tab 切换模式'],
