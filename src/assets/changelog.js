@@ -2,7 +2,7 @@ export const changelog = [
   {
     version: 'v4.1.9',
     date: '2021-05-26',
-    logs: ['修复字体显示', '修复 CDN 链接'],
+    logs: ['修复字体显示', '修复 CDN 链接', '更新字体设置'],
   },
   {
     version: 'v4.1.8',
