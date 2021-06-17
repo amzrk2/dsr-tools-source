@@ -8,7 +8,6 @@ import {
   PlayCircleOutlined,
   FieldTimeOutlined,
   CalendarOutlined,
-  CloudServerOutlined,
   StarOutlined,
   MacCommandOutlined,
   CodeOutlined,
@@ -42,16 +41,6 @@ export default [
       name: 'KataCode 片假名加密编码',
       short: '片假加密编码',
       icon: CodeOutlined,
-    },
-  },
-  {
-    path: '/bilive',
-    exact: true,
-    component: null,
-    meta: {
-      name: '哔哩哔哩录播地址获取工具',
-      short: '哔哩哔哩录播',
-      icon: CloudServerOutlined,
     },
   },
   {

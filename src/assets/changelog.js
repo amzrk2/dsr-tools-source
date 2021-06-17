@@ -2,7 +2,7 @@ export const changelog = [
   {
     version: 'v4.1.10',
     date: '2021-06-17',
-    logs: ['修复 Bangumi API'],
+    logs: ['修复 Bangumi API', '移除录播模块'],
   },
   {
     version: 'v4.1.9',
