@@ -3,7 +3,7 @@
 // 无 trail 的 URL
 const API_BASE = 'https://api.bgm.tv';
 // 代理子路径
-const PROXY_PATH = /^\/bgm(\/?.*)/;
+const PROXY_PATH = /^\/bgm-api(\/?.*)/;
 // 伪造请求头
 const FAKE_ORIGIN = 'https://bgm.tv';
 const FAKE_REFERRER = 'https://bgm.tv/calendar';

@@ -30,7 +30,7 @@ function FFXIV() {
    */
   const fetchData = useCallback(async () => {
     let res = null;
-    res = await workers.get('/dsr-tools/ffxiv/index.min.json');
+    res = await workers.get('/dsr-cdn-api/dsr-tools/ffxiv/index.min.json');
     if (!res) {
       res = await api.get('/dsr-tools/ffxiv/index.min.json');
     }

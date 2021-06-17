@@ -248,7 +248,7 @@ function Anime() {
 
   useEffect(() => {
     (async () => {
-      const res = await workers.get('/bgm/calendar');
+      const res = await workers.get('/bgm-api/calendar');
       if (res.data) {
         const data = parseData(res.data);
         setData(data);

@@ -12,7 +12,7 @@ export const cdn = axios.create({
   baseURL: jsdelivr('', 'dsr-cdn-main'),
 });
 export const workers = axios.create({
-  baseURL: 'https://workers.dsrkafuu.su/dsr-cdn-api',
+  baseURL: 'https://workers.dsrkafuu.su',
 });
 export const xhr = axios.create();
 
