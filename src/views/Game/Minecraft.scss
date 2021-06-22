@@ -1,0 +1,47 @@
+.mc {
+  padding: 2.2857rem;
+
+  &__card {
+    .ant-card-body {
+      padding: 0;
+    }
+
+    .ant-card:not(:first-child) {
+      margin-top: 2.2857rem;
+    }
+
+    .list__item {
+      padding-left: 1.7143rem !important;
+      padding-right: 1.7143rem !important;
+    }
+  }
+
+  .blist {
+    padding: 1rem 1.7143rem;
+
+    &__item:not(:last-child) {
+      margin-right: 0.75rem;
+    }
+  }
+
+  .preview {
+    width: 100%;
+    padding-top: 56.25%;
+
+    .ant-carousel {
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      overflow: hidden;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+    }
+  }
+
+  .download .ant-btn {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+}
