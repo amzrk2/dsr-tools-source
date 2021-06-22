@@ -1,7 +1,10 @@
 {
+  "private": true,
   "name": "dsr-tools",
   "version": "4.2.0",
-  "private": true,
+  "description": "新版 DSRToolS 站点项目，基于 React 和 Ant Design。",
+  "license": "MPL-2.0",
+  "author": "DSRKafuU <dsrkafuu@outlook.com> (https://dsrkafuu.su)",
   "scripts": {
     "dev": "cross-env NODE_ENV=development vite",
     "build": "cross-env NODE_ENV=production eslint && vite build",

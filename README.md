@@ -16,10 +16,10 @@ npm run build
 
 ## License
 
-<a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fdsrkafuu%2Fdsr-tools?ref=badge_large" alt="FOSSA Status"><img align="right" src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdsrkafuu%2Fdsr-tools.svg?type=large"/></a>
+<a href="https://app.fossa.com/projects/git%2Bgithub.com%2Fdsrkafuu%2Fdsr-tools?ref=badge_shield" alt="FOSSA Status"><img align="right" src="https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdsrkafuu%2Fdsr-tools.svg?type=shield"/></a>
 
 This project and all contributors shall not be responsible for any dispute or loss caused by using this project.
 
-This project is released under the `Apache License 2.0`, for more information read the [License](https://github.com/dsrkafuu/dsr-tools/blob/master/LICENSE).
+This project is released under the `Mozilla Public License 2.0`, for more information read the [License](https://github.com/dsrkafuu/dsr-tools/blob/master/LICENSE).
 
 **Copyright © 2019-present DSRKafuU**
