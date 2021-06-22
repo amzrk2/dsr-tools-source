@@ -27,7 +27,7 @@ const flatRoutes = flattenRoutes(routes);
  * app router
  * @returns {import('react').ReactElement}
  */
-function Router() {
+function Router(props) {
   return (
     <Switch>
       {flatRoutes.map((route) => (
@@ -36,7 +36,7 @@ function Router() {
           exact={route.exact || false}
           path={route.path}
           meta={route.meta}
-          render={(props) => (
+          render={() => (
             <Fragment>
               <Helmet>
                 <title>{route.meta?.name || ''} | DSRToolS</title>

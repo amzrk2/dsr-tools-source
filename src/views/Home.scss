@@ -1,21 +1,25 @@
+$title-light: hsla(0, 0%, 100%, 0.55);
+$title-dark: hsla(0, 0%, 0%, 0.45);
+
 .home {
   position: relative;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 50% 50%;
+  background-position: center center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   &__title {
-    color: hsla(0, 0%, 100%, 0.55);
+    color: $title-dark;
     font-size: $font-size-xl * 3;
     white-space: nowrap;
     overflow: visible;
 
     @include responsive(sm) {
       font-size: $font-size-xl * 2;
+      color: $title-light;
     }
   }
 
@@ -23,9 +27,14 @@
     display: flex;
 
     .ant-btn {
-      color: hsla(0, 0%, 100%, 0.55);
-      border-color: hsla(0, 0%, 100%, 0.55);
+      color: $title-dark;
+      border-color: $title-dark;
       margin: 0 0.75rem;
+
+      @include responsive(sm) {
+        color: $title-light;
+        border-color: $title-light;
+      }
 
       &:hover {
         color: $color-primary;
@@ -39,6 +48,10 @@
     text-align: center;
     width: 100%;
     bottom: 0.25rem;
-    color: hsla(0, 0%, 100%, 0.55);
+    color: $title-dark;
+
+    @include responsive(sm) {
+      color: $title-light;
+    }
   }
 }

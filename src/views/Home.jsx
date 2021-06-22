@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback, memo } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import { Button } from 'antd';
 import 'antd/lib/button/style/index.less';
@@ -7,9 +9,10 @@ import './Home.scss';
 import jsdelivr from '@/utils/jsdelivr';
 import { api } from '@/utils/axios';
 
-const image = jsdelivr('/dsr-tools/home/cover-row.webp', 'dsr-cdn-api');
+const imageRow = jsdelivr('/dsr-tools/home/cover_row.jpg', 'dsr-cdn-api');
+const imageCol = jsdelivr('/dsr-tools/home/cover_col.jpg', 'dsr-cdn-api');
 
-function Home() {
+function Home({ isMobile }) {
   const [data, setData] = useState({
     title: '',
     links: [],
@@ -28,7 +31,10 @@ function Home() {
   useEffect(() => fetchData(), [fetchData]);
 
   return (
-    <div className='home' style={{ backgroundImage: `url(${image})` }}>
+    <div
+      className={classNames('home', { 'home--mobile': isMobile })}
+      style={{ backgroundImage: `url(${isMobile ? imageCol : imageRow})` }}
+    >
       <h1 className='home__title'>{data.title}</h1>
       <div className='home__links'>
         {data.links.map((link) => (
@@ -41,5 +47,9 @@ function Home() {
     </div>
   );
 }
+
+Home.propTypes = {
+  isMobile: PropTypes.bool,
+};
 
 export default memo(Home);

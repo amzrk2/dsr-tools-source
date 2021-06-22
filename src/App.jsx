@@ -69,7 +69,7 @@ const App = memo(function App() {
           <Header collapsed={collapsed} onCollapsedChange={switchCollapse} />
         </Layout.Header>
         <Layout.Content className='content__layout'>
-          <Router />
+          <Router isMobile={minimal} />
           <Footer />
         </Layout.Content>
       </Layout>
