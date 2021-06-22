@@ -13,7 +13,7 @@ function Loading({ loading, children }) {
         <div className='loading__overlay'>
           <Spin size='large' />
         </div>
-        {children}
+        {loading ? null : children}
       </div>
     );
   } else {

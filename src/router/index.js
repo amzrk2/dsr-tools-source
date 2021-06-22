@@ -64,8 +64,7 @@ export default [
       {
         path: '/game/minecraft',
         exact: true,
-        // component: lazy(() => import('@/views/Game/Minecraft')),
-        component: null,
+        component: lazy(() => import('@/views/Game/Minecraft')),
         meta: {
           name: 'Minecraft DSRCA 整合包',
           short: 'MC 整合包',

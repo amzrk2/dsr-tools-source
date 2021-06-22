@@ -128,15 +128,17 @@ function FFXIV() {
 
   // router selected tab detector
   const history = useHistory();
-  const curTab = useMemo(() => {
+  const [curTab, setCurTab] = useState(() => {
     const search = new URLSearchParams(history.location.search);
     return search.get('tab') || 'settings';
-  }, [history.location.search]);
+  });
+
   /**
    * @param {string} key
    */
   const onTabChange = useCallback(
     (key) => {
+      setCurTab(key);
       const search = new URLSearchParams();
       search.set('tab', key);
       history.replace({
