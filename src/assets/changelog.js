@@ -1,5 +1,16 @@
 export const changelog = [
   {
+    version: 'v4.2.0',
+    date: '2021-06-22',
+    logs: [
+      '添加 Minecraft 整合包模块',
+      '修复 FFXIV 模块路由',
+      '修复路由参数传递',
+      '修复响应式断点设置错误',
+      '修改项目 License 为 MPL 2.0',
+    ],
+  },
+  {
     version: 'v4.1.10',
     date: '2021-06-17',
     logs: ['修复 Bangumi API', '移除录播模块'],
